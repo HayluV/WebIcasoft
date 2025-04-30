@@ -1,6 +1,7 @@
 # APLICATIVO WEB ICASOFT IA.
 Desarrollado por: 
 Haylú Vicuña
+Eliana Aramayo
 Pasos para crear un proyecto DJANGO:
 1. CREAR TU ENTORNO VIRTUAL:
     python -m venv env
