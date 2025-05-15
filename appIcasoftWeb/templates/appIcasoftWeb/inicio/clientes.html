@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>footer</title>
+
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
+</head>
+<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transpasrent-white">
+  
+  <div>
+    <section class="w-full mt-0 overflow-hidden lg:flex lg:flex-col lg:w-full">
+      
+      <div class="bg-sky-300 p-[10px] w-full">
+        <h2 class="font-Big-Shoulders text-[4rem] uppercase text-white mb-2 text-center custom-animated-text">Nuestros clientes</h2>
+      </div>
+      
+      <div class="lg:flex w-full">
+        <div class="bg-sky-300 p-[40px] flex-grow">
+     <img class="mb-[40px] w-[900px] mx-auto block transition-transform duration-300 transform hover:scale-105" src="{% static 'img/clientes.jpg' %}" alt="icon-sedans">
+
+        </div>
+      </div>
+    </section>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nosotros</title>
+  <link rel="stylesheet" href="{% static 'src/nosotros.css' %}" />
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}" />
+</head>
+<body class="text-[0.9375rem] font-Lexend-Deca flex justify-center text-transparent-white bg-white">
+
+  <div class="w-full">
+
+   <section class="w-full mt-0 overflow-hidden relative">
+      <div class="bg-sky-300 p-[10px] w-full">
+       <h2 class="font-Big-Shoulders text-[4rem] uppercase text-white mb-2 text-center custom-animated-text mt-4">
+        Sobre Nosotros
+        </h2>
+      </div>
+
+      <div class="lg:flex w-full">
+        <div class="bg-white p-[30px] flex-grow">
+          <img
+            class="mb-[20px] w-full lg:w-[800px] max-w-[300px] mx-auto block transition-transform duration-300 transform hover:scale-105"
+            src="{% static 'img/sobreNosotros1.jpg' %}"
+            alt="Técnico reparando computadora"
+          />
+        </div>
+
+        <div class="bg-white p-[15px] flex-grow mt-12"> 
+          <h2 class="font-Big-Shoulders text-[2rem] text-primary mb-2 text-left lg:text-left uppercase">
+            Acerca de:
+          </h2>
+
+          <p class="sobre-nosotros-text text-primary mb-2 lg:mb-4 pl-2">
+            Llevamos más de 10 años proporcionando soluciones de mantenimiento y reparación de computadoras.
+            Nuestro equipo altamente capacitado se dedica a garantizar el óptimo rendimiento de tu tecnología,
+            ofreciendo un servicio rápido y confiable.
+          </p>
+
+          <h2 class="font-Big-Shoulders text-[2rem] text-primary mb-6 text-left lg:text-left uppercase">
+            Soporte técnico personalizado:
+          </h2>
+
+          <p class="sobre-nosotros-text text-primary mb-2 lg:mb-4">
+            No importa donde te encuentres, Nuestro equipo de profesionales,<br />
+            altamente capacitados llegará hasta su ubicación para solucionar cualquier problema de forma rápida y eficiente.<br />
+            Con ICASOFT, su tranquilidad es nuestra prioridad, asegurando un servicio confiable <br />
+            y de calidad donde lo necesite.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio</title>
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+</head>
+
+<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transpasrent-white">
+  <div>
+    <section class="w-full mt-0 overflow-hidden lg:flex lg:flex-col lg:w-full">
+      <div class="bg-icasoftBlue p-[10px] w-full">
+        <h2 class="font-Big-Shoulders text-[4rem] uppercase text-white mb-2 text-center custom-animated-text">Portafolio</h2>
+      </div>
+      
+      <div class="lg:flex w-full">
+        <div class="bg-icasoftBlue p-[48px] flex-grow">
+          <img class="mb-[35px] w-[300px] mx-auto block transition-transform duration-300 transform hover:scale-105" src="{% static 'img/portafolio1.jpg' %}" alt="icon-sedans">
+          <h2 class="font-Big-Shoulders text-[2rem] text-white mb-6 text-center">Proyecto: SHUMAN PERÚ</h2>
+        </div>
+      
+        <div class="bg-icasoftBlue p-[48px] flex-grow">
+          <img class="mb-[35px] w-[300px] mx-auto block transition-transform duration-300 transform hover:scale-105" src="{% static 'img/portafolio2.jpg' %}" alt="icon-sedans">
+          <h2 class="font-Big-Shoulders text-[2rem] text-white mb-6 text-center">Proyecto: METALMARK</h2>       
+        </div>
+  
+        <div class="bg-icasoftBlue p-[48px] flex-grow">
+          <img class="mb-[35px] w-[300px] mx-auto block transition-transform duration-300 transform hover:scale-105" src="{% static 'img/portafolio3.jpg' %}" alt="icon-sedans">
+          <h2 class="font-Big-Shoulders text-[2rem] text-white mb-6 text-center">Proyecto: INTERBANK</h2>       
+        </div>
+      </div>
+    </section>
+  </div>
+  
+</body>
+</html>

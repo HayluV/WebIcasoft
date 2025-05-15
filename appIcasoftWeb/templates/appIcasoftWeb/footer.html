@@ -1,11 +1,74 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>footer</title>
+  <link rel="stylesheet" href="{% static 'src/footer.css' %}">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
 </head>
-<body>
-    
+
+<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transpasrent-white">
+  
+  <div>
+    <section class="w-full mt-0 overflow-hidden lg:flex lg:flex-col lg:w-full">
+      <div class="lg:flex w-full">
+        <div class="bg-icasoftBlue p-[48px] flex-grow">
+          <h2 class="font-Big-Shoulders text-[2rem] text-white mb-6 text-center lg:text-left uppercase">Información de contacto:</h2>
+          <p class="footer-text text-white mb-2 text-center lg:text-left">Calle Cajamarca 156, Galería AMISUR interior 135 - A</p>
+          <p class="footer-text text-white mb-2 text-center lg:text-left">972 142 523</p>
+          <p class="footer-text text-white mb-2 text-center lg:text-left">Lunes - Sábado<br>9:00 A.M - 9:00 P.M</p>
+          <picture class="text-center lg:text-left">
+            <source srcset="{% static 'img/logo.png' %}" type="image/png">
+            <img src="{% static 'img/logo.png' %}" alt="Logo" width="70" style="border-radius: 50%;" class="h-auto mx-auto lg:mx-0">
+          </picture>
+        </div>
+
+        <div class="bg-icasoftBlue p-[48px] flex-grow">
+          <h2 class="font-Big-Shoulders text-[2rem] text-white mb-6 text-center lg:text-left uppercase">Te ayudamos:</h2>
+          <ul class="text-center">
+            <li class="footer-text text-white mb-2">
+              <p class="text-white mb-2 text-center lg:text-left">Libro de Reclamaciones</p>
+            </li>
+            <li class="footer-text text-white mb-2">
+              <p class="text-white mb-2 text-center lg:text-left">Tipo de entrega</p>
+            </li>
+            <li class="footer-text text-white mb-2">
+              <p class="text-white mb-2 text-center lg:text-left">Términos y Condiciones</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-icasoftBlue p-[48px] flex-grow">
+          <h2 class="font-Big-Shoulders text-[2rem] text-white mb-6 text-center lg:text-left uppercase">Encuéntranos en:</h2>
+          <ul class="text-center">
+            <li class="footer-text text-white text-center lg:text-left mb-2">
+              <a href="https://www.facebook.com" class="text-white hover:text-gray-400">
+                Facebook
+              </a>
+            </li>
+            <li class="footer-text text-white text-center lg:text-left mb-2">
+              <a href="https://www.tiktok.com" class="text-white hover:text-gray-400">
+                TikTok
+              </a>
+            </li>
+            <li class="footer-text text-white text-center lg:text-left mb-2">
+              <a href="https://www.youtube.com" class="text-white hover:text-gray-400">
+                YouTube
+              </a>
+            </li>
+            <li class="footer-text text-white text-center lg:text-left mb-2">
+              <a href="https://www.instagram.com" class="text-white hover:text-gray-400">
+                Instagram
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+  </div>
 </body>
 </html>

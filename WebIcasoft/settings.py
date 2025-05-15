@@ -115,9 +115,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# The URL that Django uses to serve static files
+STATIC_URL = '/static/'
+
+# Directories where static files are located (e.g., your custom CSS files)
+STATICFILES_DIRS = [
+    BASE_DIR / '../WebIcaSoft/static',  # The location where your custom static files are
+]
+
+# Where the collected static files will be stored (for production)
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # This is the directory where all static files will be collected
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

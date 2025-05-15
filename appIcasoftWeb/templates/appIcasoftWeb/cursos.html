@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio - IcaSoft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% load static %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
 </head>
-<body>
+<body class="m-0 p-0">
+{% include 'appIcasoftWeb/header.html' %}
+<div>
+    {% include 'appIcasoftWeb/footer.html' %}
+</div>
+
 </body>
+
 </html>

@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>footer</title>
+
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
+</head>
+<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transpasrent-white">
+  
+  <div>
+    <section class="w-full mt-0 overflow-hidden lg:flex lg:flex-col lg:w-full">
+      
+      <div class="bg-primary p-[10px] w-full">
+        <h2 class="font-Big-Shoulders text-[4rem] uppercase text-white mb-2 text-center custom-animated-text">Blog</h2>
+      </div>
+      
+      <div class="lg:flex w-full mt-3 mb-6">
+        
+        <div class="bg-sky-300 p-6 lg:p-[48px] flex-grow custom-rounded bg-opacity-90 mb-6 lg:mb-0 mr-6">
+          <picture>
+            <img class="mb-[35px] w-[300px] h-[200px] mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" src="{% static 'img/blog1.jpg' %}" alt="Proyecto: SHUMAN PERÚ">
+          </picture>
+          <h2 class="font-Big-Shoulders text-[2rem] text-blue-950 mb-7 text-center">Sistema de soporte técnico con IA</h2>
+          <button class="bg-primary text-white w-[146px] h-12 rounded-[25px] cursor-pointer hover:bg-Bright-orange hover:text-white hover:border-2 mx-auto block">
+            Ver
+          </button>
+        </div>
+      
+        <div class="bg-sky-300 p-6 lg:p-[48px] flex-grow custom-rounded bg-opacity-90 mb-6 lg:mb-0 mr-6">
+          <picture>
+            <img class="mb-[35px] w-[300px] h-[200px] mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" src="{% static 'img/blog2.jpg' %}" alt="Proyecto: METALMARK">
+          </picture>
+          <h2 class="font-Big-Shoulders text-[2rem] text-blue-950 mb-6 text-center">Proyecto: METALMARK</h2>
+          <button class="bg-primary text-white w-[146px] h-12 rounded-[25px] cursor-pointer hover:bg-Bright-orange hover:text-white hover:border-2 mx-auto block">
+            Ver
+          </button>
+        </div>
+      
+        <div class="bg-sky-300 p-6 lg:p-[48px] flex-grow custom-rounded bg-opacity-90 mb-6 lg:mb-0">
+          <picture>
+            <img class="mb-[35px] w-[300px] h-[200px] mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" src="{% static 'img/portafolio3.jpg' %}" alt="Proyecto: INTERBANK">
+          </picture>
+          <h2 class="font-Big-Shoulders text-[2rem] text-blue-950 mb-6 text-center">Proyecto: INTERBANK</h2>
+          <button class="bg-primary text-white w-[146px] h-12 rounded-[25px] cursor-pointer hover:bg-Bright-orange hover:text-white hover:border-2 mx-auto block">
+            Ver
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+</body>
+</html>

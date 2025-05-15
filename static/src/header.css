@@ -1,0 +1,80 @@
+header {
+  background: linear-gradient(to right, var(--icasoftBlue), var(--color-Dark-cyan), #3B82F6, #4cb1ef, var(--icasoftBlue)); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+a {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--icasoftBlue); 
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  flex-grow: 0; 
+}
+
+.search-input {
+  width: 200px; 
+  padding: 8px;
+  font-size: 14px; 
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  transition: border 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: var(--icasoftBlue);
+  outline: none;
+}
+
+nav img {
+  height: 40px; /* Ajusta el tamaño de la imagen de inicio de sesión */
+  margin-left: 10px; /* Espaciado entre los enlaces de navegación y la imagen */
+}
+
+h2 {
+  font-size: 2rem; /* Tamaño de fuente para pantallas grandes */
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* @media query para pantallas pequeñas (como móviles) */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem; /* Reduce el tamaño del título en pantallas pequeñas */
+  }
+}
+
+/* Estilo para el menú de productos */
+#menu-productos {
+    display: none; /* Está oculto por defecto */
+}
+
+#menu-productos.show {
+    display: block; /* Se muestra cuando se agrega la clase "show" */
+}
+
+/* Mostrar el texto "MENÚ" en pantallas pequeñas */
+#menu-productos-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    padding-right: 20px; /* Espaciado para el logo */
+}
+
+#menu-productos-text:hover {
+    color: #ffcc00; /* Color al pasar el mouse */
+} 
+
+button#openModalBtn:hover, a#openModalBtn:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}

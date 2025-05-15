@@ -1,0 +1,76 @@
+.review-card {
+ background: linear-gradient(to right,#1D0A7A,#1D0A7A, #3944b3, #5e78ce,#6998a5, #6998a5);
+  padding: 20px;
+  padding-right: 80px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  min-height: 150px;
+}
+
+.info-text {
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 16px;
+  margin-right: 20px; 
+  flex-grow: 1; 
+  white-space: normal; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  line-height: 1.5; 
+  max-width: 450px; 
+}
+
+.img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.arrow-left, .arrow-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #6992c9;
+  color: white;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.arrow-left {
+  left: 10px; 
+}
+
+.arrow-right {
+  right: 10px; 
+}
+
+/* Asegura que la tarjeta y el contenido se ajusten bien en pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .review-card {
+    flex-direction: column; /* Cambia la dirección del contenido en pantallas pequeñas */
+    padding-right: 20px; /* Ajusta el padding para pantallas pequeñas */
+  }
+
+  .info-text {
+    margin-right: 0; 
+  }
+
+  .img {
+    width: 100px; 
+    height: 100px;
+  }
+}
