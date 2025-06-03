@@ -5,7 +5,7 @@ const totalReviews = reviewSlider.children.length;
 function loadReview(index) {
   const reviews = document.querySelectorAll('.review-item');
   reviews.forEach((review, i) => {
-    review.style.display = (i === index) ? 'flex' : 'none';  /* Asegúrate de usar 'flex' en vez de 'block' */
+    review.style.display = (i === index) ? 'flex' : 'none';  
   });
 }
 

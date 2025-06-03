@@ -1,0 +1,168 @@
+/* Reset box-sizing global */
+* {
+  box-sizing: border-box;
+}
+
+/* Wrapper slider */
+.servicios-slider-wrapper {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+/* Viewport: slider visible area */
+.servicios-viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 50px 0;
+  background: white; /* importante para que contraste */
+}
+
+/* Contenedor con flex para tarjetas */
+.servicios-container {
+  display: flex;
+  transition: transform 0.3s ease;
+  padding-right: 30px; /* espacio para flechas */
+}
+
+/* Cada tarjeta servicio */
+.servicio-card {
+  flex: 0 0 280px;
+  margin: 0 15px 20px 15px;
+  background-color: #a0c4ff;
+  height: 200px;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+  padding: 1rem;
+
+  /* Fondo personalizado vía inline style en html */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: rgb(17, 17, 110);
+  text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.7);
+  user-select: none;
+}
+
+/* Sombra al pasar mouse */
+.servicio-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Texto dentro tarjeta */
+.servicio-text {
+  font-size: 1.2rem;
+  text-align: center;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 8px;
+}
+
+/* Contenedor del botón */
+.servicio-btn-container {
+  text-align: center;
+}
+
+/* Botón */
+.btn-servicios {
+  color: white;
+  background-color: #1e40af;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  user-select: none;
+}
+
+.btn-servicios:hover {
+  background-color: #fb923c;
+}
+
+/* Flechas izquierda y derecha */
+.servicios-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #1e40af;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.8;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  z-index: 10;
+}
+
+.servicios-arrow:hover {
+  background-color: #fb923c;
+  opacity: 1;
+}
+
+/* Posiciones flechas */
+#servicios-arrow-left {
+  left: -25px;
+}
+
+#servicios-arrow-right {
+  right: -25px;
+}
+
+/* Responsive tablets */
+@media (max-width: 768px) {
+  .servicio-card {
+    flex: 0 0 48%;
+    margin: 0 1% 20px 1%;
+  }
+
+  #servicios-arrow-left {
+    left: -15px;
+  }
+
+  #servicios-arrow-right {
+    right: -15px;
+  }
+}
+
+/* Responsive móviles */
+@media (max-width: 480px) {
+  .servicio-card {
+    flex: 0 0 96%;
+    margin: 0 2% 20px 2%;
+  }
+
+  .servicios-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  #servicios-arrow-left {
+    left: -10px;
+  }
+
+  #servicios-arrow-right {
+    right: -10px;
+  }
+}
+

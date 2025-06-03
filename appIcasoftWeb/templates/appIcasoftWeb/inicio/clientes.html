@@ -3,30 +3,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>footer</title>
 
-  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}" />
+  <style>
+    .collage-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #7dd3fc;
+      border-radius: 10px;
+      overflow: visible;
+    }
+    .collage-container img {
+      width: 100%;
+      height: 180px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: block;
+    }
+    .collage-container img:hover {
+      transform: scale(1.1);
+      z-index: 10;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 768px) {
+      .collage-container {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      }
+      .collage-container img {
+        height: 120px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .collage-container {
+        grid-template-columns: 1fr; /* una columna, imagen por fila */
+        gap: 12px;
+      }
+      .collage-container img {
+        width: 100%;
+        height: auto;
+        max-height: 180px; /* opcional */
+      }
+    }
+  </style>
 </head>
-<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transpasrent-white">
-  
+<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transparent-white">
+
   <div>
     <section class="w-full mt-0 overflow-hidden lg:flex lg:flex-col lg:w-full">
-      
+
       <div class="bg-sky-300 p-[10px] w-full">
-        <h2 class="font-Big-Shoulders text-[4rem] uppercase text-white mb-2 text-center custom-animated-text">Nuestros clientes</h2>
+        <h2 class="font-Big-Shoulders text-[3rem] uppercase text-white mb-2 text-center custom-animated-text">
+          Nuestros clientes
+        </h2>
       </div>
-      
+
       <div class="lg:flex w-full">
         <div class="bg-sky-300 p-[40px] flex-grow">
-     <img class="mb-[40px] w-[900px] mx-auto block transition-transform duration-300 transform hover:scale-105" src="{% static 'img/clientes.jpg' %}" alt="icon-sedans">
+
+          <div class="collage-container">
+            <img src="{% static 'img/clientes/Agroempaques.PNG' %}" alt="Cliente 1" />
+            <img src="{% static 'img/clientes/Alfa Co.PNG' %}" alt="Cliente 2" />
+            <img src="{% static 'img/clientes/CaSolutions.PNG' %}" alt="Cliente 3" />
+            <img src="{% static 'img/clientes/Gilat.PNG' %}" alt="Cliente 4" />
+            <img src="{% static 'img/clientes/HighService.PNG' %}" alt="Cliente 5" />
+            <img src="{% static 'img/clientes/Honda.PNG' %}" alt="Cliente 6" />
+            <img src="{% static 'img/clientes/Interbank.PNG' %}" alt="Cliente 7" />
+            <img src="{% static 'img/clientes/Logisticals.PNG' %}" alt="Cliente 8" />
+            <img src="{% static 'img/clientes/Makro.PNG' %}" alt="Cliente 9" />
+            <img src="{% static 'img/clientes/Metalmark.PNG' %}" alt="Cliente 10" />
+            <img src="{% static 'img/clientes/PlazaVea.PNG' %}" alt="Cliente 11" />
+            <img src="{% static 'img/clientes/TiConsulting.PNG' %}" alt="Cliente 12" />
+            <img src="{% static 'img/clientes/Vanguard.PNG' %}" alt="Cliente 13" />
+          </div>
 
         </div>
       </div>
     </section>
   </div>
-  
+
 </body>
 </html>

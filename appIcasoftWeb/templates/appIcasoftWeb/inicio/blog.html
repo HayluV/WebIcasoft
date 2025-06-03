@@ -2,58 +2,64 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Blog</title>
-  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'src/blog.css' %}">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/blog.css' %}" />
+  <link rel="icon" href="{% static 'img/logo.png' %}" type="image/png" sizes="32x32" />
 </head>
 
 <body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-transparent-white">
   <div>
     <section class="w-full mt-0 overflow-hidden relative">
       <div class="bg-icasoftBlue p-[10px] w-full">
-        <h2 class="font-Big-Shoulders text-[4rem] uppercase text-white mb-2 text-center custom-animated-text">Blog</h2>
+        <h2 class="font-Big-Shoulders text-[3rem] uppercase text-white mb-2 text-center custom-animated-text">Blog</h2>
       </div>
 
       <div class="flex flex-col lg:flex-row w-full mt-3 mb-6 justify-center gap-6">
         <div class="flex justify-between items-center w-full">
-          <div class="arrow-left cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center ml-[20px]" onclick="moveSlider(-1)">
-            &lt;
-          </div>
 
-          <div class="flex w-full justify-center gap-6 overflow-hidden">
-            <div id="blog-slider" class="flex transition-all duration-300">
+          <div
+            class="arrow-left cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center ml-[20px]"
+            onclick="blogMoveSlider(-1)">&lt;</div>
+
+          <div class="slider-viewport overflow-hidden mx-auto">
+            <div id="blog-slider" class="slider-container flex transition-transform duration-300">
               {% for blog in blogs %}
-                <div class="blog-card bg-sky-100 p-6 lg:p-[48px] custom-rounded bg-opacity-90 mb-6 lg:mb-0">
-                  <picture>
-                    <img class="mb-[35px] mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" 
-                      src="{{ blog.image_url }}" alt="{{ blog.title }}">
-                  </picture>
-                  <h2 class="font-Big-Shoulders uppercase text-blue-950 mb-6" style="font-size: 20px;">
-                    {{ blog.title }}
-                  </h2>
-                  <a href="{{ blog.link }}" class="block mx-auto">
-                    <button class="bg-icasoftBlue text-white w-[146px] h-12 rounded-[25px] cursor-pointer hover:bg-Bright-orange hover:text-white hover:border-2">
-                      Ver
-                    </button>
-                  </a>
-                </div>
+              <div class="blog-card bg-sky-100 p-6 lg:p-[48px] custom-rounded bg-opacity-90 mb-6 lg:mb-0">
+                <picture>
+                  <img src="{{ blog.image_url }}" alt="{{ blog.title }}"
+                    class="mb-[35px] rounded-lg mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" />
+                </picture>
+                <h2 class="blog-title-clamp font-Big-Shoulders uppercase text-blue-950 mb-6" style="font-size: 20px;">
+                  {{ blog.title }}
+                </h2>
+
+                <a href="{{ blog.link }}" target="_blank" rel="noopener noreferrer" class="block mx-auto">
+                  <button
+                    class="bg-icasoftBlue text-white w-[146px] h-12 rounded-[25px] cursor-pointer hover:bg-Bright-orange hover:text-white hover:border-2">
+                    Ver
+                  </button>
+                </a>
+              </div>
               {% endfor %}
             </div>
           </div>
 
-          <div class="arrow-right cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center mr-[20px]" onclick="moveSlider(1)">
-            &#10095;
-          </div>
+          <div
+            class="arrow-right cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center mr-[20px]"
+            onclick="blogMoveSlider(1)">&#10095;</div>
 
         </div>
       </div>
 
     </section>
   </div>
+
   <script src="{% static 'src/js/blogSlider.js' %}"></script>
 </body>
+
 </html>

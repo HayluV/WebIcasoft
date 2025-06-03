@@ -77,6 +77,45 @@
     }
 }
 
+.cursos-animated-text {
+  background: linear-gradient(
+    -45deg,
+    #140443,   
+    #272786,   
+    #3399ff,   
+    #66ccff,   
+    #99ddff,   
+    #ccefff    
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-cursos 7s ease infinite;
+}
+
+@keyframes gradient-cursos {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 25% 25%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    background-position: 75% 75%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
 .custom-rounded {
     border-radius: 4rem;
 }
@@ -91,4 +130,10 @@
     .font-Big-Shoulders {
       font-size: 10vw !important;
     }
+}
+
+@media (min-width: 1024px) {
+  .pt-custom {
+    padding-top: 40px !important;
+  }
 }

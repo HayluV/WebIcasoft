@@ -1,6 +1,45 @@
 header {
-  background: linear-gradient(to right, var(--icasoftBlue), var(--color-Dark-cyan), #3B82F6, #4cb1ef, var(--icasoftBlue)); 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  background: linear-gradient(
+    to right,
+    var(--icasoftBlue) 0%,
+    #3a7bd5 50%,
+    #4c8a8a 100%
+  );
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.no-wrap-container {
+  flex-wrap: nowrap; /* No permitir salto de línea en el header */
+}
+
+.logo-texto-productos {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem; /* Espacio entre logo, texto y menú productos */
+}
+
+.logo-img {
+  height: 8rem;
+  flex-shrink: 0; /* No se reduce el logo */
+  transition: height 0.3s ease;
+}
+
+h2.no-wrap-text {
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 1px;
+  white-space: nowrap; /* Evita saltos de línea */
+  transition: font-size 0.3s ease;
+}
+
+#menu-productos-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding-right: 20px;
+  white-space: nowrap;
+  transition: font-size 0.3s ease;
 }
 
 a {
@@ -11,19 +50,13 @@ a {
 }
 
 a:hover {
-  color: var(--icasoftBlue); 
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  flex-grow: 0; 
+  color: var(--icasoftBlue);
 }
 
 .search-input {
-  width: 200px; 
+  width: 200px;
   padding: 8px;
-  font-size: 14px; 
+  font-size: 14px;
   border-radius: 20px;
   border: 2px solid #ccc;
   transition: border 0.3s ease;
@@ -35,46 +68,73 @@ a:hover {
 }
 
 nav img {
-  height: 40px; /* Ajusta el tamaño de la imagen de inicio de sesión */
-  margin-left: 10px; /* Espaciado entre los enlaces de navegación y la imagen */
+  height: 40px;
+  margin-left: 10px;
 }
 
-h2 {
-  font-size: 2rem; /* Tamaño de fuente para pantallas grandes */
-  margin: 0;
-  letter-spacing: 1px;
+button#openModalBtn:hover,
+a#openModalBtn:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
-/* @media query para pantallas pequeñas (como móviles) */
-@media (max-width: 768px) {
-  h2 {
-    font-size: 1.5rem; /* Reduce el tamaño del título en pantallas pequeñas */
-  }
-}
-
-/* Estilo para el menú de productos */
+/* Estilos para mostrar/ocultar menús */
 #menu-productos {
-    display: none; /* Está oculto por defecto */
+  display: none;
 }
 
 #menu-productos.show {
-    display: block; /* Se muestra cuando se agrega la clase "show" */
+  display: block;
 }
 
-/* Mostrar el texto "MENÚ" en pantallas pequeñas */
-#menu-productos-text {
+#menu-info {
+  display: none;
+}
+
+#menu-info:not(.hidden) {
+  display: block;
+}
+
+/* Responsive sizes */
+
+@media (max-width: 1024px) {
+  .logo-img {
+    height: 6rem;
+  }
+  h2.no-wrap-text {
+    font-size: 1.6rem;
+  }
+  #menu-productos-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    height: 4rem;
+  }
+  h2.no-wrap-text {
     font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    padding-right: 20px; /* Espaciado para el logo */
+  }
+  #menu-productos-text {
+    font-size: 0.9rem;
+  }
+  .logo-texto-productos {
+    gap: 0.5rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
-#menu-productos-text:hover {
-    color: #ffcc00; /* Color al pasar el mouse */
-} 
-
-button#openModalBtn:hover, a#openModalBtn:hover {
-    opacity: 0.8;
-    cursor: pointer;
+@media (max-width: 480px) {
+  .logo-img {
+    height: 3rem;
+  }
+  h2.no-wrap-text {
+    font-size: 1rem;
+  }
+  #menu-productos-text {
+    font-size: 0.8rem;
+  }
 }

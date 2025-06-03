@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modal ejemplo</title>
+  <link rel="stylesheet" href="{% static 'src/css/modal-login.css' %}" />
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+</head>
+
+<body>
+
+<div id="miModalRegistro" class="fixed inset-0 bg-black-transparent bg-opacity-10 backdrop-blur-md flex justify-center items-center z-50 hidden">
+  <div class="modal-card w-11/12 max-w-md sm:w-1/3"
+       style="background-image: url('{% static 'img/fondo.modal.jpg' %}'); background-size: cover; background-position: center; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); color: white;">
+       
+    <div class="flex justify-center mb-4">
+      <img src="{% static 'img/logo.png' %}" alt="ICAsOFT" class="h-20" />
+    </div>
+
+    <div class="modal-header flex justify-between items-center mb-4">
+      <h5 class="font-Big-Shoulders text-white text-xl font-semibold flex-grow text-center uppercase">Registrarse</h5>
+      <button type="button" id="closeModalRegistroBtn" class="text-gray-300">
+        <span class="text-2xl">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body mb-4">
+      <form action="/register" method="POST">
+        <input type="text" placeholder="Correo electrónico" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
+        <input type="text" placeholder="Nombre" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
+        <input type="text" placeholder="Apellidos" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
+        <input type="password" placeholder="Contraseña" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
+        <input type="password" placeholder="Confirmar contraseña" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
+      </form>
+    </div>
+
+    <div class="modal-footer flex justify-between">
+      <button id="closeModalRegistroBtn2" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancelar</button>
+      <button class="bg-icasoftBlue text-white px-4 py-2 rounded-md">Registrar</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

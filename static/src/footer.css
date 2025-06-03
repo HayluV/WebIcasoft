@@ -1,4 +1,31 @@
+.footer-h2 {
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+}
+
+.footer-h2.size-normal {
+  font-size: 1.2rem !important;
+}
+
+.footer-h2.size-large {
+  font-size: 2rem !important;
+}
+
+.footer-h2.white {
+  color: white !important;
+}
+
+.footer-h2.blue {
+  color: var(--icasoftBlue) !important;
+}
+
+@media (max-width: 768px) {
+  .footer-h2 {
+    text-align: center !important;
+  }
+}
+
 .footer-text {
   font-family: "Lexend Deca", sans-serif;
-  font-size: 18px;
 }

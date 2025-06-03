@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+}
+
+.slider-wrapper {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 50px 0;
+}
+
+.container {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.card {
+  flex: 0 0 280px;
+  margin: 0 15px 20px 15px;
+  background-color: #a0c4ff;
+  height: 200px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;   /* <-- agregar esto */
+  align-items: center;      /* centra horizontalmente los hijos */
+  justify-content: center;  /* centra verticalmente el contenido */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+  padding: 1rem;
+}
+
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-text {
+  font-size: 1.2rem;
+  user-select: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+ color: rgb(17, 17, 110); /* azul oscuro */
+text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.7); /* sombra blanca más gruesa */
+
+}
+
+
+.btn-container {
+  text-align: center; /* centra horizontalmente el contenido dentro del div */
+  margin-top: 8px;    /* espacio arriba del botón */
+}
+
+.btn-cursos {
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;s
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+
+.btn-cursos:hover {
+  background-color: #fb923c;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #1e40af;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.8;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  z-index: 10;
+}
+
+.arrow:hover {
+  background-color: #fb923c;
+  opacity: 1;
+}
+
+#arrow-left {
+  left: -25px;
+}
+
+#arrow-right {
+  right: -25px;
+}
+
+/* Responsive tablets */
+@media (max-width: 768px) {
+  .card {
+    flex: 0 0 48%;
+    margin: 0 1% 20px 1%;
+  }
+
+  #arrow-left {
+    left: -15px;
+  }
+
+  #arrow-right {
+    right: -15px;
+  }
+}
+
+/* Responsive móviles */
+@media (max-width: 480px) {
+  .card {
+    flex: 0 0 96%;
+    margin: 0 2% 20px 2%;
+  }
+
+  .arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  #arrow-left {
+    left: -10px;
+  }
+
+  #arrow-right {
+    right: -10px;
+  }
+}

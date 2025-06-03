@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Icasoft</title>
+  {% load static %}
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}" />
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/header.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/modal-login.css' %}" />
+</head>
+<body class="m-0 p-0">
+
+<header class="fixed top-0 left-0 w-full text-white z-10 shadow-md">
+  <div class="flex items-center justify-between p-4 w-full no-wrap-container">
+    <div class="flex items-center space-x-1 md:space-x-4 logo-texto-productos">
+      <img src="{% static 'img/logo-naranja.png' %}" alt="ICASOFT" class="logo-img" />
+      <h2 class="font-Big-Shoulders text-[2rem] text-white mb-1 uppercase no-wrap-text">ICASOFT</h2>
+      <div id="menu-productos-text" class="text-white cursor-pointer no-wrap-text">
+        ☰ PRODUCTOS
+      </div>
+    </div>
+
+    <nav class="hidden lg:flex space-x-8 items-center">
+      <input
+        type="text"
+        placeholder="Buscar..."
+        class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none"
+      />
+      <a href="/">INICIO</a>
+      <a href="/#cursos">CURSOS</a>
+      <a href="/#blog">BLOG</a>
+      <a href="/contacto">CONTACTAR</a>
+      <button id="openModalBtnHeader" class="focus:outline-none" aria-label="Iniciar sesión">
+        <img
+          src="{% static 'img/logo-iniciarsesion.webp' %}"
+          alt="Iniciar sesión"
+          class="h-10"
+        />
+      </button>
+    </nav>
+
+    <!-- Botón menú móvil -->
+    <button id="menu-info-toggle" class="lg:hidden text-white">
+      <p>☰</p>
+    </button>
+  </div>
+</header>
+
+<!-- Menú info para pantallas pequeñas -->
+<div id="menu-info" class="fixed inset-0 bg-transparent z-20 hidden">
+  <div class="bg-white w-64 h-full p-4 space-y-4">
+    <button id="close-menu-info" class="text-xl text-right text-black">X</button>
+    <nav>
+      <input
+        type="text"
+        placeholder="Buscar..."
+        class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none"
+      />
+      <a href="/" class="block p-2">INICIO</a>
+      <a href="/#cursos" class="block p-2">CURSOS</a>
+      <a href="/#blog" class="block p-2">BLOG</a>
+      <a href="/contacto" class="block p-2">CONTACTAR</a>
+      <button id="openModalBtnMenu" class="focus:outline-none" aria-label="Iniciar sesión">
+        <img src="{% static 'img/logo-iniciarsesion.webp' %}" alt="Iniciar sesión" class="h-10" />
+      </button>
+    </nav>
+  </div>
+</div>
+
+<!-- Menú productos: solo visible en pantalla grande -->
+<div id="menu-productos" class="fixed inset-0 bg-transparent z-20 hidden">
+  <div class="bg-white w-64 h-full p-4 space-y-4">
+    <button id="close-menu-productos" class="text-xl text-right text-black">X</button>
+    <nav>
+      <a href="/laptops" class="block p-2">Laptops</a>
+      <a href="/impresoras" class="block p-2">Impresoras</a>
+      <a href="/accesorios" class="block p-2">Accesorios</a>
+      <a href="/monitores" class="block p-2">Monitores</a>
+    </nav>
+  </div>
+</div>
+
+<!-- Modal de login incluido -->
+{% include 'appIcasoftWeb/modal-login.html' %}
+{% include 'appIcasoftWeb/modal-registro.html' %}
+
+<div class="pt-20">
+  {% block content %}
+  {% endblock %}
+</div>
+
+<script src="{% static 'src/js/header.js' %}"></script>
+<script src="{% static 'src/js/modal-login.js' %}"></script>
+
+</body>
+</html>

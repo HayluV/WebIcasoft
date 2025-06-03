@@ -1,19 +1,125 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio - IcaSoft</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    {% load static %}
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
-</head>
-<body class="m-0 p-0">
-{% include 'appIcasoftWeb/header.html' %}
-<div>
-    {% include 'appIcasoftWeb/footer.html' %}
-</div>
+<html lang="es">
 
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% if curso %}{{ curso.titulo }}{% else %}Inicio - IcaSoft{% endif %}</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'src/inicio.css' %}">
+
+  <style>
+    .titulo-curso {
+      font-family: "Big Shoulders", cursive;
+      font-weight: 700;
+      font-size: 3rem;
+      text-transform: uppercase;
+      background-color: var(--icasoftBlue);
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .descripcion-curso {
+      font-family: "Lexend Deca", sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
+      word-spacing: 0.15em;
+      text-align: justify;
+      color: var(--icasoftBlue);
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .fila-img-info {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+      justify-content: space-between; 
+    }
+
+    .curso-imagen {
+      flex: 0 0 40%;
+      max-width: 300px;
+    }
+
+    .curso-imagen img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+
+    .info-curso {
+      flex: 0 0 auto;
+      max-width: calc(100% - 320px);
+      min-width: auto;
+      width: auto;
+      background-color: #f0f4f8;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+      font-family: "Lexend Deca", sans-serif;
+      font-size: 1rem;
+      color: var(--icasoftBlue);
+    }
+
+    @media (max-width: 768px) {
+      .fila-img-info {
+        flex-direction: column;
+      }
+
+      .curso-imagen,
+      .info-curso {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <header>
+      {% include 'appIcasoftWeb/header/header.html' %}
+    </header>
+
+    <main class="pt-10 lg-pt">
+      {% if curso %}
+      <h2 class="titulo-curso cursos-animated-text">
+        {{ curso.titulo }}
+      </h2>
+
+      <p class="descripcion-curso">
+        {{ curso.descripcion }}
+      </p>
+
+      <div class="fila-img-info">
+        <div class="info-curso">
+          {{ curso.info|safe }}
+        </div>
+        <div class="curso-imagen">
+          <img src="{{ curso.image_url }}" alt="{{ curso.titulo }}" />
+        </div>
+      </div>
+
+      {% else %}
+      <p class="sobre-nosotros-text">No se encontró información del curso solicitado.</p>
+      {% endif %}
+    </main>
+
+    <footer>
+      {% include 'appIcasoftWeb/footer.html' %}
+    </footer>
+  </div>
 </body>
 
 </html>

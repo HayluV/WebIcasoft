@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Servicios - Slider</title>
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/servicios.css' %}" />
+</head>
+
+<body>
+  <main class="servicios-slider-wrapper">
+    <h2 class="titulo-principal">Servic</h2>
+
+    <button id="servicios-arrow-left" class="servicios-arrow" aria-label="Anterior">
+      &#8249;
+    </button>
+
+    <div class="servicios-viewport">
+      <div id="servicios-container" class="servicios-container">
+
+        <div class="servicio-card"
+          style="background-image: url('{% static 'img/servicio1.jpg' %}');">
+          <p class="servicio-text">Reparación de hardware</p>
+          <div class="servicio-btn-container">
+            <a href="https://ejemplo.com/servicio1" target="_blank" rel="noopener noreferrer">
+              <button class="btn-servicios">Solicitar servicio</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="servicio-card"
+          style="background-image: url('{% static 'img/servicio2.jpg' %}');">
+          <p class="servicio-text">Actualización de software</p>
+          <div class="servicio-btn-container">
+            <a href="https://ejemplo.com/servicio2" target="_blank" rel="noopener noreferrer">
+              <button class="btn-servicios">Solicitar servicio</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="servicio-card"
+          style="background-image: url('{% static 'img/servicio3.jpg' %}');">
+          <p class="servicio-text">Consultoría técnica</p>
+          <div class="servicio-btn-container">
+            <a href="https://ejemplo.com/servicio3" target="_blank" rel="noopener noreferrer">
+              <button class="btn-servicios">Solicitar servicio</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="servicio-card"
+          style="background-image: url('{% static 'img/servicio4.jpg' %}');">
+          <p class="servicio-text">Mantenimiento preventivo</p>
+          <div class="servicio-btn-container">
+            <a href="https://ejemplo.com/servicio4" target="_blank" rel="noopener noreferrer">
+              <button class="btn-servicios">Solicitar servicio</button>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <button id="servicios-arrow-right" class="servicios-arrow" aria-label="Siguiente">
+      &#8250;
+    </button>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('servicios-container');
+      const btnLeft = document.getElementById('servicios-arrow-left');
+      const btnRight = document.getElementById('servicios-arrow-right');
+
+      const cardStyle = window.getComputedStyle(container.querySelector('.servicio-card'));
+      const cardMarginRight = parseInt(cardStyle.marginRight);
+      const cardWidth = container.querySelector('.servicio-card').offsetWidth + cardMarginRight;
+
+      const scrollAmount = cardWidth;
+
+      btnLeft.addEventListener('click', () => {
+        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+
+      btnRight.addEventListener('click', () => {
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+
+      function updateArrows() {
+        btnLeft.disabled = container.scrollLeft <= 0;
+        btnRight.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth;
+      }
+
+      container.addEventListener('scroll', updateArrows);
+      updateArrows();
+    });
+  </script>
+</body>
+
+</html>

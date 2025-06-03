@@ -1,0 +1,16 @@
+ div {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Centrar el texto en main para pantallas pequeñas */
+@media (max-width: 600px) {
+  main {
+    display: flex;            /* usamos flexbox para centrar */
+    justify-content: center;  /* centrar horizontalmente */
+    align-items: center;      /* centrar verticalmente */
+    text-align: center;       /* centrar texto */
+    padding: 0rem;            /* opcional para que no quede pegado */
+  }
+}

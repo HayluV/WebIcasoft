@@ -1,12 +1,34 @@
-let currentSlide = 0;
-const blogSlider = document.getElementById('blog-slider');
-const totalSlides = blogSlider.children.length;
+(function() {
+  let blogCurrentIndex = 0;
+  const blogSlider = document.getElementById('blog-slider');
+  if (!blogSlider) return;
+  const blogTotalCards = blogSlider.children.length;
 
-function moveSlider(direction) {
-  currentSlide += direction;
-  if (currentSlide < 0) currentSlide = totalSlides - 1;
-  if (currentSlide >= totalSlides) currentSlide = 0;
+  function blogSlidesToMove() {
+    return window.innerWidth <= 768 ? 2 : 4;
+  }
 
-  const offset = -currentSlide * (blogSlider.children[0].offsetWidth + 24); 
-  blogSlider.style.transform = `translateX(${offset}px)`;
-}
+  function blogMoveSlider(direction) {
+    const moveCount = blogSlidesToMove();
+
+    blogCurrentIndex += direction * moveCount;
+
+    if (blogCurrentIndex < 0) blogCurrentIndex = 0;
+    if (blogCurrentIndex > blogTotalCards - moveCount) blogCurrentIndex = blogTotalCards - moveCount;
+
+    const firstCard = blogSlider.children[0];
+    const style = getComputedStyle(firstCard);
+    const marginRight = parseInt(style.marginRight) || 0;
+    const cardWidth = firstCard.offsetWidth + marginRight;
+
+    const offset = -blogCurrentIndex * cardWidth;
+    blogSlider.style.transform = `translateX(${offset}px)`;
+  }
+
+  window.blogMoveSlider = blogMoveSlider;
+
+  window.addEventListener('resize', () => {
+    blogCurrentIndex = 0;
+    if (blogSlider) blogSlider.style.transform = 'translateX(0)';
+  });
+})();

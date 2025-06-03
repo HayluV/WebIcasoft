@@ -1,12 +1,15 @@
 .sobre-nosotros-text {
-  font-family: "Lexend Deca", sans-serif;
-  font-size: 1.125rem;       
+  font-family: "Lexend Deca", sans-serif;       
   line-height: 1.6;
   letter-spacing: 0.03em;
   word-spacing: 0.15em;
-  text-align: justify;
-  color: var(--icasoftBlue);  
+  text-align: justify; 
 }
+
+.custom-animated-text {
+  font-size: 3.2rem !important;
+}
+
 
 
 
