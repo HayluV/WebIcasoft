@@ -24,7 +24,6 @@
       gap: 1rem;
     }
 
-    /* Es escritorio: 3 productos visibles */
     .producto-visor-slider {
       width: calc(3 * 280px + 2 * 30px);
       max-width: 100%;
@@ -147,7 +146,6 @@
       color: white;
     }
 
-    /* Tablet / móvil grande: 2 productos visibles */
     @media (max-width: 768px) {
       .producto-visor-slider {
         width: calc(2 * 40% + 25px);
@@ -158,7 +156,6 @@
       }
     }
 
-    /* Móvil pequeño: 1 producto visible */
     @media (max-width: 480px) {
       .producto-visor-slider {
         width: 200px;
@@ -295,7 +292,6 @@
       contenedor.dataset.posicion = posicion;
     }
 
-    // Reinicia slider al cambiar tamaño para evitar posiciones inválidas
     window.addEventListener('resize', () => {
       const contenedor = document.getElementById('producto-contenedor-productos');
       contenedor.dataset.posicion = 0;

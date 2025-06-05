@@ -22,6 +22,16 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.blog-card img {
+  width: 80%;
+  height: 180px;
+  object-fit: cover;
+  margin: 0 auto 35px;
+  display: block;
+  transition: transform 0.3s ease;
+  border-radius: 40px; /* Add border-radius here */
+}
+
 
 .blog-title-clamp {
   font-size: clamp(12px, 1.8vw, 20px);

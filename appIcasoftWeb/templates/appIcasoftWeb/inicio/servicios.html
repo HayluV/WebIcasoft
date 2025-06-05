@@ -5,99 +5,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Servicios - Slider</title>
+  <title>Servicios - Tarjetas con más espacio</title>
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
   <link rel="stylesheet" href="{% static 'src/css/servicios.css' %}" />
+  <style>
+    html, body {
+      height: 100%;   /* Ocupa toda la altura */
+      margin: 0;      /* Elimina el margen por defecto */
+      padding: 0;     /* Elimina el padding por defecto */
+    }
+
+    .titulo-container {
+      background-color: var(--icasoftBlue);
+      padding: 5px 10px;
+    }
+
+    h2.titulo-principal {
+      font-family: 'Big Shoulders';
+      font-size: 2.5rem !important;
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0;
+      color: #111166;
+      height: 100%;  /* Hace que el h2 ocupe el 100% de la altura disponible */
+    }
+
+    .contenedor-slider {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .visor-slider {
+      display: grid;
+      grid-template-columns: repeat(3, 320px);
+      grid-template-rows: repeat(2, 220px);
+      gap: 40px 50px;
+      justify-content: center;
+      padding: 40px 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+    }
+
+    .tarjeta-servicio {
+      width: 320px;
+      height: 220px;
+      padding: 20px;
+      margin: 0 auto;
+      background-color: #e0f2fe;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #111166;
+      font-weight: 700;
+      text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.7);
+    }
+
+    .servicio-text {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      user-select: none;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .servicio-btn-container {
+      text-align: center;
+    }
+
+    .btn-ver-detalle {
+      width: 140px;
+      height: 44px;
+      font-size: 1rem;
+      background-color: #1e40af;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-ver-detalle:hover {
+      background-color: #fb923c;
+    }
+
+    @media (max-width: 1024px) {
+      .visor-slider {
+        grid-template-columns: repeat(2, 320px);
+        max-width: 700px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .visor-slider {
+        grid-template-columns: 1fr;
+        max-width: 90vw;
+      }
+
+      .tarjeta-servicio {
+        width: 100%;
+        height: auto;
+        min-height: 180px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <main class="servicios-slider-wrapper">
-    <h2 class="titulo-principal">Servic</h2>
-
-    <button id="servicios-arrow-left" class="servicios-arrow" aria-label="Anterior">
-      &#8249;
-    </button>
-
-    <div class="servicios-viewport">
-      <div id="servicios-container" class="servicios-container">
-
-        <div class="servicio-card"
-          style="background-image: url('{% static 'img/servicio1.jpg' %}');">
+  <div class="titulo-container w-full">
+    <h2 class="titulo-principal">Servicios</h2>
+  </div>
+  <main>
+    <div class="contenedor-slider">
+      <div class="visor-slider">
+        <div class="tarjeta-servicio" style="background-image: url('{% static 'img/servicios/servicio1.jpg' %}');">
           <p class="servicio-text">Reparación de hardware</p>
           <div class="servicio-btn-container">
             <a href="https://ejemplo.com/servicio1" target="_blank" rel="noopener noreferrer">
-              <button class="btn-servicios">Solicitar servicio</button>
+              <button class="btn-ver-detalle">Solicitar servicio</button>
             </a>
           </div>
         </div>
-
-        <div class="servicio-card"
-          style="background-image: url('{% static 'img/servicio2.jpg' %}');">
+        <div class="tarjeta-servicio" style="background-image: url('{% static 'img/servicio2.jpg' %}');">
           <p class="servicio-text">Actualización de software</p>
           <div class="servicio-btn-container">
             <a href="https://ejemplo.com/servicio2" target="_blank" rel="noopener noreferrer">
-              <button class="btn-servicios">Solicitar servicio</button>
+              <button class="btn-ver-detalle">Solicitar servicio</button>
             </a>
           </div>
         </div>
-
-        <div class="servicio-card"
-          style="background-image: url('{% static 'img/servicio3.jpg' %}');">
-          <p class="servicio-text">Consultoría técnica</p>
-          <div class="servicio-btn-container">
-            <a href="https://ejemplo.com/servicio3" target="_blank" rel="noopener noreferrer">
-              <button class="btn-servicios">Solicitar servicio</button>
-            </a>
-          </div>
-        </div>
-
-        <div class="servicio-card"
-          style="background-image: url('{% static 'img/servicio4.jpg' %}');">
+        <div class="tarjeta-servicio" style="background-image: url('{% static 'img/servicio3.jpg' %}');">
           <p class="servicio-text">Mantenimiento preventivo</p>
           <div class="servicio-btn-container">
-            <a href="https://ejemplo.com/servicio4" target="_blank" rel="noopener noreferrer">
-              <button class="btn-servicios">Solicitar servicio</button>
+            <a href="https://ejemplo.com/servicio3" target="_blank" rel="noopener noreferrer">
+              <button class="btn-ver-detalle">Solicitar servicio</button>
             </a>
           </div>
         </div>
-
       </div>
     </div>
-
-    <button id="servicios-arrow-right" class="servicios-arrow" aria-label="Siguiente">
-      &#8250;
-    </button>
   </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('servicios-container');
-      const btnLeft = document.getElementById('servicios-arrow-left');
-      const btnRight = document.getElementById('servicios-arrow-right');
-
-      const cardStyle = window.getComputedStyle(container.querySelector('.servicio-card'));
-      const cardMarginRight = parseInt(cardStyle.marginRight);
-      const cardWidth = container.querySelector('.servicio-card').offsetWidth + cardMarginRight;
-
-      const scrollAmount = cardWidth;
-
-      btnLeft.addEventListener('click', () => {
-        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      });
-
-      btnRight.addEventListener('click', () => {
-        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      });
-
-      function updateArrows() {
-        btnLeft.disabled = container.scrollLeft <= 0;
-        btnRight.disabled = container.scrollLeft + container.clientWidth >= container.scrollWidth;
-      }
-
-      container.addEventListener('scroll', updateArrows);
-      updateArrows();
-    });
-  </script>
 </body>
 
 </html>

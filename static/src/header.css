@@ -19,7 +19,7 @@ header {
 }
 
 .logo-img {
-  height: 8rem;
+  height: 2.6rem;
   flex-shrink: 0; /* No se reduce el logo */
   transition: height 0.3s ease;
 }
@@ -38,6 +38,7 @@ h2.no-wrap-text {
   cursor: pointer;
   text-transform: uppercase;
   padding-right: 20px;
+  padding-left: 10px;
   white-space: nowrap;
   transition: font-size 0.3s ease;
 }

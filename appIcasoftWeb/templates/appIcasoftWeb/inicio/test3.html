@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prueba 2</title>
+  <style>
+    /* Estilos de la página */
+    body {
+      margin: 0;
+      font-family: 'Lexend Deca', sans-serif;
+      height: 100%; /* Asegura que el body ocupe toda la altura */
+    }
+
+    .main-container {
+      width: 100%;
+      height: 100vh; /* Ocupa toda la altura de la pantalla */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .titulo-container {
+      background-color: #4CAF50; /* Color de fondo del contenedor */
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 100%; /* Hace que el contenedor ocupe todo el ancho */
+      height: 100%; /* Hace que el contenedor ocupe toda la altura */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h2.titulo-curso {
+      font-size: 2.5rem;
+      color: #fff; /* Color de texto del título */
+      margin: 0;
+    }
+
+    .descripcion-curso {
+      font-size: 1.2rem;
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      padding: 0 20px;
+    }
+
+    /* Estilo del slider */
+    .slider-container {
+      width: 80%;
+      max-width: 900px;
+      position: relative;
+      margin-bottom: 30px;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .slider img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .slider-nav button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .slider-nav button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main-container">
+
+    <div class="titulo-container">
+      <h2 class="titulo-curso cursos-animated-text">Curso de Programación Web</h2>
+    </div>
+
+    <p class="descripcion-curso">
+      Aprende a desarrollar aplicaciones web modernas con tecnologías como HTML, CSS, JavaScript y más.
+    </p>
+
+    <div class="slider-container">
+      <div class="slider">
+        <img src="https://via.placeholder.com/800x400/FF5733/FFFFFF?text=Imagen+1" alt="Imagen 1">
+        <img src="https://via.placeholder.com/800x400/33CFFF/FFFFFF?text=Imagen+2" alt="Imagen 2">
+        <img src="https://via.placeholder.com/800x400/4CAF50/FFFFFF?text=Imagen+3" alt="Imagen 3">
+      </div>
+      <div class="slider-nav">
+        <button id="prev-btn">‹</button>
+        <button id="next-btn">›</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slider img');
+    const totalSlides = slides.length;
+
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function showSlide(index) {
+      if (index < 0) {
+        currentSlide = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        currentSlide = 0;
+      }
+      document.querySelector('.slider').style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentSlide--;
+      showSlide(currentSlide);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentSlide++;
+      showSlide(currentSlide);
+    });
+  </script>
+
+</body>
+
+</html>

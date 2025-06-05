@@ -70,10 +70,32 @@
 
   .info-text {
     margin-right: 0; 
+    font-size: 15px;
   }
 
   .img {
     width: 100px; 
     height: 100px;
+    margin: 0 auto; /* centra la imagen */
+  }
+
+  .footer-h2 {
+    font-size: 1rem !important; /* reduce tamaño del h2 en móvil */
+    text-align: center !important; /* centra el texto */
+  }
+
+  /* Apila imagen y texto dentro de cada review */
+  .review-item {
+    flex-direction: column !important; /* apilar en columna */
+    align-items: center; /* centrar contenido horizontal */
+    text-align: center; /* centrar texto */
+    gap: 1rem;
+    max-width: 90vw; /* evitar que sea muy ancho */
+    margin: 0 auto; /* centrar el contenedor */
+  }
+
+  .review-item .info-container {
+    margin-left: 0 !important; /* quitar margen lateral para que no corra */
+    width: 100%;
   }
 }

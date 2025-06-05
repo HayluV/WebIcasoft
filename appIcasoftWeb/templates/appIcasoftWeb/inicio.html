@@ -6,11 +6,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Inicio - IcaSoft</title>
   {% load static %}
-  <!DOCTYPE html>
   <link rel="stylesheet" href="{% static 'src/styles.css' %}">
   <link rel="stylesheet" href="{% static 'src/inicio.css' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
 
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0; 
+      padding: 0; 
+      width: 100%;
+      overflow-x: hidden; 
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; 
+      width: 100%;
+    }
+
+    header {
+      width: 100%;
+      height: 100px; 
+      text-align: center;
+      color: white;
+    }
+
+    main {
+      flex-grow: 1; 
+      width: 100%;
+      background-color: #ffffff; 
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+      background-color: var(--icasoftBlue);
+    }
+  </style>
 </head>
 
 <body>
@@ -18,12 +53,13 @@
     <header>
       {% include 'appIcasoftWeb/header/header.html' %}
     </header>
-    <main class="pt-5 lg-pt">
 
+    <main class="pt-5 lg-pt-3 w-full">
       <div id="cursos">
-
       </div>
-      {% include 'appIcasoftWeb/inicio/test.html' %}
+      {% include 'appIcasoftWeb/inicio/banner.html' %}
+
+      {% include 'appIcasoftWeb/inicio/servicios.html' %}
       {% include 'appIcasoftWeb/inicio/productosTop.html' %}
       {% include 'appIcasoftWeb/inicio/info-cursos.html' %}
       {% include 'appIcasoftWeb/inicio/nosotros.html' %}
@@ -36,8 +72,6 @@
       {% include 'appIcasoftWeb/inicio/portafolio.html' %}
       {% include 'appIcasoftWeb/inicio/mapa.html' %}
     </main>
-
-
 
     <footer>
       {% include 'appIcasoftWeb/footer.html' %}
