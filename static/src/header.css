@@ -1,34 +1,43 @@
+/* Contenedor visible */
+.visible-container {
+  display: block;
+}
+
 header {
-  background: linear-gradient(
-    to right,
-    var(--icasoftBlue) 0%,
-    #3a7bd5 50%,
-    #4c8a8a 100%
-  );
+  background: linear-gradient(to right,
+      var(--icasoftBlue) 0%,
+      #3a7bd5 50%,
+      #4c8a8a 100%);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  height: 70px;
+}
+
+.flex {
+  padding: 5px 10px 1px 1px;
 }
 
 .no-wrap-container {
-  flex-wrap: nowrap; /* No permitir salto de línea en el header */
+  flex-wrap: nowrap;
 }
 
 .logo-texto-productos {
   display: flex;
   align-items: center;
-  gap: 0.25rem; /* Espacio entre logo, texto y menú productos */
+  gap: 0.25rem;
 }
 
 .logo-img {
   height: 2.6rem;
-  flex-shrink: 0; /* No se reduce el logo */
+  flex-shrink: 0;
   transition: height 0.3s ease;
 }
 
-h2.no-wrap-text {
+h2.font-Big-Shoulders {
   font-size: 2rem;
   margin: 0;
   letter-spacing: 1px;
-  white-space: nowrap; /* Evita saltos de línea */
+  white-space: nowrap;
   transition: font-size 0.3s ease;
 }
 
@@ -43,6 +52,26 @@ h2.no-wrap-text {
   transition: font-size 0.3s ease;
 }
 
+.shopping-cart-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-number {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 a {
   font-family: 'Lexend Deca', sans-serif;
   font-size: 18px;
@@ -55,9 +84,9 @@ a:hover {
 }
 
 .search-input {
-  width: 200px;
-  padding: 8px;
-  font-size: 14px;
+  width: 350px;
+  padding: 2px 10px 2px 10px;
+  font-size: larger;
   border-radius: 20px;
   border: 2px solid #ccc;
   transition: border 0.3s ease;
@@ -68,74 +97,143 @@ a:hover {
   outline: none;
 }
 
-nav img {
-  height: 40px;
-  margin-left: 10px;
-}
-
-button#openModalBtn:hover,
-a#openModalBtn:hover {
-  opacity: 0.8;
+.iconLogin {
+  font-size: xx-large !important;
+  color: #3399ff;
+  box-shadow: 0px 0px 9px 3px #66e3ff;
+  border-radius: 50%;
+  background: white;
   cursor: pointer;
 }
 
-/* Estilos para mostrar/ocultar menús */
-#menu-productos {
+/* Estilo para el botón de menú móvil */
+#mobile-menu-button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  white-space: nowrap;
   display: none;
+  align-items: center;
+  gap: 5px;
+  z-index: 30;
+  transition: all 0.3s ease;
 }
 
-#menu-productos.show {
-  display: block;
+#mobile-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
 }
 
-#menu-info {
-  display: none;
+/* Menús móviles */
+#mobile-menu, #menu-productos {
+  transition: all 0.3s ease;
 }
 
-#menu-info:not(.hidden) {
-  display: block;
+#mobile-menu .productos-menu {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
 }
 
-/* Responsive sizes */
+#mobile-menu .productos-menu #mobile-productos-submenu {
+  transition: all 0.3s ease;
+}
 
-@media (max-width: 1024px) {
-  .logo-img {
-    height: 6rem;
+/* Clase para mostrar menús */
+.icasoft-menu-show {
+  display: block !important;
+}
+
+/* Responsive sizes - iPad Pro 10.5" y similares */
+@media (max-width: 1366px) and (min-width: 1024px) and (orientation: portrait),
+       (max-width: 1024px) and (orientation: landscape) {
+  /* Mostrar menú desktop completo en iPad Pro en landscape */
+  nav.lg\\:flex {
+    display: flex !important;
   }
-  h2.no-wrap-text {
+  
+  #mobile-menu-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  /* Para tablets en portrait (incluyendo iPad Pro) */
+  header {
+    height: 60px;
+    padding: 2px 5px;
+  }
+
+  .logo-img {
+    height: 3rem;
+  }
+
+  h2.font-Big-Shoulders {
     font-size: 1.6rem;
   }
-  #menu-productos-text {
-    font-size: 1rem;
+
+  /* Mostrar solo menú móvil */
+  nav.lg\\:flex {
+    display: none !important;
+  }
+  
+  #mobile-menu-button {
+    display: flex;
+  }
+  
+  #menu-productos-text,
+  .search-input,
+  .shopping-cart-container,
+  nav.lg\\:flex > a,
+  nav.lg\\:flex > button {
+    display: none !important;
   }
 }
 
 @media (max-width: 768px) {
+  header {
+    height: 50px;
+    padding: 5px 12px;
+  }
+
   .logo-img {
-    height: 4rem;
+    height: 2rem;
   }
-  h2.no-wrap-text {
-    font-size: 1.2rem;
+
+  h2.font-Big-Shoulders {
+    font-size: 1.2rem !important;
   }
-  #menu-productos-text {
-    font-size: 0.9rem;
-  }
+
   .logo-texto-productos {
     gap: 0.5rem;
   }
-  h2 {
-    font-size: 1.5rem;
+
+  .search-input {
+    width: 100%;
   }
 }
 
 @media (max-width: 480px) {
+  header {
+    height: 50px;
+    padding: 2px 4px;
+  }
+
   .logo-img {
-    height: 3rem;
+    height: 1.8rem;
   }
-  h2.no-wrap-text {
+
+  h2.font-Big-Shoulders {
+    font-size: 1rem !important;
+  }
+
+  #mobile-menu-button {
     font-size: 1rem;
-  }
-  #menu-productos-text {
-    font-size: 0.8rem;
+    padding: 5px 10px;
   }
 }
+
+
+

@@ -1,6 +1,122 @@
-.modal-card {
-  background: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  border-radius: 0.5rem;
+/* Añade esto a tu archivo css/modal-login.css */
+#login-modal {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  width: 350px;
+  z-index: 1000;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.login-modal-background {
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+}
+
+.login-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.login-container h3 {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 1.5rem;
+  color: var(--icasoftBlue);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.login-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.login-form input:focus {
+  border-color: var(--icasoftBlue);
+  outline: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--icasoftBlue);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #1a8cff;
+}
+
+.login-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.login-footer a {
+  color: var(--icasoftBlue);
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animación similar al menú de productos */
+@keyframes slideDownFadeInLogin {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icasoft-login-show .login-container {
+  animation: slideDownFadeInLogin 0.3s ease forwards;
+}
+
+/* Estilo para el botón de cerrar */
+.close-login-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #777;
+}
+
+.close-login-modal:hover {
+  color: #333;
 }

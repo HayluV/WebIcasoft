@@ -1,7 +1,8 @@
 .review-card {
   background: linear-gradient(to right,#1D0A7A,#1D0A7A, #3944b3, #5e78ce,#6998a5, #6998a5);
   padding: 20px;
-  padding-right: 80px;
+  padding-right: 50px;
+  padding-left: 50px;
   border-radius: 10px;
   overflow: hidden;
   width: 100%;
@@ -16,7 +17,6 @@
 .h2{
   text-align: left !important;
 }
-
 
 .info-text {
   font-family: "Lexend Deca", sans-serif;
@@ -37,15 +37,15 @@
   object-fit: cover;
 }
 
-.arrow-left, .arrow-right {
+.review-slider-arrow-left, .review-slider-arrow-right {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #6992c9;
+  background-color: #3944b3;
   color: white;
   font-size: 24px;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -54,11 +54,11 @@
   z-index: 1;
 }
 
-.arrow-left {
+.review-slider-arrow-left {
   left: 10px; 
 }
 
-.arrow-right {
+.review-slider-arrow-right {
   right: 10px; 
 }
 
@@ -97,5 +97,12 @@
   .review-item .info-container {
     margin-left: 0 !important; /* quitar margen lateral para que no corra */
     width: 100%;
+  }
+
+  /* Ajuste de tamaño de las flechas en pantallas pequeñas */
+  .review-slider-arrow-left, .review-slider-arrow-right {
+    width: 50px;  /* Reducir tamaño */
+    height: 50px; /* Reducir tamaño */
+    font-size: 18px; /* Ajustar tamaño del icono */
   }
 }

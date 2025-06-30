@@ -1,161 +1,385 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Servicios - Tarjetas con más espacio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - IcaSoft</title>
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
-  <link rel="stylesheet" href="{% static 'src/css/servicios.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/inicio/servicios.css' %}"/>
   <style>
-    html, body {
-      height: 100%;   /* Ocupa toda la altura */
-      margin: 0;      /* Elimina el margen por defecto */
-      padding: 0;     /* Elimina el padding por defecto */
+    /* ESTILOS BASE DEL MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      overflow: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
-
-    .titulo-container {
-      background-color: var(--icasoftBlue);
-      padding: 5px 10px;
+    
+    .modal.show {
+      opacity: 1;
     }
-
-    h2.titulo-principal {
-      font-family: 'Big Shoulders';
-      font-size: 2.5rem !important;
-      text-transform: uppercase;
+    
+    .modal-content {
+      position: relative;
+      width: 40%;
+      max-width: 700px;
+      margin: 15vh auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 
+                  0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: modalopen 0.4s;
+      overflow: hidden;
+    }
+    
+    .modal-img-container {
+      width: 100%;
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .modal-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .modal-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%);
+    }
+    
+    .modal-body-content {
+      padding: 25px;
+    }
+    
+    .modal-title {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      color: white;
+      font-size: 1.8rem;
       text-align: center;
-      margin: 0;
-      color: #111166;
-      height: 100%;  /* Hace que el h2 ocupe el 100% de la altura disponible */
+      padding: 0 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      z-index: 2;
     }
-
-    .contenedor-slider {
+    
+    .modal-description {
+      margin-top: 15px;
+      line-height: 1.6;
+      color: #333;
+      font-size: 1rem;
+      text-align: center;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: rgb(51, 0, 255);
+      font-size: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 3;
+      transition: transform 0.2s;
+      text-shadow: 2px 2px 15px white;
+    }
+    
+    .close-modal:hover {
+      transform: scale(1.1);
+    }
+    
+    .modal-actions {
       display: flex;
       justify-content: center;
-      width: 100%;
-      margin-bottom: 30px;
+      gap: 15px;
+      margin-top: 25px;
     }
-
-    .visor-slider {
-      display: grid;
-      grid-template-columns: repeat(3, 320px);
-      grid-template-rows: repeat(2, 220px);
-      gap: 40px 50px;
-      justify-content: center;
-      padding: 40px 50px;
-      max-width: 1200px;
-      margin: 0 auto;
-      background-color: #ffffff;
-      border-radius: 12px;
+    
+    .modal-btn {
+      padding: 12px 24px;
+      min-height: 48px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .modal-btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .modal-btn-primary:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+    
+    @keyframes modalopen {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .tarjeta-servicio {
-      width: 320px;
-      height: 220px;
-      padding: 20px;
-      margin: 0 auto;
-      background-color: #e0f2fe;
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: #111166;
-      font-weight: 700;
-      text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.7);
-    }
-
-    .servicio-text {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      text-align: center;
-      user-select: none;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .servicio-btn-container {
-      text-align: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .btn-ver-detalle {
-      width: 140px;
-      height: 44px;
-      font-size: 1rem;
-      background-color: #1e40af;
-      color: white;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
+      min-height: 48px;
+      min-width: 48px;
     }
 
-    .btn-ver-detalle:hover {
-      background-color: #fb923c;
-    }
-
-    @media (max-width: 1024px) {
-      .visor-slider {
-        grid-template-columns: repeat(2, 320px);
+     @media (max-width: 1024px) {
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+      }
+      
+      .modal-content {
+       width: 40%;
         max-width: 700px;
+       margin: 5vh auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .modal-img-container {
+        height: 180px;
+      }
+      
+      .modal-title {
+        font-size: 1.5rem;
+        bottom: 15px;
+      }
+      
+      .modal-body-content {
+        padding: 20px;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .modal-btn {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        padding: 12px 20px;
+      }
+      
+      .close-modal {
+        font-size: 40px;
+        right: 10px;
+        top: 5px;
       }
     }
 
-    @media (max-width: 600px) {
-      .visor-slider {
-        grid-template-columns: 1fr;
-        max-width: 90vw;
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
       }
-
-      .tarjeta-servicio {
+      
+      .modal-content {
+        width: 90%;
+        margin: 0;
+        max-height: 85vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .modal-img-container {
+        height: 180px;
+      }
+      
+      .modal-title {
+        font-size: 1.5rem;
+        bottom: 15px;
+      }
+      
+      .modal-body-content {
+        padding: 20px;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .modal-btn {
         width: 100%;
-        height: auto;
-        min-height: 180px;
+        max-width: 200px;
+        margin: 0 auto;
+        padding: 12px 20px;
+      }
+      
+      .close-modal {
+        font-size: 40px;
+        right: 10px;
+        top: 5px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .modal-content {
+        width: 95%;
+      }
+      
+      .modal-img-container {
+        height: 150px;
+      }
+      
+      .modal-title {
+        font-size: 1.3rem;
+      }
+      
+      .modal-description {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ESTILOS PARA DISPOSITIVOS TÁCTILES */
+    @media (hover: none) {
+      .btn-ver-detalle:hover, 
+      .modal-btn:hover {
+        transform: none !important;
       }
     }
   </style>
 </head>
-
 <body>
   <div class="titulo-container w-full">
-    <h2 class="titulo-principal">Servicios</h2>
+    <h2 class="titulo-principal-servicios cursos-animated-text">Servicios</h2>
   </div>
+  
   <main>
     <div class="contenedor-slider">
       <div class="visor-slider">
-        <div class="tarjeta-servicio" style="background-image: url('{% static 'img/servicios/servicio1.jpg' %}');">
-          <p class="servicio-text">Reparación de hardware</p>
-          <div class="servicio-btn-container">
-            <a href="https://ejemplo.com/servicio1" target="_blank" rel="noopener noreferrer">
-              <button class="btn-ver-detalle">Solicitar servicio</button>
-            </a>
+        {% for servicio in servicios %}
+          <div class="tarjeta-servicio" 
+               onclick="abrirModal(
+                 '{{ servicio.nombre }}', 
+                 '{{ servicio.descripcion }}', 
+                 '{% static servicio.imagen %}'
+               )">
+            <img src="{% static servicio.imagen %}" 
+                 alt="{{ servicio.nombre }}" 
+                 class="img-servicio">
+            <p class="nombre-servicio font-Big-Shoulders">{{ servicio.nombre }}</p>
+            <div class="servicio-btn-container">
+              <button class="btn-ver-detalle bg-icasoftBlue font-Lexend-Deca btn-font">
+                Ver detalles
+              </button>
+            </div>
           </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Modal de Servicios -->
+    <div id="servicioModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="cerrarModal()">&times;</span>
+        <div class="modal-img-container">
+          <img id="modalImagen" src="" alt="" class="img-servicio-modal">
+          <div class="modal-img-overlay"></div>
+          <h2 id="modalTitulo" class="modal-title font-Big-Shoulders"></h2>
         </div>
-        <div class="tarjeta-servicio" style="background-image: url('{% static 'img/servicio2.jpg' %}');">
-          <p class="servicio-text">Actualización de software</p>
-          <div class="servicio-btn-container">
-            <a href="https://ejemplo.com/servicio2" target="_blank" rel="noopener noreferrer">
-              <button class="btn-ver-detalle">Solicitar servicio</button>
-            </a>
-          </div>
-        </div>
-        <div class="tarjeta-servicio" style="background-image: url('{% static 'img/servicio3.jpg' %}');">
-          <p class="servicio-text">Mantenimiento preventivo</p>
-          <div class="servicio-btn-container">
-            <a href="https://ejemplo.com/servicio3" target="_blank" rel="noopener noreferrer">
-              <button class="btn-ver-detalle">Solicitar servicio</button>
-            </a>
-          </div>
+        <div class="modal-body-content">
+          <p id="modalDescripcion" class="modal-description font-Lexend-Deca"></p>
         </div>
       </div>
     </div>
+
+    <script>
+      // FUNCIONES DEL MODAL
+      function abrirModal(nombre, descripcion, imagenUrl) {
+        const modal = document.getElementById('servicioModal');
+        document.getElementById('modalTitulo').textContent = nombre;
+        document.getElementById('modalDescripcion').textContent = descripcion;
+        
+        // Manejo seguro de la URL de la imagen
+        const imgElement = document.getElementById('modalImagen');
+        imgElement.src = imagenUrl;
+        imgElement.alt = nombre;
+        
+        // Forzar reflow para asegurar la animación
+        void modal.offsetWidth;
+        
+        // Mostrar con animación
+        modal.style.display = 'flex';
+        setTimeout(() => {
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+          document.body.style.touchAction = 'none'; // Previene el scroll detrás del modal
+        }, 10);
+      }
+      
+      function cerrarModal() {
+        const modal = document.getElementById('servicioModal');
+        modal.classList.remove('show');
+        document.body.style.touchAction = ''; // Restaura el touch
+        setTimeout(() => {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }, 300);
+      }
+      
+      // Cerrar al hacer clic fuera del contenido
+      window.onclick = function(event) {
+        const modal = document.getElementById('servicioModal');
+        if (event.target === modal) {
+          cerrarModal();
+        }
+      };
+      
+      // Cerrar con tecla ESC
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && document.getElementById('servicioModal').style.display === 'flex') {
+          cerrarModal();
+        }
+      });
+
+      // Mejorar accesibilidad táctil
+      document.querySelectorAll('.tarjeta-servicio').forEach(card => {
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'scale(0.98)';
+        });
+        
+        card.addEventListener('touchend', function() {
+          this.style.transform = 'scale(1)';
+        });
+      });
+    </script>
   </main>
 </body>
-
 </html>

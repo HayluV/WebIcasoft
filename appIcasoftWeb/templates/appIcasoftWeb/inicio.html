@@ -7,17 +7,17 @@
   <title>Inicio - IcaSoft</title>
   {% load static %}
   <link rel="stylesheet" href="{% static 'src/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
   <link rel="stylesheet" href="{% static 'src/inicio.css' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
-
+  <script src="https://kit.fontawesome.com/41846aaf96.js" crossorigin="anonymous"></script>
   <style>
     html, body {
       height: 100%;
       margin: 0; 
       padding: 0; 
-      width: 100%;
-      overflow-x: hidden; 
     }
+    
 
     body {
       display: flex;
@@ -54,15 +54,16 @@
       {% include 'appIcasoftWeb/header/header.html' %}
     </header>
 
-    <main class="pt-5 lg-pt-3 w-full">
-      <div id="cursos">
-      </div>
+    <main class="pt-0 lg-pt-0 w-full">
       {% include 'appIcasoftWeb/inicio/banner.html' %}
-
       {% include 'appIcasoftWeb/inicio/servicios.html' %}
       {% include 'appIcasoftWeb/inicio/productosTop.html' %}
+      <div id="cursos">
       {% include 'appIcasoftWeb/inicio/info-cursos.html' %}
+      </div>
+      <div id="nosotros">
       {% include 'appIcasoftWeb/inicio/nosotros.html' %}
+      </div>
       {% include 'appIcasoftWeb/inicio/reviews.html' %}
 
       <div id="blog">
@@ -74,7 +75,9 @@
     </main>
 
     <footer>
-      {% include 'appIcasoftWeb/footer.html' %}
+      {% include 'appIcasoftWeb/footer/footer.html' %}
+      {% include 'appIcasoftWeb/chatbot/chatbot.html' %}
+
     </footer>
   </div>
 

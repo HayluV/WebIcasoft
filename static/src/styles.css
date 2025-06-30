@@ -50,33 +50,6 @@
     background-color: var(--icasoftBlue); 
 }
 
-.custom-animated-text {
-    background: linear-gradient(-45deg, #0915ff, #a9c9ff, #ffffff, #2323c9);
-    background-size: 400% 400%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradient 5s linear infinite;
-}
-
-@keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
-    25% {
-      background-position: 25% 25%;
-    }
-    50% {
-      background-position: 50% 50%;
-    }
-    75% {
-      background-position: 75% 75%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-}
-
 .cursos-animated-text {
   background: linear-gradient(
     -45deg,
@@ -84,7 +57,8 @@
     #272786,   
     #3399ff,   
     #66ccff,   
-    #99ddff,   
+    #ffffff,  
+    #ffffff,
     #ccefff    
   );
   background-size: 400% 400%;
@@ -112,6 +86,36 @@
   }
 }
 
+.fondo-animated-text {
+  background: linear-gradient(
+    -45deg,
+    #291fbc,   
+    #291fbc,   
+    #0973be,  
+    #0973be,  
+    #291fbc, 
+    #291fbc,   
+    #ffffff    
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-nuevo 6s ease infinite;
+}
+
+@keyframes gradient-nuevo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 
 
 
@@ -122,7 +126,7 @@
 
 @media (max-width: 768px) {
     .font-Big-Shoulders {
-      font-size: 6vw !important;
+      font-size: 4vw !important ;
     }
 }
 

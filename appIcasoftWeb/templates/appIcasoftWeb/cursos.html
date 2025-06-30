@@ -10,6 +10,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
   <link rel="stylesheet" href="{% static 'src/inicio.css' %}">
+  <script src="https://kit.fontawesome.com/41846aaf96.js" crossorigin="anonymous"></script>
+
 
   <style>
     .titulo-curso {
@@ -94,7 +96,7 @@
 
     <main class="pt-10 lg-pt">
       {% if curso %}
-      <h2 class="titulo-curso cursos-animated-text">
+      <h2 class="titulo-curso fondo-animated-text">
         {{ curso.titulo }}
       </h2>
 
@@ -117,8 +119,9 @@
     </main>
 
     <footer>
-      {% include 'appIcasoftWeb/footer.html' %}
+      {% include 'appIcasoftWeb/footer/footer.html' %}
     </footer>
+
   </div>
 </body>
 

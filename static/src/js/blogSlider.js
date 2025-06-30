@@ -1,34 +1,47 @@
-(function() {
-  let blogCurrentIndex = 0;
-  const blogSlider = document.getElementById('blog-slider');
-  if (!blogSlider) return;
-  const blogTotalCards = blogSlider.children.length;
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.getElementById('blog-slider');
+    const prevButton = document.querySelector('.arrow-left-blog');
+    const nextButton = document.querySelector('.arrow-right-blog');
+    const cards = document.querySelectorAll('.portafolio-card');
+    let cardsPerPage;
+    let currentIndex = 0;
 
-  function blogSlidesToMove() {
-    return window.innerWidth <= 768 ? 2 : 4;
-  }
+    function setCardsPerPage() {
+        if (window.innerWidth <= 480) {
+            cardsPerPage = 1;  
+        } else if (window.innerWidth <= 768) {
+            cardsPerPage = 2;  
+        } else {
+            cardsPerPage = 3;  
+        }
+    }
 
-  function blogMoveSlider(direction) {
-    const moveCount = blogSlidesToMove();
+    setCardsPerPage(); 
+    window.addEventListener('resize', setCardsPerPage);  
 
-    blogCurrentIndex += direction * moveCount;
+    function moveSlider(direction) {
+        if (direction === 'next') {
+            currentIndex += cardsPerPage;
+            if (currentIndex >= cards.length) {
+                currentIndex = 0; 
+            }
+        } else if (direction === 'prev') {
+            currentIndex -= cardsPerPage;
+            if (currentIndex < 0) {
+                currentIndex = Math.floor(cards.length / cardsPerPage) * cardsPerPage; // Volver al final si va por debajo
+            }
+        }
 
-    if (blogCurrentIndex < 0) blogCurrentIndex = 0;
-    if (blogCurrentIndex > blogTotalCards - moveCount) blogCurrentIndex = blogTotalCards - moveCount;
+        // Actualizar la posición del slider
+        slider.style.transform = `translateX(-${(currentIndex / cardsPerPage) * 100}%)`;
+    }
 
-    const firstCard = blogSlider.children[0];
-    const style = getComputedStyle(firstCard);
-    const marginRight = parseInt(style.marginRight) || 0;
-    const cardWidth = firstCard.offsetWidth + marginRight;
+    // Agregar eventos a las flechas para mover el slider
+    prevButton.addEventListener('click', function() {
+        moveSlider('prev');
+    });
 
-    const offset = -blogCurrentIndex * cardWidth;
-    blogSlider.style.transform = `translateX(${offset}px)`;
-  }
-
-  window.blogMoveSlider = blogMoveSlider;
-
-  window.addEventListener('resize', () => {
-    blogCurrentIndex = 0;
-    if (blogSlider) blogSlider.style.transform = 'translateX(0)';
-  });
-})();
+    nextButton.addEventListener('click', function() {
+        moveSlider('next');
+    });
+});

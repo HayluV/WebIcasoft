@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,91 +9,337 @@
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}" />
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
   <link rel="stylesheet" href="{% static 'src/header.css' %}" />
-  <link rel="stylesheet" href="{% static 'src/css/modal-login.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/menu-productos.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/mobile-menu.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/icofont/icofont.min.css' %}">
+  <!-- Font Awesome para el ícono de usuario -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Estilos para el modal de login */
+    #login-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #login-modal.active {
+      display: flex;
+    }
+
+.login-container {
+      background-image: url('/static/blogs/Blog1.jpg'); /* Ruta a tu imagen */
+      background-size: cover; /* Cubre todo el contenedor */
+      background-position: center; /* Centra la imagen */
+      padding: 30px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      color: white; /* Cambia el color del texto si es necesario para mejor contraste */
+    }
+
+    .close-login-modal {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-group input {
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #ffff;
+      border-radius: 5px;
+    }
+
+    .login-btn {
+      background-color: #1826bf;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .login-footer a {
+      color: #0e0537;
+      text-decoration: none;
+    }
+
+    .iconLogin {
+      font-size: 24px;
+      transition: transform 0.3s;
+    }
+
+    .iconLogin:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
+
 <body class="m-0 p-0">
 
-<header class="fixed top-0 left-0 w-full text-white z-10 shadow-md">
-  <div class="flex items-center justify-between p-4 w-full no-wrap-container">
-    <div class="flex items-center space-x-1 md:space-x-4 logo-texto-productos">
-      <img src="{% static 'img/logos/LogoManzana.png' %}" alt="ICASOFT" class="logo-img" />
-      <h2 class="font-Big-Shoulders text-[2rem] text-white mb-1 uppercase no-wrap-text">ICASOFT</h2>
-      <div id="menu-productos-text" class="text-white cursor-pointer no-wrap-text">
-        ☰ PRODUCTOS
+  <header class="fixed top-0 left-0 w-full text-white z-10 shadow-md">
+    <div class="flex items-center justify-between p-4 w-full no-wrap-container">
+      <div class="flex items-center space-x-1 md:space-x-4 logo-texto-productos">
+        <a href="/">
+          <img src="{% static 'img/logos/LogoManzana.png' %}" alt="ICASOFT" class="logo-img" />
+        </a>
+
+        <div class="visible-container">
+          <a href="/">
+            <h2 class="font-Big-Shoulders text-[2rem] text-white mb-1 uppercase no-wrap-text">ICASOFT</h2>
+          </a>
+        </div>
+      </div>
+
+      <!-- Menú para desktop -->
+      <nav class="hidden lg:flex space-x-8 items-center">
+        <input type="text" placeholder="Buscar..."
+          class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none" />
+        <a href="/" class="shopping-cart-container">
+          <i class="icofont-shopping-cart" style="font-size: 40px;"></i>
+          <span class="cart-number">0</span>
+        </a>
+        <div id="menu-productos-text" class="text-white cursor-pointer no-wrap-text">
+          ☰ PRODUCTOS
+        </div>
+        <a href="/#cursos">CURSOS</a>
+        <a href="/#blog">BLOG</a>
+        <a href="/contacto">CONTACTAR</a>
+        <!-- Botón que abre el modal -->
+        <button id="openModalBtnHeader" class="focus:outline-none" aria-label="Iniciar sesión">
+          <i class="fa-solid fa-circle-user iconLogin"></i>
+        </button>
+      </nav>
+
+      <!-- Botón menú hamburguesa para móvil/tablet -->
+      <div id="mobile-menu-button" class="lg:hidden text-white cursor-pointer no-wrap-text flex items-center px-4">
+        ☰ MENÚ
       </div>
     </div>
+  </header>
 
-    <nav class="hidden lg:flex space-x-8 items-center">
-      <input
-        type="text"
-        placeholder="Buscar..."
-        class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none"
-      />
-      <a href="/">INICIO</a>
-      <a href="/#cursos">CURSOS</a>
-      <a href="/#blog">BLOG</a>
-      <a href="/contacto">CONTACTAR</a>
-      <button id="openModalBtnHeader" class="focus:outline-none" aria-label="Iniciar sesión">
-        <img
-          src="{% static 'img/logo-iniciarsesion.webp' %}"
-          alt="Iniciar sesión"
-          class="h-10"
-        />
-      </button>
-    </nav>
+  <!-- Menú móvil completo -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden overflow-y-auto">
+    <div class="bg-white min-h-full p-4 space-y-4">
+      <button id="close-mobile-menu" class="text-xl text-right text-black">X</button>
 
-    <!-- Botón menú móvil -->
-    <button id="menu-info-toggle" class="lg:hidden text-white">
-      <p>☰</p>
-    </button>
+      <input type="text" placeholder="Buscar..."
+        class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none w-full" />
+
+      <a href="#" id="openModalBtnMobile"
+        class="block p-2 text-black hover:bg-gray-100 rounded text-center flex items-center justify-center gap-2">
+        <i class="icofont-login" style="font-size: 1.2rem;"></i>
+        <span>INICIAR SESIÓN</span>
+      </a>
+      <div class="productos-menu text-center">
+        <div class="relative p-2 text-black cursor-pointer hover:bg-gray-100 rounded" id="mobile-productos-btn">
+          <span>☰ PRODUCTOS</span>
+          <i class="icofont-simple-down absolute right-4 top-1/2 transform -translate-y-1/2"></i>
+        </div>
+        <div id="mobile-productos-submenu" class="hidden">
+          <a href="/laptops" class="block p-2 text-black hover:bg-gray-100 rounded">Laptops</a>
+          <a href="/impresoras" class="block p-2 text-black hover:bg-gray-100 rounded">Impresoras</a>
+          <a href="/accesorios" class="block p-2 text-black hover:bg-gray-100 rounded">Accesorios</a>
+          <a href="/monitores" class="block p-2 text-black hover:bg-gray-100 rounded">Monitores</a>
+        </div>
+      </div>
+      <a href="/#nosotros" class="block p-2 text-black hover:bg-gray-100 rounded text-center">NOSOTROS</a>
+      <a href="/#cursos" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CURSOS</a>
+      <a href="/#blog" class="block p-2 text-black hover:bg-gray-100 rounded text-center">BLOG</a>
+      <a href="/contacto" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CONTACTAR</a>
+
+      <div class="shopping-cart-container p-2 hover:bg-gray-100 rounded text-center">
+        <i class="icofont-shopping-cart" style="font-size: 30px;"></i>
+        <span class="cart-number">0</span>
+      </div>
+    </div>
   </div>
-</header>
 
-<!-- Menú info para pantallas pequeñas -->
-<div id="menu-info" class="fixed inset-0 bg-transparent z-20 hidden">
-  <div class="bg-white w-64 h-full p-4 space-y-4">
-    <button id="close-menu-info" class="text-xl text-right text-black">X</button>
-    <nav>
-      <input
-        type="text"
-        placeholder="Buscar..."
-        class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none"
-      />
-      <a href="/" class="block p-2">INICIO</a>
-      <a href="/#cursos" class="block p-2">CURSOS</a>
-      <a href="/#blog" class="block p-2">BLOG</a>
-      <a href="/contacto" class="block p-2">CONTACTAR</a>
-      <button id="openModalBtnMenu" class="focus:outline-none" aria-label="Iniciar sesión">
-        <img src="{% static 'img/logo-iniciarsesion.webp' %}" alt="Iniciar sesión" class="h-10" />
-      </button>
-    </nav>
+  <!-- Menú de productos para desktop -->
+  <div id="menu-productos" class="fixed inset-0 z-20 hidden">
+    <div class="menu-productos-background absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="productos-container relative">
+      <div class="productos-grid">
+        <!-- Categoría Laptops -->
+        <div class="categoria-producto">
+          <h3 class="categoria-titulo">Laptops</h3>
+          <div class="producto-item">
+            <a href="/laptops/gaming" class="producto-link">Laptops Gaming</a>
+          </div>
+          <div class="producto-item">
+            <a href="/laptops/empresariales" class="producto-link">Laptops Empresariales</a>
+          </div>
+          <div class="producto-item">
+            <a href="/laptops/ultrabook" class="producto-link">Ultrabooks</a>
+          </div>
+          <div class="producto-item">
+            <a href="/laptops/todas" class="producto-link">Ver todas</a>
+          </div>
+        </div>
+
+        <!-- Categoría Impresoras -->
+        <div class="categoria-producto">
+          <h3 class="categoria-titulo">Impresoras</h3>
+          <div class="producto-item">
+            <a href="/impresoras/laser" class="producto-link">Impresoras Láser</a>
+          </div>
+          <div class="producto-item">
+            <a href="/impresoras/tinta" class="producto-link">Impresoras de Tinta</a>
+          </div>
+          <div class="producto-item">
+            <a href="/impresoras/multifuncion" class="producto-link">Multifunción</a>
+          </div>
+          <div class="producto-item">
+            <a href="/impresoras/todas" class="producto-link">Ver todas</a>
+          </div>
+        </div>
+
+        <!-- Categoría Accesorios -->
+        <div class="categoria-producto">
+          <h3 class="categoria-titulo">Accesorios</h3>
+          <div class="producto-item">
+            <a href="/accesorios/teclados" class="producto-link">Teclados</a>
+          </div>
+          <div class="producto-item">
+            <a href="/accesorios/mouse" class="producto-link">Mouse</a>
+          </div>
+          <div class="producto-item">
+            <a href="/accesorios/audifonos" class="producto-link">Audífonos</a>
+          </div>
+          <div class="producto-item">
+            <a href="/accesorios/todos" class="producto-link">Ver todos</a>
+          </div>
+        </div>
+
+        <!-- Categoría Monitores -->
+        <div class="categoria-producto">
+          <h3 class="categoria-titulo">Monitores</h3>
+          <div class="producto-item">
+            <a href="/monitores/gaming" class="producto-link">Monitores Gaming</a>
+          </div>
+          <div class="producto-item">
+            <a href="/monitores/oficina" class="producto-link">Monitores Oficina</a>
+          </div>
+          <div class="producto-item">
+            <a href="/monitores/4k" class="producto-link">Monitores 4K</a>
+          </div>
+          <div class="producto-item">
+            <a href="/monitores/todos" class="producto-link">Ver todos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Modal de Login -->
+<div id="login-modal" class="fixed inset-0 z-50 hidden">
+  <div class="login-modal-background absolute inset-0 bg-[#0e0537] opacity-90"></div>
+  <div class="login-container relative mx-auto my-16 max-w-md overflow-hidden" 
+       style="background-image: url('{% static 'img/fondo.modal.jpg' %}'); background-size: cover; background-position: center; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+    <div class="relative z-10 p-8 text-white">
+      <button class="close-login-modal absolute top-4 right-4 text-2xl font-bold hover:text-gray-300">×</button>
+      
+      <!-- Imagen agregada aquí -->
+      <div class="flex justify-center mb-4">
+        <img src="{% static 'img/logo-Icasoft/logoNaranja.png' %}" alt="Logo" class="" style="width: 100px; height: 100px">
+      </div>
+      
+      <h3 class="text-2xl text-white font-Big-Shoulders mb-6 text-center">Iniciar Sesión</h3>
+      <form class="login-form">
+        <div class="form-group mb-4">
+          <label for="email" class="block mb-2 text-white font-medium">Correo Electrónico</label>
+          <input type="email" id="email" required class="w-full px-4 py-2 rounded text-black">
+        </div>
+        <div class="form-group mb-6">
+          <label for="password" class="block mb-2 font-medium font-lex">Contraseña</label>
+          <input type="password" id="password" required class="w-full px-4 py-2 rounded text-black">
+        </div>
+        <button type="submit" class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
+          Ingresar
+        </button>
+      </form>
+      <div class="login-footer mt-6 text-center">
+        <p class="text-blue-300 mb-2">¿No tienes cuenta? <a href="/registro" class="text-white hover:underline">Regístrate</a></p>
+        <p><a href="/recuperar-contrasena" class="text-white hover:underline">¿Olvidaste tu contraseña?</a></p>
+      </div>
+    </div>
   </div>
 </div>
 
-<!-- Menú productos: solo visible en pantalla grande -->
-<div id="menu-productos" class="fixed inset-0 bg-transparent z-20 hidden">
-  <div class="bg-white w-64 h-full p-4 space-y-4">
-    <button id="close-menu-productos" class="text-xl text-right text-black">X</button>
-    <nav>
-      <a href="/laptops" class="block p-2">Laptops</a>
-      <a href="/impresoras" class="block p-2">Impresoras</a>
-      <a href="/accesorios" class="block p-2">Accesorios</a>
-      <a href="/monitores" class="block p-2">Monitores</a>
-    </nav>
-  </div>
-</div>
+  <script>
+    // Script para manejar el modal de login
+    document.addEventListener('DOMContentLoaded', function () {
+      const loginModal = document.getElementById('login-modal');
+      const openModalBtn = document.getElementById('openModalBtnHeader');
+      const closeModalBtn = document.querySelector('.close-login-modal');
 
-<!-- Modal de login incluido -->
-{% include 'appIcasoftWeb/modal-login.html' %}
-{% include 'appIcasoftWeb/modal-registro.html' %}
+      // Abrir modal al hacer clic en el ícono de usuario
+      openModalBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        loginModal.classList.add('active');
+      });
 
-<div class="pt-20">
-  {% block content %}
-  {% endblock %}
-</div>
+      // Cerrar modal al hacer clic en la X
+      closeModalBtn.addEventListener('click', function () {
+        loginModal.classList.remove('active');
+      });
 
-<script src="{% static 'src/js/header.js' %}"></script>
-<script src="{% static 'src/js/modal-login.js' %}"></script>
+      // Cerrar modal al hacer clic fuera del contenido
+      loginModal.addEventListener('click', function (e) {
+        if (e.target === loginModal || e.target.classList.contains('login-modal-background')) {
+          loginModal.classList.remove('active');
+        }
+      });
+
+      // También agregar funcionalidad para el botón de login en móvil
+      const openModalBtnMobile = document.getElementById('openModalBtnMobile');
+      if (openModalBtnMobile) {
+        openModalBtnMobile.addEventListener('click', function (e) {
+          e.preventDefault();
+          loginModal.classList.add('active');
+          // Cerrar también el menú móvil si está abierto
+          document.getElementById('mobile-menu').classList.add('hidden');
+        });
+      }
+    });
+
+    // Resto de tu código JavaScript para otros menús
+    // ...
+  </script>
+
+  <script src="{% static 'src/js/header.js' %}"></script>
 
 </body>
+
 </html>

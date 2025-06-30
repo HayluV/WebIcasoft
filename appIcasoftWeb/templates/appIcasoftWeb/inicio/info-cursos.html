@@ -5,44 +5,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Info Cursos - Slider responsive con espacios</title>
+  <title>Inicio - IcaSoft</title>
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
   <link rel="stylesheet" href="{% static 'src/css/cursos.css' %}" />
 </head>
 
 <body>
-  <div class="bg-icasoftBlue p-[10px] w-full">
-    <h2 class="font-Big-Shoulders text-[3rem] uppercase text-white mb-2 text-center custom-animated-text">Cursos</h2>
+  <div class="titulo-container w-full">
+    <h2 class="titulo-principal-cursos cursos-animated-text">Cursos</h2>
   </div>
-
-  <div class="slider-wrapper">
-    <div id="arrow-left" class="arrow" aria-label="Anterior" role="button" tabindex="0">&#8249;</div>
-
-    <div class="viewport">
-      <div id="slider" class="container">
-
+  <main>
+    <div class="contenedor-slider">
+      <div class="visor-slider-cursos">
         {% for curso in cursos %}
-        <div class="card"
-          style="background-image: url('{{ curso.image_url }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-      <p class="card-text font-Big-Shoulders uppercase">
-  {{ curso.title }}
-</p>
-
-          <div class="btn-container">
+        <div class="tarjeta-curso">
+          <img src="{{ curso.image_url }}" alt="{{ curso.title }}" class="img-curso">
+          <p class="nombre-curso font-Big-Shoulders font-Big-Shoulders">{{ curso.title }}</p>
+          <div class="curso-btn-container">
             <a href="{{ curso.link }}" rel="noopener noreferrer">
-              <button class="bg-icasoftBlue footer-text btn-cursos">Ver cursos</button>
+              <button class="btn-ver-detalle bg-icasoftBlue font-Lexend-Deca btn-font">Ver curso</button>
             </a>
           </div>
         </div>
         {% endfor %}
-
       </div>
     </div>
-
-    <div id="arrow-right" class="arrow" aria-label="Siguiente" role="button" tabindex="0">&#8250;</div>
-  </div>
-
-  <script src="{% static '/src/js/cursoSlider.js' %}"></script>
+  </main>
 </body>
 
 </html>

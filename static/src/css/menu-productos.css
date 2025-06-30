@@ -1,0 +1,113 @@
+#menu-productos {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 70px);
+  z-index: 1000;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.menu-productos-background {
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.productos-container {
+  background-color: white;
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categoria-producto {
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.categoria-producto:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-3px);
+}
+
+.categoria-titulo {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--icasoftBlue);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--icasoftBlue);
+}
+
+.producto-item {
+  margin-bottom: 0.8rem;
+}
+
+.producto-link {
+  color: #333;
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  display: block;
+  padding: 0.3rem 0;
+}
+
+.producto-link:hover {
+  color: var(--icasoftBlue);
+  transform: translateX(5px);
+}
+
+#menu-productos-text {
+  position: relative;
+  padding: 0.5rem 1rem;
+}
+
+#menu-productos-text:hover {
+  color: #66e3ff;
+}
+
+#menu-productos-text::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: #66e3ff;
+  transition: width 0.3s ease;
+}
+
+#menu-productos-text:hover::after {
+  width: 80%;
+}
+
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#menu-productos.icasoft-menu-show .productos-container {
+  animation: slideDownFadeIn 0.3s ease forwards;
+}

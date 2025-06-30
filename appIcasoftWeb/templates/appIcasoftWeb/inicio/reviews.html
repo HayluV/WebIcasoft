@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,36 +16,36 @@
   <div>
     <section class="w-full mt-0 overflow-hidden relative">
       <div class="flex flex-col lg:flex-row w-full mt-3 mb-6 justify-center gap-6">
-        <div class="flex justify-center items-center w-full"> 
-            <div class="review-card p-6 lg:p-[48px] justify-center custom-rounded bg-opacity-90 mb-6 lg:mb-0 flex items-center gap-6">
-                <div class="arrow-left cursor-pointer text-2xl text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center ml-[30px]" onclick="moveReview(-1)">
-                  &lt;
-                </div>
-
-                <div id="review-slider" class="flex transition-all duration-300 overflow-hidden">
-                  {% for review in reviews %}
-                    <div class="review-item flex items-center" style="display: none;">
-                      <div class="img-container">
-                        <img class="w-[120px] h-[120px] rounded-full object-cover mx-auto" src="{{ review.img }}" alt="Review Image">
-                      </div>
-
-                      <div class="info-container ml-6">
-                     
-                      <h2 class="footer-h2 font-Big-Shoulders text-[1.5rem] text-white mb-6 text-center lg:text-left uppercase">
-                        {{ review.name }}
-                      </h2>
-
-
-                        <p class="info-text text-white">{{ review.text }}</p>
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-
-                <div class="arrow-right cursor-pointer text-2xl text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center mr-[20px]" onclick="moveReview(1)">
-                  &#10095;
-                </div>
+        <div class="flex justify-center items-center w-full">
+          <div class="review-card p-6 lg:p-[48px] justify-center custom-rounded bg-opacity-90 mb-6 lg:mb-0 flex items-center gap-6">
+            <!-- Botón de flecha izquierda -->
+            <div class="review-slider-arrow-left cursor-pointer text-2xl text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center ml-[30px]" onclick="moveReview(-1)">
+              &#10094;
             </div>
+
+            <!-- Slider de reseñas -->
+            <div id="review-slider" class="reviews-flex transition-all duration-300 overflow-hidden">
+              {% for review in reviews %}
+              <div class="review-item flex items-center" style="display: none;">
+                <div class="img-container">
+                  <img class="w-[120px] h-[120px] rounded-full object-cover mx-auto" src="{{ review.img }}" alt="Review Image">
+                </div>
+
+                <div class="info-container ml-6">
+                  <h2 class="footer-h2 font-Big-Shoulders text-[1.5rem] text-white mb-6 text-center lg:text-left uppercase">
+                    {{ review.name }}
+                  </h2>
+                  <p class="info-text text-white">{{ review.text }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <!-- Botón de flecha derecha -->
+            <div class="review-slider-arrow-right cursor-pointer text-2xl text-white p-5 rounded-full w-[50px] h-[50px] flex items-center justify-center mr-[20px]" onclick="moveReview(1)">
+              &#10095;
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -52,4 +53,5 @@
 
   <script src="{% static 'src/js/review.js' %}"></script>
 </body>
+
 </html>
