@@ -1,0 +1,166 @@
+ .banner-images {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      overflow: hidden;
+    }
+
+    .banner-images img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      object-fit: cover;
+      filter: opacity(0.3);
+    }
+
+    .banner-images img.active {
+      opacity: 1;
+    }
+
+    .banner-images .texto-sobrepuesto {
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 4vw; 
+      color: rgb(14, 25, 146);
+      font-weight: bold;
+      text-shadow: 2px 2px 5px #fff;
+      text-align: center;
+    }
+
+    .banner-images .texto-sobrepuesto-pequeño {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 4vw;
+      color: rgb(14, 25, 146);
+      font-weight: lighter;
+      text-shadow: 2px 2px 5px #fff;
+      text-align: center;
+    }
+
+    .btn-container-banner {
+      position: absolute;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .btn-ir-ia {
+      color: white;
+      padding: 12px 30px;
+      font-size: 1.2rem; 
+      text-transform: uppercase;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      background: linear-gradient(to right, #071c95, #00d2ff,#00d2ff ,#071c95);
+      display: inline-block;
+      animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) infinite;
+      transform-origin: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .btn-ir-ia:hover {
+      background: linear-gradient(to right, #24c7cd, #3a7bd5);
+      animation: none;
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0) rotate(0deg); }
+      15% { transform: translateX(-5px) rotate(-3deg); }
+      30% { transform: translateX(4px) rotate(3deg); }
+      45% { transform: translateX(-4px) rotate(-2deg); }
+      60% { transform: translateX(3px) rotate(2deg); }
+      75% { transform: translateX(-2px) rotate(-1deg); }
+      90% { transform: translateX(1px) rotate(1deg); }
+      100% { transform: translateX(0) rotate(0); }
+    }
+
+    .btn-ir-ia:active {
+      animation: pulse 0.5s;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 1024px) {
+      .btn-ir-ia {
+        padding: 10px 25px;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .banner-images {
+        height: 300px;
+      }
+      
+      .btn-ir-ia {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .banner-images {
+        height: 200px;
+      }
+
+      .texto-sobrepuesto {
+        font-size: 6vw;
+        top: 50%;
+      }
+
+      .texto-sobrepuesto-pequeño {
+        font-size: 4vw;
+        top: 35%;
+      }
+
+      .btn-container-banner {
+        bottom: 15%;
+      }
+
+      .btn-ir-ia {
+        padding: 6px 15px;
+        font-size: 0.8rem;
+        border-radius: 20px;
+        animation: shake-mobile 0.8s cubic-bezier(.36,.07,.19,.97) infinite;
+      }
+
+      @keyframes shake-mobile {
+        0% { transform: translateX(0) rotate(0deg); }
+        15% { transform: translateX(-3px) rotate(-2deg); }
+        30% { transform: translateX(2px) rotate(2deg); }
+        45% { transform: translateX(-2px) rotate(-1deg); }
+        60% { transform: translateX(1px) rotate(1deg); }
+        100% { transform: translateX(0) rotate(0); }
+      }
+    }
+
+    @media (max-width: 400px) {
+      .banner-images {
+        height: 180px;
+      }
+
+      .btn-ir-ia {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+      }
+    }

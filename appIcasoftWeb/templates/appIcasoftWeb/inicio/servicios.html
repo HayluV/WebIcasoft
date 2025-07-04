@@ -1,0 +1,385 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio - IcaSoft</title>
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/inicio/servicios.css' %}"/>
+  <style>
+    /* ESTILOS BASE DEL MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      overflow: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .modal.show {
+      opacity: 1;
+    }
+    
+    .modal-content {
+      position: relative;
+      width: 40%;
+      max-width: 700px;
+      margin: 15vh auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 
+                  0 10px 30px rgba(0, 0, 0, 0.5);
+      animation: modalopen 0.4s;
+      overflow: hidden;
+    }
+    
+    .modal-img-container {
+      width: 100%;
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .modal-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .modal-img-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%);
+    }
+    
+    .modal-body-content {
+      padding: 25px;
+    }
+    
+    .modal-title {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      width: 100%;
+      color: white;
+      font-size: 1.8rem;
+      text-align: center;
+      padding: 0 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      z-index: 2;
+    }
+    
+    .modal-description {
+      margin-top: 15px;
+      line-height: 1.6;
+      color: #333;
+      font-size: 1rem;
+      text-align: center;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: rgb(51, 0, 255);
+      font-size: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 3;
+      transition: transform 0.2s;
+      text-shadow: 2px 2px 15px white;
+    }
+    
+    .close-modal:hover {
+      transform: scale(1.1);
+    }
+    
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+    
+    .modal-btn {
+      padding: 12px 24px;
+      min-height: 48px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .modal-btn-primary {
+      background-color: #3498db;
+      color: white;
+    }
+    
+    .modal-btn-primary:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+    
+    @keyframes modalopen {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tarjeta-servicio {
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-ver-detalle {
+      min-height: 48px;
+      min-width: 48px;
+    }
+
+     @media (max-width: 1024px) {
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+      }
+      
+      .modal-content {
+       width: 40%;
+        max-width: 700px;
+       margin: 5vh auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .modal-img-container {
+        height: 180px;
+      }
+      
+      .modal-title {
+        font-size: 1.5rem;
+        bottom: 15px;
+      }
+      
+      .modal-body-content {
+        padding: 20px;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .modal-btn {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        padding: 12px 20px;
+      }
+      
+      .close-modal {
+        font-size: 40px;
+        right: 10px;
+        top: 5px;
+      }
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+      }
+      
+      .modal-content {
+        width: 90%;
+        margin: 0;
+        max-height: 85vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .modal-img-container {
+        height: 180px;
+      }
+      
+      .modal-title {
+        font-size: 1.5rem;
+        bottom: 15px;
+      }
+      
+      .modal-body-content {
+        padding: 20px;
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .modal-btn {
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        padding: 12px 20px;
+      }
+      
+      .close-modal {
+        font-size: 40px;
+        right: 10px;
+        top: 5px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .modal-content {
+        width: 95%;
+      }
+      
+      .modal-img-container {
+        height: 150px;
+      }
+      
+      .modal-title {
+        font-size: 1.3rem;
+      }
+      
+      .modal-description {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ESTILOS PARA DISPOSITIVOS TÁCTILES */
+    @media (hover: none) {
+      .btn-ver-detalle:hover, 
+      .modal-btn:hover {
+        transform: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="titulo-container w-full">
+    <h2 class="titulo-principal-servicios cursos-animated-text">Servicios</h2>
+  </div>
+  
+  <main>
+    <div class="contenedor-slider">
+      <div class="visor-slider">
+        {% for servicio in servicios %}
+          <div class="tarjeta-servicio" 
+               onclick="abrirModal(
+                 '{{ servicio.nombre }}', 
+                 '{{ servicio.descripcion }}', 
+                 '{% static servicio.imagen %}'
+               )">
+            <img src="{% static servicio.imagen %}" 
+                 alt="{{ servicio.nombre }}" 
+                 class="img-servicio">
+            <p class="nombre-servicio font-Big-Shoulders">{{ servicio.nombre }}</p>
+            <div class="servicio-btn-container">
+              <button class="btn-ver-detalle bg-icasoftBlue font-Lexend-Deca btn-font">
+                Ver detalles
+              </button>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Modal de Servicios -->
+    <div id="servicioModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="cerrarModal()">&times;</span>
+        <div class="modal-img-container">
+          <img id="modalImagen" src="" alt="" class="img-servicio-modal">
+          <div class="modal-img-overlay"></div>
+          <h2 id="modalTitulo" class="modal-title font-Big-Shoulders"></h2>
+        </div>
+        <div class="modal-body-content">
+          <p id="modalDescripcion" class="modal-description font-Lexend-Deca"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // FUNCIONES DEL MODAL
+      function abrirModal(nombre, descripcion, imagenUrl) {
+        const modal = document.getElementById('servicioModal');
+        document.getElementById('modalTitulo').textContent = nombre;
+        document.getElementById('modalDescripcion').textContent = descripcion;
+        
+        // Manejo seguro de la URL de la imagen
+        const imgElement = document.getElementById('modalImagen');
+        imgElement.src = imagenUrl;
+        imgElement.alt = nombre;
+        
+        // Forzar reflow para asegurar la animación
+        void modal.offsetWidth;
+        
+        // Mostrar con animación
+        modal.style.display = 'flex';
+        setTimeout(() => {
+          modal.classList.add('show');
+          document.body.style.overflow = 'hidden';
+          document.body.style.touchAction = 'none'; // Previene el scroll detrás del modal
+        }, 10);
+      }
+      
+      function cerrarModal() {
+        const modal = document.getElementById('servicioModal');
+        modal.classList.remove('show');
+        document.body.style.touchAction = ''; // Restaura el touch
+        setTimeout(() => {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }, 300);
+      }
+      
+      // Cerrar al hacer clic fuera del contenido
+      window.onclick = function(event) {
+        const modal = document.getElementById('servicioModal');
+        if (event.target === modal) {
+          cerrarModal();
+        }
+      };
+      
+      // Cerrar con tecla ESC
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && document.getElementById('servicioModal').style.display === 'flex') {
+          cerrarModal();
+        }
+      });
+
+      // Mejorar accesibilidad táctil
+      document.querySelectorAll('.tarjeta-servicio').forEach(card => {
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'scale(0.98)';
+        });
+        
+        card.addEventListener('touchend', function() {
+          this.style.transform = 'scale(1)';
+        });
+      });
+    </script>
+  </main>
+</body>
+</html>

@@ -1,0 +1,41 @@
+@media (min-width: 1024px) {
+  .lg-pt {
+    padding-top: 65px;
+  }
+}
+
+html, body {
+      height: 100%;
+      margin: 0; 
+      padding: 0; 
+    }
+    
+
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; 
+      width: 100%;
+    }
+
+    header {
+      width: 100%;
+      height: 100px; 
+      text-align: center;
+      color: white;
+    }
+
+    main {
+      flex-grow: 1; 
+      width: 100%;
+      background-color: #ffffff; 
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+      background-color: var(--icasoftBlue);
+    }
+
+  

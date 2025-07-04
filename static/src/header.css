@@ -1,0 +1,270 @@
+
+.visible-container {
+  display: block;
+}
+
+header {
+  background: linear-gradient(to right,
+      var(--icasoftBlue) 0%,
+      #3a7bd5 50%,
+      #4c8a8a 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  height: 70px;
+}
+
+.flex {
+  padding: 5px 10px 1px 1px;
+}
+
+.no-wrap-container {
+  flex-wrap: nowrap;
+}
+
+.logo-texto-productos {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.logo-img {
+  height: 2.6rem;
+  flex-shrink: 0;
+  transition: height 0.3s ease;
+}
+
+h2.font-Big-Shoulders {
+  font-size: 2rem;
+  margin: 0;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  transition: font-size 0.3s ease;
+}
+
+#menu-productos-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding-right: 20px;
+  padding-left: 10px;
+  white-space: nowrap;
+  transition: font-size 0.3s ease;
+}
+
+.shopping-cart-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-number {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  font-family: 'Lexend Deca', sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--icasoftBlue);
+}
+
+.search-input {
+  width: 350px;
+  padding: 2px 10px 2px 10px;
+  font-size: larger;
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  transition: border 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: var(--icasoftBlue);
+  outline: none;
+}
+
+.iconLogin {
+  font-size: xx-large !important;
+  color: #3399ff;
+  box-shadow: 0px 0px 9px 3px #66e3ff;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+/* Estilo para el botón de menú móvil */
+#mobile-menu-button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 5px 15px;
+  white-space: nowrap;
+  display: none;
+  align-items: center;
+  gap: 5px;
+  z-index: 30;
+  transition: all 0.3s ease;
+}
+
+#mobile-menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Menús móviles */
+#mobile-menu, #menu-productos {
+  transition: all 0.3s ease;
+}
+
+#mobile-menu .productos-menu {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+#mobile-menu .productos-menu #mobile-productos-submenu {
+  transition: all 0.3s ease;
+}
+
+/* Clase para mostrar menús */
+.icasoft-menu-show {
+  display: block !important;
+}
+
+/* Responsive sizes - iPad Pro 10.5" y similares */
+@media (max-width: 1366px) and (min-width: 1024px) and (orientation: portrait),
+       (max-width: 1024px) and (orientation: landscape) {
+  /* Mostrar menú desktop completo en iPad Pro en landscape */
+  nav.lg\\:flex {
+    display: flex !important;
+  }
+  
+  #mobile-menu-button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  /* Para tablets en portrait (incluyendo iPad Pro) */
+  header {
+    height: 60px;
+    padding: 2px 5px;
+  }
+
+  .logo-img {
+    height: 3rem;
+  }
+
+  h2.font-Big-Shoulders {
+    font-size: 1.6rem;
+  }
+
+  /* Mostrar solo menú móvil */
+  nav.lg\\:flex {
+    display: none !important;
+  }
+  
+  #mobile-menu-button {
+    display: flex;
+  }
+  
+  #menu-productos-text,
+  .search-input,
+  .shopping-cart-container,
+  nav.lg\\:flex > a,
+  nav.lg\\:flex > button {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    height: 50px;
+    padding: 5px 12px;
+  }
+
+  .logo-img {
+    height: 2rem;
+  }
+
+  h2.font-Big-Shoulders {
+    font-size: 1.2rem !important;
+  }
+
+  .logo-texto-productos {
+    gap: 0.5rem;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    height: 50px;
+    padding: 2px 4px;
+  }
+
+  .logo-img {
+    height: 1.8rem;
+  }
+
+  h2.font-Big-Shoulders {
+    font-size: 1rem !important;
+  }
+
+  #mobile-menu-button {
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+}
+
+ /* Estilo para el contenedor del ícono de usuario */
+.user-menu-container {
+  position: relative;
+}
+
+/* Menú desplegable */
+#user-menu {
+  display: none; /* El menú está oculto por defecto */
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+/* Mostrar el menú al pasar el cursor sobre el contenedor */
+.user-menu-container:hover #user-menu {
+  display: block; /* Mostrar el menú cuando se pasa el cursor sobre el contenedor */
+}
+
+/* Estilo para los elementos dentro del menú */
+#user-menu a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 16px;
+  display: block;
+}
+
+#user-menu a:hover {
+  background-color: #f5f5f5;
+}

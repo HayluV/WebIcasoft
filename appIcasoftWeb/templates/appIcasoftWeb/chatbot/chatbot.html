@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Robot + WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'src/css/chatbots/chatbot.css' %}" />
+</head>
+<body>
+    <!-- Botón de WhatsApp (ARRIBA) -->
+    <div class="whatsapp-float" id="whatsappButton">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+    
+    <!-- Modal de WhatsApp -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <div class="modal-header">
+            <i class="fab fa-whatsapp"></i>
+            <h3>WhatsApp</h3>
+        </div>
+        <div class="modal-body">
+            <p>¿Prefieres hablar directamente por WhatsApp?</p>
+        </div>
+        <a href="https://wa.me/521234567890" class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chatear ahora
+        </a>
+    </div>
+
+    <!-- Chatbot Robot (AZUL Y LINDO - ABAJO) -->
+    <div class="robot-chatbot">
+        <div class="robot-launcher" id="robotLauncher">
+            <i class="fas fa-robot"></i>
+        </div>
+        
+        <div class="robot-interface" id="robotInterface">
+            <div class="robot-header">
+                <div class="robot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="header-text">
+                    <h3>RoboAsistente</h3>
+                    <p>Estoy aquí para ayudarte</p>
+                </div>
+                <button class="close-robot" id="closeRobot">&times;</button>
+            </div>
+            
+            <div class="robot-body" id="robotBody">
+                <div class="robot-message">
+                    <p>¡Hola humano! 👋 Soy tu asistente robótico. ¿En qué puedo ayudarte hoy?</p>
+                </div>
+            </div>
+            
+            <div class="robot-input">
+                <input type="text" placeholder="Escribe tu mensaje..." id="robotInput">
+                <button id="sendRobotMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+  <script src="{% static 'src/js/chatbots/chatbot.js' %}"></script>
+</body>
+</html>

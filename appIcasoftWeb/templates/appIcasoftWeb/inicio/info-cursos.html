@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inicio - IcaSoft</title>
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/cursos.css' %}" />
+</head>
+
+<body>
+  <div class="titulo-container w-full">
+    <h2 class="titulo-principal-cursos cursos-animated-text">Cursos</h2>
+  </div>
+  <main>
+    <div class="contenedor-slider">
+      <div class="visor-slider-cursos">
+        {% for curso in cursos %}
+        <div class="tarjeta-curso">
+          <img src="{{ curso.image_url }}" alt="{{ curso.title }}" class="img-curso">
+          <p class="nombre-curso font-Big-Shoulders font-Big-Shoulders">{{ curso.title }}</p>
+          <div class="curso-btn-container">
+            <a href="{{ curso.link }}" rel="noopener noreferrer">
+              <button class="btn-ver-detalle bg-icasoftBlue font-Lexend-Deca btn-font">Ver curso</button>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

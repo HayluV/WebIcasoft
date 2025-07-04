@@ -1,0 +1,108 @@
+.review-card {
+  background: linear-gradient(to right,#1D0A7A,#1D0A7A, #3944b3, #5e78ce,#6998a5, #6998a5);
+  padding: 20px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  min-height: 150px;
+}
+
+.h2{
+  text-align: left !important;
+}
+
+.info-text {
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 16px;
+  margin-right: 20px; 
+  flex-grow: 1; 
+  white-space: normal; 
+  word-wrap: break-word; 
+  overflow-wrap: break-word; 
+  line-height: 1.5; 
+  max-width: 450px; 
+}
+
+.img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-slider-arrow-left, .review-slider-arrow-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #3944b3;
+  color: white;
+  font-size: 24px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.review-slider-arrow-left {
+  left: 10px; 
+}
+
+.review-slider-arrow-right {
+  right: 10px; 
+}
+
+@media screen and (max-width: 768px) {
+  .review-card {
+    flex-direction: column; 
+    padding-right: 20px;
+  }
+
+  .info-text {
+    margin-right: 0; 
+    font-size: 15px;
+  }
+
+  .img {
+    width: 100px; 
+    height: 100px;
+    margin: 0 auto; /* centra la imagen */
+  }
+
+  .footer-h2 {
+    font-size: 1rem !important; /* reduce tamaño del h2 en móvil */
+    text-align: center !important; /* centra el texto */
+  }
+
+  /* Apila imagen y texto dentro de cada review */
+  .review-item {
+    flex-direction: column !important; /* apilar en columna */
+    align-items: center; /* centrar contenido horizontal */
+    text-align: center; /* centrar texto */
+    gap: 1rem;
+    max-width: 90vw; /* evitar que sea muy ancho */
+    margin: 0 auto; /* centrar el contenedor */
+  }
+
+  .review-item .info-container {
+    margin-left: 0 !important; /* quitar margen lateral para que no corra */
+    width: 100%;
+  }
+
+  /* Ajuste de tamaño de las flechas en pantallas pequeñas */
+  .review-slider-arrow-left, .review-slider-arrow-right {
+    width: 50px;  /* Reducir tamaño */
+    height: 50px; /* Reducir tamaño */
+    font-size: 18px; /* Ajustar tamaño del icono */
+  }
+}

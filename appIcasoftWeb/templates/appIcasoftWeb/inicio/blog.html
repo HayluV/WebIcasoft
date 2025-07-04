@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog</title>
+  <link rel="stylesheet" href="{% static 'src/css/inicio/blog.css' %}" />
+  <link rel="icon" href="{% static 'img/logo.png' %}" type="image/png" sizes="32x32" />
+</head>
+
+<body class="text-[0.9375rem] font-Lexen-Deca blog-flex justify-center text-transparent-white">
+  <div>
+    <section class="w-full mt-0 overflow-hidden relative">
+      <div class="bg-icasoftBlue p-[10px] w-full">
+        <h2 class="titulo-principal-servicios cursos-animated-text">Blog</h2>
+      </div>
+
+      <div class="blog-flex blog-flex-col lg:blog-flex-row w-full mt-3 mb-6 justify-center gap-6">
+        <div class="blog-flex justify-between items-center w-full">
+          <div
+            class="arrow-left-blog cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] blog-flex items-center justify-center ml-[20px]">&#10094;</div>
+          <div class="slider-viewport overflow-hidden mx-auto">
+            <div id="blog-slider" class="slider-container blog-flex transition-transform duration-300">
+              {% for blog in blogs %}
+              <div class="blog-card bg-sky-100 p-6 lg:p-[48px] bg-opacity-90 mb-6 lg:mb-0">
+                <picture>
+                  <img src="{{ blog.image_url }}" alt="{{ blog.title }}"
+                    class="mb-[35px] rounded-lg mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" />
+                </picture>
+                <h2 class="blog-title-clamp font-Big-Shoulders uppercase text-blue-950 mb-6" style="font-size: 20px;">
+                  <span class="scrolling-title">{{ blog.title }}</span>
+                </h2>
+
+                <div class="button-container">
+                  <a href="{{ blog.link }}" target="_blank" rel="noopener noreferrer">
+                    <button class="btn bg-icasoftBlue">Ver</button>
+                  </a>
+                </div>
+              </div>
+
+              {% endfor %}
+            </div>
+          </div>
+          <div
+            class="arrow-right-blog cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] blog-flex items-center justify-center mr-[20px]">&#10095;</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="{% static 'src/js/blogSlider.js' %}"></script>
+</body>
+
+</html>

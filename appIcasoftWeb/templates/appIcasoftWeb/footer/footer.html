@@ -1,0 +1,300 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Footer - ICASOFT</title>
+  <link rel="stylesheet" href="{% static 'src/footer.css' %}" />
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+  <style>
+    /* Estilos para los modales del footer */
+    .footer-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      overflow: auto;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .footer-modal.show {
+      opacity: 1;
+    }
+    
+    .footer-modal-content {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      margin: 10vh auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      animation: modalopen 0.4s;
+      overflow: hidden;
+      padding: 30px;
+    }
+    
+    .footer-modal-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    
+    .footer-modal-text {
+      line-height: 1.6;
+      color: #333;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    
+    .close-footer-modal-btn {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      color: #3498db;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .close-footer-modal-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .footer-modal-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 10px 25px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    
+    .footer-modal-btn:hover {
+      background-color: #2980b9;
+    }
+    
+    @keyframes modalopen {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive para móviles */
+    @media (max-width: 768px) {
+      .footer-modal.show {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center ;
+        padding: 15px;
+      }
+
+      .footer-modal-content{
+          width: 90%;
+        margin: 0;
+        max-height: 85vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .footer-modal-title {
+        font-size: 1.5rem;
+      }
+      
+      .close-footer-modal-btn {
+        font-size: 30px;
+        top: 10px;
+        right: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body class="text-[0.9375rem] font-Lexen-Deca flex justify-center text-Transparent-white">
+
+  <div>
+    <section class="w-full mt-0 overflow-hidden lg:flex lg:flex-col lg:w-full">
+      <div class="lg:flex w-full">
+        <div class="bg-icasoftBlue p-[30px] flex-grow">
+          <h2 class="footer-h2 size-normal white font-Big-Shoulders mb-6 uppercase">
+            Información de contacto:
+          </h2>
+          <p class="footer-text text-white mb-2 text-center lg:text-left">
+            Calle Cajamarca 156, <br> (Galería AMISUR interior <strong> 135 - A</strong>)
+          </p>
+          <p class="footer-text text-white mb-2 text-center lg:text-left">
+            972 142 523
+          </p>
+          <p class="footer-text text-white mb-2 text-center lg:text-left text-[22px]">
+            Lunes - Sábado<br />9:00 A.M - 9:00 P.M
+          </p>
+        </div>
+
+        <div class="bg-icasoftBlue p-[30px] flex-grow">
+          <h2 class="footer-h2 size-normal white font-Big-Shoulders mb-6 uppercase">
+            Te ayudamos:
+          </h2>
+          <ul class="text-center lg:text-left">
+            <li class="footer-text text-white mb-2">
+              <p class="text-white mb-2 text-center lg:text-left text-[18px]">
+                Libro de Reclamaciones
+              </p>
+            </li>
+            <li class="footer-text text-white mb-2">
+              <p class="text-white mb-2 text-center lg:text-left text-[18px] cursor-pointer" 
+                 onclick="abrirModalEntrega()">
+                Tipo de entrega
+              </p>
+            </li>
+            <li class="footer-text text-white mb-2">
+              <p class="text-white mb-2 text-center lg:text-left text-[18px] cursor-pointer" 
+                 onclick="abrirModalTerminos()">
+                Términos y Condiciones
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-icasoftBlue p-[30px] flex-grow">
+          <h2 class="footer-h2-redes text-white font-Big-Shoulders mb-6 uppercase">
+            Encuéntranos en:
+          </h2>
+
+          <ul class="footer-redes text-center lg:text-left">
+            <li class="footer-text text-white">
+              <a href="https://www.facebook.com/icasofti21.pe/?locale=es_LA"
+                class="text-white hover:text-gray-400 text-[14px]" target="_blank">
+                <img src="{% static 'img/logo-facebook.png' %}" alt="Facebook Logo" class="logo-facebook">
+              </a>
+            </li>
+            <li class="footer-text text-white">
+              <a href="https://www.tiktok.com/@icasoft" class="" target="_blank">
+                <img src="{% static 'img/logos/tiktok.png' %}" alt="TikTok Logo" class="logo-tk">
+              </a>
+            </li>
+            <li class="footer-text text-white">
+              <a href="https://www.youtube.com" class="text-white hover:text-gray-400 text-[14px]" target="_blank">
+                <img src="{% static 'img/logos/youtube.png' %}" alt="YouTube Logo" class="logo-yt">
+              </a>
+            </li>
+            <li class="footer-text text-white">
+              <a href="https://www.instagram.com/icasoft/" class="text-white hover:text-gray-400 text-[14px]"
+                target="_blank">
+                <img src="{% static 'img/logos/instagram.png' %}" alt="Ig Logo" class="logo-ig">
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal Tipo de Entrega -->
+  <div id="footerEntregaModal" class="footer-modal">
+    <div class="footer-modal-content">
+      <span class="close-footer-modal-btn" onclick="cerrarFooterModal('footerEntregaModal')">&times;</span>
+       <h2 class="footer-modal-title font-Big-Shoulders fondo-animated-text uppercase">Tipo de entrega</h2>
+      <div class="footer-modal-text">
+        <p>Realizamos envíos a todo el Perú con las siguientes opciones:</p>
+        <ul style="list-style-type: disc; padding-left: 20px; margin-top: 10px;">
+          <li><strong>Envío estándar:</strong> 3-5 días hábiles a Lima Metropolitana</li>
+          <li><strong>Envío express:</strong> 24-48 horas en Lima (costo adicional)</li>
+          <li><strong>Envíos a provincia:</strong> 5-10 días hábiles según destino</li>
+          <li><strong>Recojo en tienda:</strong> Sin costo adicional (Cajamarca 156)</li>
+        </ul>
+        <p style="margin-top: 15px;">Los pedidos se despachan el mismo día si se realizan antes de las 3pm.</p>
+      </div>
+      <button class="footer-modal-btn" onclick="cerrarFooterModal('footerEntregaModal')">Entendido</button>
+    </div>
+  </div>
+
+  <!-- Modal Términos y Condiciones -->
+  <div id="footerTerminosModal" class="footer-modal">
+    <div class="footer-modal-content">
+      <span class="close-footer-modal-btn" onclick="cerrarFooterModal('footerTerminosModal')">&times;</span>
+      <h2 class="footer-modal-title font-Big-Shoulders fondo-animated-text">Términos y Condiciones</h2>
+      <div class="footer-modal-text">
+        <p><strong>1. Política de Privacidad:</strong> Tus datos personales están protegidos según la Ley de Protección de Datos Personales.</p>
+        
+        <p><strong>2. Garantías:</strong> Todos nuestros productos tienen garantía de 3 meses contra defectos de fabricación.</p>
+        
+        <p><strong>3. Devoluciones:</strong> Aceptamos devoluciones dentro de los 7 días posteriores a la compra, siempre que el producto esté en su empaque original.</p>
+        
+        <p><strong>4. Pagos:</strong> Aceptamos todas las tarjetas de crédito/débito, transferencias bancarias y pago en efectivo al recojo.</p>
+        
+        <p><strong>5. Precios:</strong> El precio final es el mostrado al confirmar la compra.</p>
+      </div>
+      <button class="footer-modal-btn" onclick="cerrarFooterModal('footerTerminosModal')">Aceptar</button>
+    </div>
+  </div>
+
+  <script>
+    // Funciones para los modales del footer
+    function abrirModalEntrega() {
+      const modal = document.getElementById('footerEntregaModal');
+      modal.style.display = 'block';
+      setTimeout(() => {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }, 10);
+    }
+    
+    function abrirModalTerminos() {
+      const modal = document.getElementById('footerTerminosModal');
+      modal.style.display = 'block';
+      setTimeout(() => {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }, 10);
+    }
+    
+    function cerrarFooterModal(modalId) {
+      const modal = document.getElementById(modalId);
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }, 300);
+    }
+    
+    // Cerrar al hacer clic fuera del contenido
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('footer-modal')) {
+        event.target.classList.remove('show');
+        setTimeout(() => {
+          event.target.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }, 300);
+      }
+    });
+    
+    // Cerrar con tecla ESC
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        document.querySelectorAll('.footer-modal.show').forEach(modal => {
+          cerrarFooterModal(modal.id);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

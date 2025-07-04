@@ -1,0 +1,143 @@
+ @import "tailwindcss";
+
+@font-face {
+    font-family: "Big Shoulders";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("../fonts/Big_Shoulders/BigShoulders-VariableFont_opsz,wght.ttf") format("woff2");
+}
+
+@font-face {
+    font-family: "Lexend Deca";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../fonts/Lexend_Deca/LexendDeca-VariableFont_wght.ttf") format("woff2");
+}
+
+.m-0 {
+    margin: 0 !important;
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+@theme {
+    --color-Dark-cyan: hsl(184, 100%, 22%);
+    --color-Very-dark-cyan: hsl(179, 100%, 13%);
+    --color-Transparent-white: hsla(0, 0%, 100%, 0.75);
+    --color-Very-light-gray: hsl(0, 0%, 95%);
+    --font-Lexend-Deca: "Lexend Deca";
+    --font-Big-Shoulders: "Big Shoulders";
+}
+
+:root {
+    --icasoftBlue: hsl(250, 85%, 26%); 
+    --color-Dark-cyan: hsl(192, 80%, 63%);
+    --color-Transparent-white: hsla(0, 0%, 100%, 0.75);
+    --color-Very-light-gray: hsl(0, 0%, 95%);
+    --font-Lexend-Deca: "Lexend Deca";
+    --font-Big-Shoulders: "Big Shoulders";
+}
+
+.text-primary {
+    color: var(--icasoftBlue); 
+}
+
+.bg-icasoftBlue {
+    background-color: var(--icasoftBlue); 
+}
+
+.cursos-animated-text {
+  background: linear-gradient(
+    -45deg,
+    #140443,   
+    #272786,   
+    #3399ff,   
+    #66ccff,   
+    #ffffff,  
+    #ffffff,
+    #ccefff    
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-cursos 7s ease infinite;
+}
+
+@keyframes gradient-cursos {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 25% 25%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    background-position: 75% 75%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.fondo-animated-text {
+  background: linear-gradient(
+    -45deg,
+    #291fbc,   
+    #291fbc,   
+    #0973be,  
+    #0973be,  
+    #291fbc, 
+    #291fbc,   
+    #ffffff    
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-nuevo 6s ease infinite;
+}
+
+@keyframes gradient-nuevo {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+
+
+
+.custom-rounded {
+    border-radius: 4rem;
+}
+
+@media (max-width: 768px) {
+    .font-Big-Shoulders {
+      font-size: 4vw !important ;
+    }
+}
+
+@media (max-width: 480px) {
+    .font-Big-Shoulders {
+      font-size: 10vw !important;
+    }
+}
+
+@media (min-width: 1024px) {
+  .pt-custom {
+    padding-top: 40px !important;
+  }
+}

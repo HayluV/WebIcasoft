@@ -1,0 +1,138 @@
+/* mobile-menu.css */
+#mobile-menu {
+    font-family: 'Lexend Deca', sans-serif;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+#mobile-menu .bg-white {
+    background: linear-gradient(to right, 
+        var(--icasoftBlue) 0%,
+        #3a7bd5 50%,
+        #4c8a8a 100%) !important;
+    width: 80%;
+    max-width: 320px;
+    min-height: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-bottom: 60px;
+}
+
+#mobile-menu .text-black,
+#mobile-menu a {
+    color: white !important;
+    font-size: 1.1rem;
+    padding: 12px 16px;
+}
+
+#mobile-menu #close-mobile-menu {
+    color: white !important;
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+#mobile-menu .hover\:bg-gray-100:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 4px;
+}
+
+#mobile-menu .search-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-bottom: 15px;
+}
+
+#mobile-menu .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#mobile-menu .search-input:focus {
+    border-color: white;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+#mobile-menu .productos-menu {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 10px;
+}
+
+#mobile-menu #mobile-productos-submenu {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+#mobile-menu .shopping-cart-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#mobile-menu .iconLogin {
+    color: white;
+    box-shadow: 0 0 9px 3px rgba(102, 227, 255, 0.5);
+}
+
+/* Animaciones */
+#mobile-menu {
+    transition: opacity 0.3s ease;
+}
+
+#mobile-menu .bg-white {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+#mobile-menu.icasoft-menu-show {
+    opacity: 1;
+}
+
+#mobile-menu.icasoft-menu-show .bg-white {
+    transform: translateX(0);
+}
+
+/* Ícono de flecha para el submenú */
+#mobile-productos-btn .icofont-simple-down {
+    transition: transform 0.3s ease;
+}
+
+#mobile-productos-btn.active .icofont-simple-down {
+    transform: rotate(180deg);
+}
+
+/* Scrollbar personalizada */
+#mobile-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+#mobile-menu::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#mobile-menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+}
+
+/* Asegura que todos los items principales estén centrados */
+#mobile-menu > .bg-white > a:not(.productos-menu a),
+#mobile-productos-btn {
+  text-align: center;
+}
+
+/* Posicionamiento del ícono de flecha */
+#mobile-productos-btn {
+  position: relative;
+  padding-right: 2.5rem; /* Espacio para la flecha */
+}
+
+#mobile-productos-btn .icofont-simple-down {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}

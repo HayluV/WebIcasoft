@@ -1,0 +1,149 @@
+/* Estilos para el modal de login */
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal.active {
+  display: flex;
+}
+
+.login-modal-background {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login-container {
+  background-image: url('/static/img/fondo-test-negro.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+.close-login-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.close-login-modal:hover {
+  color: #ccc;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 500;
+  text-shadow: 0 0 16px rgb(255, 255, 255);
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #ffff;
+  border-radius: 5px;
+  color: #333;
+}
+
+.login-btn {
+  background-color: #1826bf;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+  background-color: #1a2dd1;
+}
+
+.white-shadow {
+  text-shadow: 0 0 16px rgb(255, 255, 255);
+}
+
+.img-form {
+  width: 90px;
+  height: 90px;
+  border-radius: 60%;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 40px 25px rgb(72, 185, 255);
+  object-fit: cover;
+}
+
+.login-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.login-footer a {
+  color: #a0c4ff;
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+.login-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 16px rgb(255, 255, 255);
+  font-family: 'Big Shoulders', sans-serif;
+}
+
+.iconLogin {
+  font-size: 24px;
+  transition: transform 0.3s;
+  color: white;
+}
+
+.iconLogin:hover {
+  transform: scale(1.1);
+}

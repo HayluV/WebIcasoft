@@ -1,0 +1,176 @@
+.footer-h2-redes {
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  margin-bottom: 1rem !important;
+}
+
+.footer-h2 {
+  font-style: normal !important;
+  font-weight: 400 !important;
+  text-align: left !important;
+}
+
+.footer-h2.size-normal {
+  font-size: 1.6rem !important;
+  margin-bottom: 1rem;
+}
+
+.footer-h2.size-large {
+  font-size: 2rem !important;
+}
+
+.footer-h2.white {
+  color: white !important;
+}
+
+.footer-h2.blue {
+  color: var(--icasoftBlue) !important;
+}
+
+.footer-text {
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 20px;
+}
+
+.footer-text p:hover {
+  color: #6fd9ff;
+}
+
+.footer-text img {
+  width: 60px;
+  height: 60px;
+  padding: 11px;
+  border-radius: 50%;
+}
+
+.logo-yt {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 16px 2px #e44e4c;
+  background: #e44e4c;
+}
+
+.logo-yt:hover {
+  box-shadow: 0 0 16px 5px #b11c1c;
+  background: #e82828;
+}
+
+.logo-tk {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 16px 2px #353535;
+  background: black;
+}
+
+.logo-tk:hover {
+  box-shadow: 0 0 16px 5px #502ab7;
+  background: #6437e0;
+}
+
+.logo-ig {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 16px 2px rgb(227, 214, 77);
+  background: #ffea47de;
+}
+
+.logo-ig:hover {
+  box-shadow: 0 0 16px 5px rgb(150, 33, 182);
+  background: rgb(201, 50, 242);
+}
+
+.logo-facebook {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 16px 2px #12bcff;
+  background: #00a0ef;
+}
+
+.logo-facebook:hover {
+  box-shadow: 0 0 16px 5px #212db3;
+  background: #2c3cec;
+}
+
+.footer-redes {
+  display: grid;
+  grid-template-columns: repeat(2, 0.2fr);
+  gap: 20px;
+  row-gap: 30px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer-redes li {
+  margin: 0;
+}
+
+/* Media Queries para Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .footer-h2 {
+    text-align: center !important;
+  }
+
+  .footer-h2.size-large {
+    font-size: 1.8rem !important;
+  }
+
+  .footer-text {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .footer-redes {
+    grid-template-columns: repeat(4, 0.2fr);
+    gap: 15px;
+    justify-items: center; /* Centra horizontalmente en cada celda */
+    align-items: center; 
+    
+  }
+}
+
+/* Media Queries para Móviles (hasta 768px) */
+@media (max-width: 768px) {
+  .footer-h2.size-large {
+    font-size: 1.6rem !important;
+  }
+
+  .footer-text {
+    font-size: 16px;
+  }
+
+  .footer-redes {
+    grid-template-columns: repeat(4, 0.2fr);
+    gap: 10px;
+    row-gap: 20px;
+    justify-items: center; /* Centra horizontalmente en cada celda */
+    align-items: center; /* Centra verticalmente en cada celda */
+  }
+
+  .footer-text img {
+    width: 50px;
+    height: 50px;
+    padding: 9px;
+  }
+}
+
+/* Media Queries para Móviles pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .footer-h2.size-large {
+    font-size: 1.4rem !important;
+  }
+
+  .footer-text {
+    font-size: 14px;
+  }
+
+  .footer-redes {
+    grid-template-columns: repeat(4, 1.0fr);
+    gap: 30px;
+    row-gap: 15px;
+     justify-items: center; /* Centra horizontalmente en cada celda */
+  align-items: center; /* Centra verticalmente en cada celda */
+  }
+
+  .footer-text img {
+    width: 45px;
+    height: 45px;
+    padding: 8px;
+  }
+}
