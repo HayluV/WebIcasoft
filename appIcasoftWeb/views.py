@@ -133,24 +133,20 @@ def user_inicio(request):
 
     productos = [
         {
-            'name': 'Angelina Aramayo',
             'img': '/static/img/inicio/productosTop/producto1.jpg',
             'text': 'Tinta EPSON original'
         },
         {
-            'name': 'Carlos Gomez',
             'img': '/static/img/inicio/productosTop/producto2.jpg',
             'text': 'Laptop HP 15 pulgadas'
         },
         {
-            'name': 'Laura Torres',
             'img': '/static/img/inicio/productosTop/producto4.jpg',
             'text': 'Mouse LOGITECH'
         },
          {
-            'name': 'Haylú Vicuña',
-            'img': '/static/img/fotousuario.jpeg',
-            'text': 'Venta de laptops buenas, muy recomendado el servicio.'
+            'img': '/static/img/productos/tecladoGenius.webp',
+            'text': 'Teclado GENIUS'
         },
     ]
 
@@ -225,6 +221,49 @@ def user_curso(request, curso_nombre=None):
         return render(request, "appIcasoftWeb/curso_no_encontrado.html", {"curso_nombre": curso_nombre})
 
     return render(request, "appIcasoftWeb/cursos.html", {"curso": curso, "curso_nombre": curso_nombre})
+
+def user_producto(request):
+    categorias = {
+        'laptops': {
+            'nombre': 'Laptops', 
+            'subcategorias': {
+                'gaming': 'Gaming',
+                'empresariales': 'Empresariales',
+                'ultrabooks': 'Ultrabooks'
+            }
+        },
+        'impresoras': {
+            'nombre': 'Impresoras',
+            'subcategorias': {
+                'laser': 'Láser',
+                'tinta': 'de Tinta',
+                'multifuncion': 'Multifunción'
+            }
+        }
+    }
+    return render(request, 'appIcasoftWeb/productos/todos.html', {'categorias': categorias})
+
+def user_producto_categoria(request, categoria):
+    # Ejemplo con datos estáticos (reemplazar con query real)
+    productos = [
+        {'img': '/static/img/productos/laptop1.jpg', 'text': 'Laptop Gaming X1', 'precio': 1200},
+        {'img': '/static/img/productos/laptop2.jpg', 'text': 'Laptop Empresarial E5', 'precio': 1500}
+    ]
+    return render(request, 'appIcasoftWeb/productos/categoria.html', {
+        'productos': productos,
+        'categoria': categoria
+    })
+
+def user_producto_subcategoria(request, categoria, subcategoria):
+    # Ejemplo con datos estáticos
+    productos = [
+        {'img': '/static/img/productos/laptop-gaming.jpg', 'text': 'Laptop Gaming Pro', 'precio': 2000}
+    ]
+    return render(request, 'appIcasoftWeb/productos/subcategoria.html', {
+        'productos': productos,
+        'categoria': categoria,
+        'subcategoria': subcategoria
+    })
 
 
 

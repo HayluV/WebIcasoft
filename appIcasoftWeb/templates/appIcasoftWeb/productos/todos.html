@@ -1,0 +1,70 @@
+{% extends "appIcasoftWeb/base.html" %}
+
+{% block content %}
+<div class="">
+  <div class="titulo-container w-full">
+    <h2 class="titulo-principal-productos fondo-animated-text">Productos</h2>
+  </div>
+
+  <!-- Sección Laptops -->
+  <div class="card mb-4 border-0 shadow-sm">
+    <div class="card-header bg-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="h5 mb-0">Laptops</h2>
+        <a href="{% url 'user_producto_categoria' 'laptops' %}" class="btn btn-sm btn-outline-primary">Ver todos</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <h5 class="card-title">Laptops Gaming</h5>
+              <a href="{% url 'user_producto_subcategoria' 'laptops' 'gaming' %}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <h5 class="card-title">Laptops Empresariales</h5>
+              <a href="{% url 'user_producto_subcategoria' 'laptops' 'empresariales' %}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <h5 class="card-title">Ultrabooks</h5>
+              <a href="{% url 'user_producto_subcategoria' 'laptops' 'ultrabooks' %}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección Impresoras -->
+  <div class="card mb-4 border-0 shadow-sm">
+    <div class="card-header bg-white">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="h5 mb-0">Impresoras</h2>
+        <a href="{% url 'user_producto_categoria' 'impresoras' %}" class="btn btn-sm btn-outline-primary">Ver todos</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card h-100 border-0">
+            <div class="card-body text-center">
+              <h5 class="card-title">Impresoras Láser</h5>
+              <a href="{% url 'user_producto_subcategoria' 'impresoras' 'laser' %}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+        <!-- Más subcategorías de impresoras... -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,5 +1,3 @@
-
-
 /* Sección "Sobre Nosotros" */
 .titulo-principal-servicios {
   font-size: 2.5rem;
@@ -81,10 +79,8 @@
     text-align: center;
   }
   
-  img {
+  .img-responsive-nosotros {
     max-width: 80%;
     margin: 0 auto;
   }
 }
-
-

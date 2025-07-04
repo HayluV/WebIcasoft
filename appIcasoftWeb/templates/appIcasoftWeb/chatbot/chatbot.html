@@ -1,300 +1,64 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot ICA Soft</title>
-    <script src="https://kit.fontawesome.com/41846aaf96.js" crossorigin="anonymous"></script>
-    <style>
-        /* ESTILOS PRINCIPALES - SIN BLOQUEO DE INTERACCIONES */
-        #icasoft-chatbot {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --text-color: #333;
-            --light-gray: #f5f5f5;
-            --border-color: #ddd;
-            /* SIN pointer-events aquí */
-        }
-
-        /* Botón flotante */
-        .chatbot-launcher {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .chatbot-launcher:hover {
-            transform: scale(1.1);
-            background-color: var(--secondary-color);
-        }
-
-        /* Ventana del chat - INICIALMENTE OCULTA */
-        .chatbot-interface {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 500px;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            display: none;
-            flex-direction: column;
-            z-index: 999;
-            overflow: hidden;
-        }
-
-        /* Cuando está activo */
-        .chatbot-interface.chatbot-active {
-            display: flex;
-            animation: fadeInUp 0.3s ease;
-        }
-
-        /* Resto de estilos del chat (sin modificaciones) */
-        .chatbot-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-content h3 {
-            margin: 0;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .header-content p {
-            margin: 2px 0 0 0;
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .chatbot-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .message {
-            max-width: 80%;
-            margin-bottom: 12px;
-            padding: 10px 15px;
-            border-radius: 18px;
-            line-height: 1.4;
-            position: relative;
-        }
-
-        .bot-message {
-            background-color: var(--light-gray);
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-
-        .user-message {
-            background-color: var(--primary-color);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-
-        .message-time {
-            display: block;
-            font-size: 10px;
-            color: #777;
-            margin-top: 4px;
-            text-align: right;
-        }
-
-        .chatbot-input {
-            display: flex;
-            padding: 12px;
-            background-color: white;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .chatbot-input button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-left: 10px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* RESPONSIVE - SIN BLOQUEO DE SCROLL */
-        @media (max-width: 768px) {
-            .chatbot-interface {
-                width: 90%;
-                max-height: 60vh;
-                bottom: 80px;
-                right: 5%;
-            }
-
-            .chatbot-launcher {
-                bottom: 20px;
-                right: 20px;
-            }
-        }
-    </style>
+    <title>Chatbot Robot + WhatsApp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'src/css/chatbots/chatbot.css' %}" />
 </head>
 <body>
-    <!-- CHATBOT - SIN BLOQUEAR INTERACCIONES -->
-    <div id="icasoft-chatbot">
-        <!-- Botón flotante -->
-        <div id="chatbot-launcher" class="chatbot-launcher">
-            <i class="fas fa-comment-dots"></i>
+    <!-- Botón de WhatsApp (ARRIBA) -->
+    <div class="whatsapp-float" id="whatsappButton">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+    
+    <!-- Modal de WhatsApp -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <div class="modal-header">
+            <i class="fab fa-whatsapp"></i>
+            <h3>WhatsApp</h3>
         </div>
+        <div class="modal-body">
+            <p>¿Prefieres hablar directamente por WhatsApp?</p>
+        </div>
+        <a href="https://wa.me/521234567890" class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chatear ahora
+        </a>
+    </div>
 
-        <!-- Ventana del chat -->
-        <div id="chatbot-interface" class="chatbot-interface">
-            <div class="chatbot-header">
-                <div class="header-content">
-                    <h3>ICA SOFT</h3>
-                    <p>Asistente Virtual</p>
+    <!-- Chatbot Robot (AZUL Y LINDO - ABAJO) -->
+    <div class="robot-chatbot">
+        <div class="robot-launcher" id="robotLauncher">
+            <i class="fas fa-robot"></i>
+        </div>
+        
+        <div class="robot-interface" id="robotInterface">
+            <div class="robot-header">
+                <div class="robot-avatar">
+                    <i class="fas fa-robot"></i>
                 </div>
-                <button id="chatbot-close" class="chatbot-control-btn">
-                    <i class="fas fa-times"></i>
-                </button>
+                <div class="header-text">
+                    <h3>RoboAsistente</h3>
+                    <p>Estoy aquí para ayudarte</p>
+                </div>
+                <button class="close-robot" id="closeRobot">&times;</button>
             </div>
-
-            <div class="chatbot-body">
-                <div class="chat-messages">
-                    <div class="message bot-message">
-                        <p>¡Hola! ¿En qué puedo ayudarte hoy?</p>
-                        <span class="message-time">10:30 AM</span>
-                    </div>
+            
+            <div class="robot-body" id="robotBody">
+                <div class="robot-message">
+                    <p>¡Hola humano! 👋 Soy tu asistente robótico. ¿En qué puedo ayudarte hoy?</p>
                 </div>
             </div>
-
-            <div class="chatbot-input">
-                <input type="text" placeholder="Escribe tu mensaje..." id="user-message">
-                <button id="send-message"><i class="fas fa-paper-plane"></i></button>
+            
+            <div class="robot-input">
+                <input type="text" placeholder="Escribe tu mensaje..." id="robotInput">
+                <button id="sendRobotMessage"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
     </div>
-
-    <!-- JAVASCRIPT - GARANTIZANDO QUE NUNCA BLOQUEE -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Elementos del DOM
-            const launcher = document.getElementById('chatbot-launcher');
-            const interface = document.getElementById('chatbot-interface');
-            const closeBtn = document.getElementById('chatbot-close');
-            const messageInput = document.getElementById('user-message');
-            const sendBtn = document.getElementById('send-message');
-            
-            // Estado del chat
-            let isChatOpen = false;
-
-            // Función para mostrar/ocultar chat
-            function toggleChat() {
-                isChatOpen = !isChatOpen;
-                
-                if (isChatOpen) {
-                    interface.classList.add('chatbot-active');
-                    messageInput.focus();
-                } else {
-                    interface.classList.remove('chatbot-active');
-                }
-            }
-
-            // Event listeners
-            launcher.addEventListener('click', toggleChat);
-            closeBtn.addEventListener('click', toggleChat);
-
-            // Cerrar al hacer clic fuera (solo en móvil)
-            document.addEventListener('click', function(e) {
-                if (isChatOpen && 
-                    !interface.contains(e.target) && 
-                    e.target !== launcher && 
-                    window.innerWidth <= 768) {
-                    toggleChat();
-                }
-            });
-
-            // Función para enviar mensajes
-            function sendMessage() {
-                const message = messageInput.value.trim();
-                if (message) {
-                    const messagesContainer = document.querySelector('.chat-messages');
-                    const userMessage = document.createElement('div');
-                    userMessage.className = 'message user-message';
-                    userMessage.innerHTML = ` 
-                        <p>${message}</p>
-                        <span class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                    `;
-                    messagesContainer.appendChild(userMessage);
-                    
-                    messageInput.value = '';
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    
-                    // Simular respuesta del bot
-                    setTimeout(() => {
-                        const botResponse = document.createElement('div');
-                        botResponse.className = 'message bot-message';
-                        botResponse.innerHTML = ` 
-                            <p>Gracias por tu mensaje. ¿En qué más puedo ayudarte?</p>
-                            <span class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-                        `;
-                        messagesContainer.appendChild(botResponse);
-                        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                    }, 1000);
-                }
-            }
-
-            // Event listeners para enviar mensajes
-            sendBtn.addEventListener('click', sendMessage);
-            messageInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') sendMessage();
-            });
-
-            // Asegurar estado limpio al cargar
-            window.addEventListener('load', function() {
-                interface.classList.remove('chatbot-active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-    </script>
+  <script src="{% static 'src/js/chatbots/chatbot.js' %}"></script>
 </body>
 </html>

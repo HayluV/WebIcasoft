@@ -1,0 +1,210 @@
+ /* Estilo para el select */
+  #reg-doc-type {
+    background-color: rgb(41, 22, 183);
+    color: white; /* Texto blanco para el valor seleccionado */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.65rem auto;
+  }
+
+  /* Estilo para las opciones del select */
+  #reg-doc-type option {
+    color: black; /* Texto negro para las opciones */
+    background-color: white;
+  }
+
+  /* Estilo para el placeholder (primer option vacío) */
+  #reg-doc-type option[value=""] {
+    color: white; /* Texto blanco para el placeholder */
+  }
+
+  /* Estilo para el texto seleccionado */
+  #reg-doc-type option:checked {
+    color: white;
+    background-color: #1826bf;
+  }
+
+ 
+  #login-modal, #register-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #login-modal.active, #register-modal.active {
+    display: flex;
+  }
+
+  .login-container, .register-container {
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    position: relative;
+    color: white;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .close-login-modal, .close-register-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: white;
+  }
+
+  .login-form, .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .form-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #ffff;
+    border-radius: 5px;
+  }
+
+  .login-btn, .register-btn {
+    background-color: #1826bf;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .white-shadow {
+    text-shadow: 0 0 16px rgb(255, 255, 255);
+  }
+
+  .img-form {
+    width: 90px;
+    height: 90px;
+    border-radius: 60%;
+    transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0 0 40px 25px rgb(72, 185, 255);
+    object-fit: cover;
+  }
+
+  .login-footer, .register-footer {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .login-footer a, .register-footer a {
+    color: #0e0537;
+    text-decoration: none;
+  }
+
+  /* Estilos específicos para el modal de login */
+  .login-container {
+    background-image: url('/static/blogs/Blog1.jpg');
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  /* Estilos específicos para el modal de registro */
+  .register-container {
+    padding: 25px;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .register-form {
+    gap: 12px;
+  }
+
+  .register-btn {
+    margin-top: 5px;
+  }
+
+  .register-footer a {
+    color: white;
+  }
+
+  .terms-checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .terms-checkbox input {
+    margin-right: 8px;
+  }
+
+  @media (max-height: 700px) {
+    .register-container {
+      padding: 15px;
+    }
+    .img-form {
+      width: 70px;
+      height: 70px;
+    }
+    .form-group input {
+      padding: 8px;
+    }
+  }
+
+
+ /* Estilos para el scroll */
+  .form-fields-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  .form-fields-container::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+  }
+  .form-fields-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+  }
+  
+  /* Ajustes para el modal */
+  .register-container {
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .img-form {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 10px rgba(72, 185, 255, 0.5);
+  }
+  
+  /* Asegurar que el contenido no se desborde en móviles */
+  @media (max-height: 700px) {
+    .form-fields-container {
+      max-height: 40vh;
+    }
+  }

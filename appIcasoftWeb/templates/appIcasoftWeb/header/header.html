@@ -11,99 +11,9 @@
   <link rel="stylesheet" href="{% static 'src/header.css' %}" />
   <link rel="stylesheet" href="{% static 'src/css/menu-productos.css' %}" />
   <link rel="stylesheet" href="{% static 'src/css/mobile-menu.css' %}" />
+  <link rel="stylesheet" href="{% static 'src/css/modales/login-registro.css' %}" />
   <link rel="stylesheet" href="{% static 'src/icofont/icofont.min.css' %}">
-  <!-- Font Awesome para el ícono de usuario -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* Estilos para el modal de login */
-    #login-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #login-modal.active {
-      display: flex;
-    }
-
-.login-container {
-      background-image: url('/static/blogs/Blog1.jpg'); /* Ruta a tu imagen */
-      background-size: cover; /* Cubre todo el contenedor */
-      background-position: center; /* Centra la imagen */
-      padding: 30px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 400px;
-      position: relative;
-      color: white; /* Cambia el color del texto si es necesario para mejor contraste */
-    }
-
-    .close-login-modal {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 24px;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .form-group input {
-      padding: 10px;
-      border: 1px solid #ddd;
-      background-color: #ffff;
-      border-radius: 5px;
-    }
-
-    .login-btn {
-      background-color: #1826bf;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .login-footer {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    .login-footer a {
-      color: #0e0537;
-      text-decoration: none;
-    }
-
-    .iconLogin {
-      font-size: 24px;
-      transition: transform 0.3s;
-    }
-
-    .iconLogin:hover {
-      transform: scale(1.1);
-    }
-  </style>
 </head>
 
 <body class="m-0 p-0">
@@ -135,13 +45,21 @@
         </div>
         <a href="/#cursos">CURSOS</a>
         <a href="/#blog">BLOG</a>
-        <a href="/contacto">CONTACTAR</a>
-        <!-- Botón que abre el modal -->
-        <button id="openModalBtnHeader" class="focus:outline-none" aria-label="Iniciar sesión">
-          <i class="fa-solid fa-circle-user iconLogin"></i>
-        </button>
-      </nav>
+        <a href="/Contacto">CONTACTAR</a>
 
+        <!-- Ícono de usuario con menú desplegable -->
+        <div class="user-menu-container relative">
+          <!-- Ícono de usuario -->
+          <button id="openModalBtnHeader" class="focus:outline-none" aria-label="Iniciar sesión">
+            <i class="fa-solid fa-circle-user iconLogin"></i>
+          </button>
+
+          <div id="user-menu">
+            <a href="/mi-cuenta">Mi Cuenta</a>
+            <a href="/mis-pedidos">Mis Pedidos</a>
+          </div>
+        </div>
+      </nav>
       <!-- Botón menú hamburguesa para móvil/tablet -->
       <div id="mobile-menu-button" class="lg:hidden text-white cursor-pointer no-wrap-text flex items-center px-4">
         ☰ MENÚ
@@ -177,7 +95,7 @@
       <a href="/#nosotros" class="block p-2 text-black hover:bg-gray-100 rounded text-center">NOSOTROS</a>
       <a href="/#cursos" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CURSOS</a>
       <a href="/#blog" class="block p-2 text-black hover:bg-gray-100 rounded text-center">BLOG</a>
-      <a href="/contacto" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CONTACTAR</a>
+      <a href="/Contacto" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CONTACTAR</a>
 
       <div class="shopping-cart-container p-2 hover:bg-gray-100 rounded text-center">
         <i class="icofont-shopping-cart" style="font-size: 30px;"></i>
@@ -195,16 +113,16 @@
         <div class="categoria-producto">
           <h3 class="categoria-titulo">Laptops</h3>
           <div class="producto-item">
-            <a href="/laptops/gaming" class="producto-link">Laptops Gaming</a>
+            <a href="/Productos/laptops/gaming/" class="producto-link">Laptops Gaming</a>
           </div>
           <div class="producto-item">
-            <a href="/laptops/empresariales" class="producto-link">Laptops Empresariales</a>
+            <a href="/Productos/laptops/empresariales/" class="producto-link">Laptops Empresariales</a>
           </div>
           <div class="producto-item">
             <a href="/laptops/ultrabook" class="producto-link">Ultrabooks</a>
           </div>
           <div class="producto-item">
-            <a href="/laptops/todas" class="producto-link">Ver todas</a>
+            <a href="/Productos/laptops/" class="producto-link">Ver todas</a>
           </div>
         </div>
 
@@ -261,85 +179,136 @@
       </div>
     </div>
   </div>
-<!-- Modal de Login -->
-<div id="login-modal" class="fixed inset-0 z-50 hidden">
-  <div class="login-modal-background absolute inset-0 bg-[#0e0537] opacity-90"></div>
-  <div class="login-container relative mx-auto my-16 max-w-md overflow-hidden" 
-       style="background-image: url('{% static 'img/fondo.modal.jpg' %}'); background-size: cover; background-position: center; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-    <div class="relative z-10 p-8 text-white">
-      <button class="close-login-modal absolute top-4 right-4 text-2xl font-bold hover:text-gray-300">×</button>
-      
-      <!-- Imagen agregada aquí -->
-      <div class="flex justify-center mb-4">
-        <img src="{% static 'img/logo-Icasoft/logoNaranja.png' %}" alt="Logo" class="" style="width: 100px; height: 100px">
-      </div>
-      
-      <h3 class="text-2xl text-white font-Big-Shoulders mb-6 text-center">Iniciar Sesión</h3>
-      <form class="login-form">
-        <div class="form-group mb-4">
-          <label for="email" class="block mb-2 text-white font-medium">Correo Electrónico</label>
-          <input type="email" id="email" required class="w-full px-4 py-2 rounded text-black">
+  <!-- Modal de Login -->
+  <div id="login-modal" class="fixed inset-0 z-50 hidden">
+    <div class="login-modal-background absolute inset-0  opacity-90"></div>
+    <div class="login-container relative mx-auto my-16 max-w-md overflow-hidden"
+      style="background-image: url('{% static 'img/fondo-test-negro.jpeg' %}'); background-size: cover; background-position: center; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <div class="absolute inset-0  bg-opacity-50"></div>
+      <div class="relative z-10 p-8 text-white">
+        <button class="close-login-modal absolute top-4 right-4 text-2xl font-bold hover:text-gray-300">×</button>
+        <div class="flex justify-center mb-4">
+          <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-form">
         </div>
-        <div class="form-group mb-6">
-          <label for="password" class="block mb-2 font-medium font-lex">Contraseña</label>
-          <input type="password" id="password" required class="w-full px-4 py-2 rounded text-black">
+        <h3 class="text-2xl text-white font-Big-Shoulders mb-6 text-center white-shadow">Iniciar Sesión</h3>
+        <form class="login-form">
+          <div class="form-group mb-4">
+            <label for="email" class="block mb-2 text-white font-medium white-shadow">Correo Electrónico:</label>
+            <input type="email" id="email" required class="w-full px-4 py-2 rounded text-black">
+          </div>
+          <div class="form-group mb-6">
+            <label for="password" class="block mb-2 font-medium font-lex">Contraseña:</label>
+            <input type="password" id="password" required class="w-full px-4 py-2 rounded text-black">
+          </div>
+          <button type="submit"
+            class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
+            Ingresar
+          </button>
+        </form>
+        <div class="login-footer mt-6 text-center">
+          <p class="text-blue-300 mb-2">¿No tienes cuenta? <a href="#" id="open-register-from-login"
+              class="text-white hover:underline">Regístrate</a></p>
+          <p><a href="/recuperar-contrasena" class="text-white hover:underline">¿Olvidaste tu contraseña?</a></p>
         </div>
-        <button type="submit" class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
-          Ingresar
-        </button>
-      </form>
-      <div class="login-footer mt-6 text-center">
-        <p class="text-blue-300 mb-2">¿No tienes cuenta? <a href="/registro" class="text-white hover:underline">Regístrate</a></p>
-        <p><a href="/recuperar-contrasena" class="text-white hover:underline">¿Olvidaste tu contraseña?</a></p>
       </div>
     </div>
   </div>
-</div>
 
-  <script>
-    // Script para manejar el modal de login
-    document.addEventListener('DOMContentLoaded', function () {
-      const loginModal = document.getElementById('login-modal');
-      const openModalBtn = document.getElementById('openModalBtnHeader');
-      const closeModalBtn = document.querySelector('.close-login-modal');
 
-      // Abrir modal al hacer clic en el ícono de usuario
-      openModalBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        loginModal.classList.add('active');
-      });
+  <!-- Modal de Registro - Versión mejorada -->
+  <!-- Modal de Registro (versión final) -->
+  <div id="register-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+    <div class="register-modal-background absolute inset-0 opacity-90"></div>
+    <div class="register-container relative max-w-md w-full mx-4"
+      style="background-image: url('{% static 'img/fondo-test-negro.jpeg' %}')">
+      <div class="absolute inset-0  rounded-lg"></div>
+      <div class="relative z-10 p-6">
+        <button class="close-register-modal absolute top-4 right-4 text-2xl text-white">×</button>
 
-      // Cerrar modal al hacer clic en la X
-      closeModalBtn.addEventListener('click', function () {
-        loginModal.classList.remove('active');
-      });
+        <!-- Parte superior fija (logo y título) -->
+        <div class="flex flex-col items-center mb-4">
+          <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-form mb-3">
+          <h3 class="text-2xl text-white font-Big-Shoulders text-center white-shadow">Crear Cuenta</h3>
+        </div>
 
-      // Cerrar modal al hacer clic fuera del contenido
-      loginModal.addEventListener('click', function (e) {
-        if (e.target === loginModal || e.target.classList.contains('login-modal-background')) {
-          loginModal.classList.remove('active');
-        }
-      });
+        <!-- Contenedor scrolleable para los campos del formulario -->
+        <div class="form-fields-container"
+          style="max-height: 50vh; overflow-y: auto; margin-bottom: 15px; padding-right: 8px;">
+          <form class="register-form space-y-4">
+            <div class="form-group">
+              <label for="reg-name" class="block mb-1 text-white font-medium white-shadow">Nombres:</label>
+              <input type="text" id="reg-name" required class="w-full p-2 rounded text-black">
+            </div>
 
-      // También agregar funcionalidad para el botón de login en móvil
-      const openModalBtnMobile = document.getElementById('openModalBtnMobile');
-      if (openModalBtnMobile) {
-        openModalBtnMobile.addEventListener('click', function (e) {
-          e.preventDefault();
-          loginModal.classList.add('active');
-          // Cerrar también el menú móvil si está abierto
-          document.getElementById('mobile-menu').classList.add('hidden');
-        });
-      }
-    });
+            <div class="form-group">
+              <label for="reg-lastname" class="block mb-1 text-white font-medium white-shadow">Apellidos:</label>
+              <input type="text" id="reg-lastname" required class="w-full p-2 rounded text-black">
+            </div>
 
-    // Resto de tu código JavaScript para otros menús
-    // ...
-  </script>
+            <div class="form-group">
+              <label for="reg-email" class="block mb-1 text-white font-medium white-shadow">Correo Electrónico:</label>
+              <input type="email" id="reg-email" required class="w-full p-2 rounded text-black">
+            </div>
+
+            <div class="form-group">
+              <label for="reg-phone" class="block mb-1 text-white font-medium white-shadow">Teléfono/Celular:</label>
+              <input type="tel" id="reg-phone" required class="w-full p-2 rounded text-black">
+            </div>
+
+            <div class="form-group">
+              <label for="reg-doc-type" class="block mb-1 text-white font-medium white-shadow">Tipo de
+                Documento:</label>
+              <select id="reg-doc-type" required class="w-full p-2 rounded text-white">
+                <option value="">Seleccionar</option>
+                <option value="dni">DNI</option>
+                <option value="ruc">RUC</option>
+                <option value="ce">Carné de Extranjería</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-doc-number" class="block mb-1 text-white font-medium white-shadow">Número de
+                Documento:</label>
+              <input type="text" id="reg-doc-number" required class="w-full p-2 rounded text-black">
+            </div>
+
+            <div class="form-group">
+              <label for="reg-password" class="block mb-1 text-white font-medium white-shadow">Contraseña:</label>
+              <input type="password" id="reg-password" required class="w-full p-2 rounded text-black">
+            </div>
+
+            <div class="form-group">
+              <label for="reg-confirm-password" class="block mb-1 text-white font-medium white-shadow">Confirmar
+                Contraseña:</label>
+              <input type="password" id="reg-confirm-password" required class="w-full p-2 rounded text-black">
+            </div>
+          </form>
+        </div>
+
+        <!-- Parte inferior fija (términos y botón) -->
+        <div class="terms-and-submit">
+          <div class="terms-checkbox flex items-center mb-4">
+            <input type="checkbox" id="reg-terms" required class="mr-2">
+            <label for="reg-terms" class="text-white text-sm">Acepto los <a href="/terminos"
+                class="text-blue-300 hover:underline">Términos y Condiciones</a></label>
+          </div>
+
+          <button type="submit"
+            class="register-btn w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition duration-200">
+            Registrarse
+          </button>
+
+          <div class="register-footer mt-4 text-center">
+            <p class="text-blue-300">¿Ya tienes cuenta? <a href="#" id="open-login-from-register"
+                class="text-white hover:underline">Inicia Sesión</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="{% static 'src/js/header.js' %}"></script>
-
+  <script src="{% static 'src/js/modales/login-register.js' %}"></script>
 </body>
 
 </html>

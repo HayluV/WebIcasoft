@@ -1,0 +1,69 @@
+{% extends "appIcasoftWeb/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'src/css/productos/todos.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+  <!-- Migas de pan -->
+  <nav class="mb-6" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2 font-medium uppercase">
+      <li>
+        <a href="{% url 'user_producto' %}" class="text-gray-600 hover:text-primary transition">Productos</a>
+      </li>
+      <li class="text-gray-400">/</li>
+      <li>
+        <a href="{% url 'user_producto_categoria' categoria %}" class="text-gray-600 hover:text-primary transition">{{ categoria|title }}</a>
+      </li>
+      <li class="text-gray-400">/</li>
+      <li class="text-primary">{{ subcategoria|title }}</li>
+    </ol>
+  </nav>
+
+
+<div class="mb-8 flex flex-col items-center">
+  <!-- Título centrado -->
+  <div class="text-center w-full">
+    <h2 class="titulo-principal-productos fondo-animated-text">
+      {{ categoria|title }} <span>{{ subcategoria|title }}</span>
+    </h2>
+  </div>
+
+  <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
+  <div class="self-start mt-4">  <!-- mt-4 añade margen superior -->
+    <a href="{% url 'user_producto_categoria' categoria %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
+      ← Volver a {{ categoria|title }}
+    </a>
+  </div>
+</div>
+
+  <!-- Grid de productos -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for producto in productos %}
+    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <!-- Badge nuevo -->
+      <div class="absolute top-2 right-2">
+        <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">NUEVO</span>
+      </div>
+      
+      <!-- Imagen del producto -->
+      <div class="p-4 flex justify-center">
+        <img src="{{ producto.img }}" alt="{{ producto.text }}" class="h-48 object-contain">
+      </div>
+      
+      <!-- Detalles del producto -->
+      <div class="p-4 border-t border-gray-100">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ producto.text }}</h3>
+        <p class="text-green-600 font-bold text-xl mb-4">S/ {{ producto.precio|default:"699" }}</p>
+        <button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition">
+          Añadir al carrito
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

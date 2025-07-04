@@ -1,87 +1,128 @@
-/* Añade esto a tu archivo css/modal-login.css */
-#login-modal {
-  position: fixed;
-  top: 70px;
-  right: 20px;
-  width: 350px;
-  z-index: 1000;
+/* Estilos para el modal de login */
+.login-modal {
   display: none;
-  transition: all 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-modal.active {
+  display: flex;
 }
 
 .login-modal-background {
-  cursor: pointer;
   position: absolute;
   inset: 0;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .login-container {
-  background-color: white;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  background-image: url('/static/img/fondo-test-negro.jpeg');
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login-container > * {
   position: relative;
   z-index: 1;
 }
 
-.login-container h3 {
-  font-family: 'Lexend Deca', sans-serif;
-  font-size: 1.5rem;
-  color: var(--icasoftBlue);
-  margin-bottom: 1.5rem;
-  text-align: center;
+.close-login-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
 
-.login-form .form-group {
-  margin-bottom: 1.2rem;
+.close-login-modal:hover {
+  color: #ccc;
 }
 
-.login-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #555;
-  font-family: 'Lexend Deca', sans-serif;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.login-form input {
-  width: 100%;
-  padding: 0.8rem;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-group label {
+  font-weight: 500;
+  text-shadow: 0 0 16px rgb(255, 255, 255);
+}
+
+.form-group input {
+  padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: border 0.3s ease;
-}
-
-.login-form input:focus {
-  border-color: var(--icasoftBlue);
-  outline: none;
+  background-color: #ffff;
+  border-radius: 5px;
+  color: #333;
 }
 
 .login-btn {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: var(--icasoftBlue);
+  background-color: #1826bf;
   color: white;
+  padding: 12px;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  transition: background-color 0.2s;
 }
 
 .login-btn:hover {
-  background-color: #1a8cff;
+  background-color: #1a2dd1;
+}
+
+.white-shadow {
+  text-shadow: 0 0 16px rgb(255, 255, 255);
+}
+
+.img-form {
+  width: 90px;
+  height: 90px;
+  border-radius: 60%;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 0 40px 25px rgb(72, 185, 255);
+  object-fit: cover;
 }
 
 .login-footer {
-  margin-top: 1.5rem;
+  margin-top: 20px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 14px;
 }
 
 .login-footer a {
-  color: var(--icasoftBlue);
+  color: #a0c4ff;
   text-decoration: none;
 }
 
@@ -89,34 +130,20 @@
   text-decoration: underline;
 }
 
-/* Animación similar al menú de productos */
-@keyframes slideDownFadeInLogin {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.login-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 16px rgb(255, 255, 255);
+  font-family: 'Big Shoulders', sans-serif;
 }
 
-.icasoft-login-show .login-container {
-  animation: slideDownFadeInLogin 0.3s ease forwards;
+.iconLogin {
+  font-size: 24px;
+  transition: transform 0.3s;
+  color: white;
 }
 
-/* Estilo para el botón de cerrar */
-.close-login-modal {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #777;
-}
-
-.close-login-modal:hover {
-  color: #333;
+.iconLogin:hover {
+  transform: scale(1.1);
 }

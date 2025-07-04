@@ -197,6 +197,34 @@ button.btn:hover {
   border-color: #3944b3;
 }
 
+@media (max-width: 1033px) {
+   .producto-card {
+    flex: 0 0 240px !important;
+    margin: 0px 20px 0px 20px;
+    height: 400px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 1023px) {
+   .producto-card {
+    flex: 0 0 270px !important;
+    margin: 0px 20px 0px 20px;
+    height: 400px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 1000px) {
+   .producto-card {
+    flex: 0 0 240px !important;
+    margin: 0px 30px 0px 30px !important;
+    height: 400px;
+    padding: 15px;
+  }
+}
+
+
 /* Diseño para pantallas pequeñas */
 @media (max-width: 768px) {
   .slider-viewport {
@@ -204,8 +232,8 @@ button.btn:hover {
   }
 
   .producto-card {
-    margin: 0px 4px 0px 0px;
-    height: 400px;
+    margin: 0px 4px 0px 0px !important;
+    height: 400px !important;
     max-width: 50%;
   }
 
@@ -224,8 +252,8 @@ button.btn:hover {
   }
 
   .producto-card {
-    flex: 0 0 100%;
-    margin: 0px 1px 0px 0px;
+    flex: 0 0 100% !important;
+    margin: 0px 1px 0px 0px !important;
     height: 400px;
     max-width: 100%;
   }

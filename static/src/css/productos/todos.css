@@ -1,0 +1,8 @@
+h2.titulo-principal-productos {
+  font-family: 'Big Shoulders';
+  font-size: 3.2rem; 
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 3px;
+}

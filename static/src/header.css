@@ -1,4 +1,4 @@
-/* Contenedor visible */
+
 .visible-container {
   display: block;
 }
@@ -102,7 +102,7 @@ a:hover {
   color: #3399ff;
   box-shadow: 0px 0px 9px 3px #66e3ff;
   border-radius: 50%;
-  background: white;
+  background: rgb(255, 255, 255);
   cursor: pointer;
 }
 
@@ -235,5 +235,36 @@ a:hover {
   }
 }
 
+ /* Estilo para el contenedor del ícono de usuario */
+.user-menu-container {
+  position: relative;
+}
 
+/* Menú desplegable */
+#user-menu {
+  display: none; /* El menú está oculto por defecto */
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
 
+/* Mostrar el menú al pasar el cursor sobre el contenedor */
+.user-menu-container:hover #user-menu {
+  display: block; /* Mostrar el menú cuando se pasa el cursor sobre el contenedor */
+}
+
+/* Estilo para los elementos dentro del menú */
+#user-menu a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 16px;
+  display: block;
+}
+
+#user-menu a:hover {
+  background-color: #f5f5f5;
+}

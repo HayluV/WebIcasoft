@@ -1,46 +1,293 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Modal ejemplo</title>
-  <link rel="stylesheet" href="{% static 'src/css/modal-login.css' %}" />
-  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro Completo</title>
+  <style>
+    /* Estilos generales */
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    
+    .modal-container {
+      background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      position: relative;
+      color: white;
+      animation: modalFadeIn 0.3s ease-out;
+      overflow: hidden;
+    }
+    
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .modal-header {
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.2);
+      text-align: center;
+      position: relative;
+      flex-shrink: 0;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .modal-close:hover {
+      transform: rotate(90deg);
+    }
+    
+    .modal-logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 15px rgba(100, 181, 246, 0.7);
+    }
+    
+    .modal-title {
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    
+    /* Contenido con scroll */
+    .modal-content {
+      padding: 20px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+    
+    /* Formulario */
+    .register-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+    
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-group label {
+      font-size: 0.85rem;
+      margin-bottom: 5px;
+      color: #bbdefb;
+    }
+    
+    .form-group input,
+    .form-group select {
+      padding: 10px 12px;
+      border: 1px solid #3949ab;
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      width: 100%;
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #64b5f6;
+      box-shadow: 0 0 0 2px rgba(100, 181, 246, 0.3);
+    }
+    
+    /* Grupo de dos columnas */
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    /* Checkbox */
+    .terms-check {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      font-size: 0.8rem;
+      grid-column: 1 / -1;
+    }
+    
+    .terms-check input {
+      margin-right: 8px;
+    }
+    
+    .terms-check a {
+      color: #64b5f6;
+      text-decoration: none;
+    }
+    
+    /* Botón de registro */
+    .register-btn {
+      background: linear-gradient(to right, #4a6bff, #6a11cb);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      grid-column: 1 / -1;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Pie del modal */
+    .modal-footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+    }
+    
+    .modal-footer a {
+      color: #64b5f6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    /* Responsive */
+    @media (max-width: 480px) {
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-container {
+        max-height: 95vh;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="miModalRegistro" class="fixed inset-0 bg-black-transparent bg-opacity-10 backdrop-blur-md flex justify-center items-center z-50 hidden">
-  <div class="modal-card w-11/12 max-w-md sm:w-1/3"
-       style="background-image: url('{% static 'img/fondo.modal.jpg' %}'); background-size: cover; background-position: center; border-radius: 0.5rem; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); color: white;">
-       
-    <div class="flex justify-center mb-4">
-      <img src="{% static 'img/logo.png' %}" alt="ICAsOFT" class="h-20" />
+<!-- Modal de Registro Completo -->
+<div class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <button class="modal-close">&times;</button>
+      <img src="https://via.placeholder.com/60" alt="Logo" class="modal-logo">
+      <h2 class="modal-title">Registro Completo</h2>
     </div>
-
-    <div class="modal-header flex justify-between items-center mb-4">
-      <h5 class="font-Big-Shoulders text-white text-xl font-semibold flex-grow text-center uppercase">Registrarse</h5>
-      <button type="button" id="closeModalRegistroBtn" class="text-gray-300">
-        <span class="text-2xl">&times;</span>
-      </button>
-    </div>
-
-    <div class="modal-body mb-4">
-      <form action="/register" method="POST">
-        <input type="text" placeholder="Correo electrónico" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
-        <input type="text" placeholder="Nombre" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
-        <input type="text" placeholder="Apellidos" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
-        <input type="password" placeholder="Contraseña" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
-        <input type="password" placeholder="Confirmar contraseña" class="p-2 mb-4 w-full rounded-lg border-2 border-gray-300" />
+    
+    <div class="modal-content">
+      <form class="register-form">
+        <div class="two-columns">
+          <div class="form-group">
+            <label for="reg-name">Nombres</label>
+            <input type="text" id="reg-name" required placeholder="Ej: Juan Carlos">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-lastname">Apellidos</label>
+            <input type="text" id="reg-lastname" required placeholder="Ej: Pérez Gómez">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="reg-email">Correo Electrónico</label>
+          <input type="email" id="reg-email" required placeholder="tucorreo@ejemplo.com">
+        </div>
+        
+        <div class="two-columns">
+          <div class="form-group">
+            <label for="reg-phone">Celular</label>
+            <input type="tel" id="reg-phone" required placeholder="Ej: 987654321">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-doc-type">Tipo de Documento</label>
+            <select id="reg-doc-type" required>
+              <option value="" disabled selected>Seleccione</option>
+              <option value="dni">DNI</option>
+              <option value="ruc">RUC</option>
+              <option value="ce">Carné Extranjería</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="reg-doc-number">Número de Documento</label>
+          <input type="text" id="reg-doc-number" required placeholder="Ingrese su número">
+        </div>
+        
+        <div class="two-columns">
+          <div class="form-group">
+            <label for="reg-password">Contraseña</label>
+            <input type="password" id="reg-password" required placeholder="Mínimo 8 caracteres">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-confirm-password">Confirmar Contraseña</label>
+            <input type="password" id="reg-confirm-password" required placeholder="Repita su contraseña">
+          </div>
+        </div>
+        
+        <div class="terms-check">
+          <input type="checkbox" id="reg-terms" required>
+          <label for="reg-terms">Acepto los <a href="#">Términos y Condiciones</a> y <a href="#">Política de Privacidad</a></label>
+        </div>
+        
+        <button type="submit" class="register-btn">Registrarse</button>
       </form>
     </div>
-
-    <div class="modal-footer flex justify-between">
-      <button id="closeModalRegistroBtn2" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-md">Cancelar</button>
-      <button class="bg-icasoftBlue text-white px-4 py-2 rounded-md">Registrar</button>
+    
+    <div class="modal-footer">
+      ¿Ya tienes cuenta? <a href="#" id="open-login">Inicia Sesión</a>
     </div>
   </div>
 </div>
+
+<script>
+  // Código para cerrar el modal
+  document.querySelector('.modal-close').addEventListener('click', function() {
+    document.querySelector('.modal-overlay').style.display = 'none';
+  });
+  
+  // Alternar entre login/registro (ejemplo)
+  document.getElementById('open-login').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert("Aquí se abriría el modal de login");
+  });
+</script>
 
 </body>
 </html>

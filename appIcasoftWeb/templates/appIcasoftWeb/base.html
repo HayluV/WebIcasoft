@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICASOFT - {% block title %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'src/css/productos/todos.css' %}">
+
+
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        {% include 'appIcasoftWeb/header/header.html' %}
+    </header>
+
+
+    <main class="min-h-[calc(100vh-10rem)]">
+        {% block content %}{% endblock %}
+    </main>
+
+
+    <!-- Alpine.js para interactividad -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="/static/js/main.js"></script>
+
+    {% block scripts %}{% endblock %}
+
+    <footer>
+        {% include 'appIcasoftWeb/footer/footer.html' %}
+        {% include 'appIcasoftWeb/chatbot/chatbot.html' %}
+
+    </footer>
+</body>
+
+</html>

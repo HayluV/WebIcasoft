@@ -135,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Añade esto a tu archivo header.js o donde tengas los eventos del header
 document.addEventListener('DOMContentLoaded', function() {
   const openModalBtns = document.querySelectorAll('#openModalBtnHeader, #openModalBtnMobile');
   const loginModal = document.getElementById('login-modal');
