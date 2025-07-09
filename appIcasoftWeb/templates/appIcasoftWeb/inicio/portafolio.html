@@ -1,13 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portafolio - ICASOFT</title>
-  <link rel="stylesheet" href="{% static 'src/css/inicio/portafolio.css' %}" />
-  <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
-  
+    <link rel="stylesheet" href="{% static 'src/css/inicio/portafolio.css' %}" />
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
+
     <style>
         /* ESTILOS EXCLUSIVOS DEL MODAL */
         .portfolio-modal {
@@ -23,11 +24,11 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .portfolio-modal.show {
             opacity: 1;
         }
-        
+
         .portfolio-modal-content {
             position: relative;
             margin: 2% auto;
@@ -37,7 +38,7 @@
             overflow: hidden;
             animation: modalopen 0.4s;
         }
-        
+
         .portfolio-main-image {
             width: 100%;
             max-height: 380px;
@@ -47,26 +48,26 @@
             border-bottom: 1px solid #ddd;
             transition: opacity 0.3s;
         }
-        
+
         .portfolio-modal-body {
             padding: 20px;
             background: #e0f2fe;
         }
-        
+
         .portfolio-modal-title {
             font-size: 1.8rem;
             color: #1f21b3;
             margin-bottom: 15px;
             text-align: center;
         }
-        
+
         .portfolio-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
-        
+
         .portfolio-gallery img {
             width: 100%;
             height: 120px;
@@ -75,11 +76,11 @@
             border-radius: 5px;
             transition: transform 0.3s;
         }
-        
+
         .portfolio-gallery img:hover {
             transform: scale(1.05);
         }
-        
+
         .portfolio-close {
             position: absolute;
             top: 15px;
@@ -89,18 +90,18 @@
             font-weight: bold;
             cursor: pointer;
             z-index: 2;
-            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
-        
+
         .portfolio-close:hover {
             color: #ccc;
         }
-        
+
         .portfolio-modal-actions {
             text-align: center;
             margin-top: 20px;
         }
-        
+
         .portfolio-btn {
             padding: 10px 20px;
             background-color: #2980b9;
@@ -110,16 +111,17 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        
+
         .portfolio-btn:hover {
             background-color: #1a5276;
         }
-        
+
         @keyframes modalopen {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -131,152 +133,156 @@
                 width: 95%;
                 margin: 10px auto;
             }
-            
+
             .portfolio-main-image {
                 max-height: 300px;
             }
-            
+
             .portfolio-gallery {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-
-        
     </style>
 </head>
+
 <body class="text-[0.9375rem] font-Lexen-Deca portafolio-flex justify-center text-transparent-white">
 
-<!-- Sección de Portafolio -->
-<section class="w-full mt-0 overflow-hidden relative">
-      <div class="bg-icasoftBlue p-[10px] w-full">
-        <h2 class="titulo-principal-servicios cursos-animated-text">Portafolio</h2>
-      </div>
-
-    <div class="portafolio-flex portafolio-flex-col lg:portafolio-flex-row w-full mt-3 mb-6 justify-center gap-6">
-        <div class="portafolio-flex justify-between items-center w-full">
-          <div
-            class="arrow-prev cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] portafolio-flex items-center justify-center ml-[20px]">&#10094;</div>
-          <div class="slider-viewport overflow-hidden mx-auto">
-            <div id="portafolio-slider" class="slider-container portafolio-flex transition-transform duration-300">
-        {% for foto in fotos %}
-        <div class="portafolio-card bg-sky-100 p-6 lg:p-[48px] bg-opacity-90 mb-6 lg:mb-0">
-            <picture>
-                <img src="{{ foto.image_url }}" alt="{{ foto.title }}">
-            </picture>
-                <h2 class="portafolio-title-clamp font-Big-Shoulders uppercase text-blue-950 mb-6" style="font-size: 20px;">
-                  <span class="scrolling-title">{{ foto.title }}</span>
-                </h2>
-
-          <div class="button-container">
-    <button onclick="abrirPortfolioModal(
-        '{{ foto.title|escapejs }}', 
-        '{{ foto.image_url|escapejs }}', 
-        JSON.parse('{{ foto.additional_images|escapejs }}')
-    )" class="btn bg-icasoftBlue">Ver Proyecto</button>
-</div>
+    <!-- Sección de Portafolio -->
+    <section class="w-full mt-0 overflow-hidden relative">
+        <div class="bg-icasoftBlue p-[10px] w-full">
+            <h2 class="titulo-principal-servicios cursos-animated-text">Portafolio</h2>
         </div>
-        {% endfor %}
+
+        <div class="portafolio-flex portafolio-flex-col lg:portafolio-flex-row w-full mt-3 mb-6 justify-center gap-6">
+            <div class="portafolio-flex justify-between items-center w-full">
+                <div
+                    class="arrow-prev cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] portafolio-flex items-center justify-center ml-[20px]">
+                    &#10094;</div>
+                <div class="slider-viewport overflow-hidden mx-auto">
+                    <div id="portafolio-slider"
+                        class="slider-container portafolio-flex transition-transform duration-300">
+                        {% for proyecto in proyectos %}
+                        <div class="portafolio-card bg-sky-100 p-6 lg:p-[48px] bg-opacity-90 mb-6 lg:mb-0">
+                            <picture>
+                                <img src="{{proyecto.imagenes.0}}" alt="{{ proyecto.title }}">
+                            </picture>
+                            <h2 class="portafolio-title-clamp font-Big-Shoulders uppercase text-blue-950 mb-6"
+                                style="font-size: 20px;">
+                                <span class="scrolling-title">{{ proyecto.title }}</span>
+                            </h2>
+
+                            <div class="button-container">
+                                <button onclick="abrirPortfolioModal(
+                                    '{{ proyecto.title|escapejs }}', 
+                                    '{{ proyecto.imagenes.0|escapejs }}', 
+                                    JSON.parse('{{ proyecto.imagenes_json|escapejs }}')
+                                )" class="btn bg-icasoftBlue">Ver Proyecto</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div
+                    class="arrow-next cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] portafolio-flex items-center justify-center mr-[20px]">
+                    &#10095;</div>
             </div>
-            
-    </div>
-     <div
-            class="arrow-next cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] portafolio-flex items-center justify-center mr-[20px]">&#10095;</div>
         </div>
-      </div>
     </section>
-  </div>
+    </div>
 
-<!-- Modal del Portafolio -->
-<div id="portfolioModal" class="portfolio-modal">
-    <div class="portfolio-modal-content" style="border-radius: 30px;">
-        <span class="portfolio-close" onclick="cerrarPortfolioModal()">&times;</span>
-        <img id="portfolioMainImage" src="" alt="" class="portfolio-main-image">
-        <div class="portfolio-modal-body">
-            <h2 id="portfolioModalTitle" class="portfolio-modal-title font-Big-Shoulders fondo-animated-text"></h2>
-            
-            <div class="portfolio-gallery" id="portfolioGallery">
-                <!-- Las imágenes adicionales se cargarán aquí -->
-            </div>
-            
-            <div class="portfolio-modal-actions">
-                <button onclick="cerrarPortfolioModal()" class="portfolio-btn">Cerrar</button>
+    <!-- Modal del Portafolio -->
+    <div id="portfolioModal" class="portfolio-modal">
+        <div class="portfolio-modal-content" style="border-radius: 30px;">
+            <span class="portfolio-close" onclick="cerrarPortfolioModal()">&times;</span>
+            <img id="portfolioMainImage" src="" alt="" class="portfolio-main-image">
+            <div class="portfolio-modal-body">
+                <h2 id="portfolioModalTitle" class="portfolio-modal-title font-Big-Shoulders fondo-animated-text"></h2>
+
+                <div class="portfolio-gallery" id="portfolioGallery">
+                    <!-- Las imágenes adicionales se cargarán aquí -->
+                </div>
+
+                <div class="portfolio-modal-actions">
+                    <button onclick="cerrarPortfolioModal()" class="portfolio-btn">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Función mejorada para abrir el modal con imágenes adicionales
-    function abrirPortfolioModal(titulo, imagenUrl, imagenesAdicionales = []) {
-        const modal = document.getElementById('portfolioModal');
-        const mainImage = document.getElementById('portfolioMainImage');
-        const titleElement = document.getElementById('portfolioModalTitle');
-        const gallery = document.getElementById('portfolioGallery');
-        
-        // Configurar título e imagen principal
-        titleElement.textContent = titulo;
-        mainImage.src = imagenUrl;
-        mainImage.alt = titulo;
-        
-        // Limpiar galería
-        gallery.innerHTML = '';
-        
-        // Función para agregar miniaturas
-        function agregarMiniatura(url) {
-            const img = document.createElement('img');
-            img.src = url;
-            img.onclick = function() {
-                mainImage.src = url;
-                // Efecto visual al cambiar imagen
-                mainImage.style.opacity = 0;
-                setTimeout(() => { mainImage.style.opacity = 1; }, 300);
-            };
-            gallery.appendChild(img);
-        }
-        
-        // Agregar todas las imágenes (principal + adicionales)
-        agregarMiniatura(imagenUrl);
-        
-        // Verificar si hay imágenes adicionales y agregarlas
-        if(imagenesAdicionales && imagenesAdicionales.length > 0) {
-            imagenesAdicionales.forEach(function(img) {
-                if(img && img.trim() !== '') {  // Validar que la URL no esté vacía
-                    agregarMiniatura(img);
-                }
-            });
-        }
-        
-        // Mostrar modal con animación
-        modal.style.display = 'block';
-        setTimeout(() => modal.classList.add('show'), 10);
-        document.body.style.overflow = 'hidden';
-    }
+    <script>
+        // Función mejorada para abrir el modal con imágenes adicionales
+        function abrirPortfolioModal(titulo, imagenUrl, imagenesAdicionales = []) {
+            const modal = document.getElementById('portfolioModal');
+            const mainImage = document.getElementById('portfolioMainImage');
+            const titleElement = document.getElementById('portfolioModalTitle');
+            const gallery = document.getElementById('portfolioGallery');
 
-    // Función para cerrar el modal
-    function cerrarPortfolioModal() {
-        const modal = document.getElementById('portfolioModal');
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }, 300);
-    }
+            // Configurar título e imagen principal
+            titleElement.textContent = titulo;
+            mainImage.src = imagenUrl;
+            mainImage.alt = titulo;
 
-    // Cerrar al hacer clic fuera del modal
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('portfolioModal')) {
-            cerrarPortfolioModal();
-        }
-    };
+            // Limpiar galería
+            gallery.innerHTML = '';
 
-    // Cerrar con tecla ESC
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && document.getElementById('portfolioModal').style.display === 'block') {
-            cerrarPortfolioModal();
+            // Función para agregar miniaturas
+            function agregarMiniatura(url) {
+                const img = document.createElement('img');
+                img.src = url;
+                img.onclick = function () {
+                    mainImage.src = url;
+                    // Efecto visual al cambiar imagen
+                    mainImage.style.opacity = 0;
+                    setTimeout(() => { mainImage.style.opacity = 1; }, 300);
+                };
+                gallery.appendChild(img);
+            }
+
+            // Agregar todas las imágenes (principal + adicionales)
+            agregarMiniatura(imagenUrl);
+
+            // Verificar si hay imágenes adicionales y agregarlas
+            if (imagenesAdicionales && imagenesAdicionales.length > 0) {
+                imagenesAdicionales.forEach(function (img) {
+                    if (img && img.trim() !== '') {  // Validar que la URL no esté vacía
+                        agregarMiniatura(img);
+                    }
+                });
+            }
+
+            // Mostrar modal con animación
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('show'), 10);
+            document.body.style.overflow = 'hidden';
         }
-    });
-</script>
-  <script src="{% static 'src/js/portafolioSlider.js' %}"></script>
+
+        // Función para cerrar el modal
+        function cerrarPortfolioModal() {
+            const modal = document.getElementById('portfolioModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Cerrar al hacer clic fuera del modal
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('portfolioModal')) {
+                cerrarPortfolioModal();
+            }
+        };
+
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && document.getElementById('portfolioModal').style.display === 'block') {
+                cerrarPortfolioModal();
+            }
+        });
+    </script>
+    <script src="{% static 'src/js/portafolioSlider.js' %}"></script>
 
 </body>
+
 </html>

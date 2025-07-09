@@ -1,50 +1,56 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from appIcasoftWeb.models import Categoria, Blog, Proyecto, Portafolio
+import os, json
 
 def user_inicio(request):
-    blogs = [
-        {
-            'title': 'Lanzamiento Oficial de ICASOFT AI',
-            'image_url': '/static/img/blogs/blog6.png',  
-            'link': 'https://icasofti21.blogspot.com/2025/05/lanzamiento-oficial-de-icasoft-ai.html',
-        },
-        {
-            'title': 'Icasoft AI: Presentación Oficial de la 1ra IA avanzada de Soporte Técnico',
-            'image_url': '/static/img/blogs/blog1.jpg',  
-            'link': 'https://icasofti21.blogspot.com/2025/01/icasoft-ai-presentacion-oficial-de-la.html',
-        },
-        {
-            'title': 'Una inteligencia artificial se ‘autoclona’ para evitar que la apaguen',
-            'image_url': '/static/img/blogs/blog3.jpg',  
-            'link': 'https://icasofti21.blogspot.com/2025/02/una-inteligencia-artificial-se.html',
-        },
-        {
-            'title': 'OpenIA anuncia deep research',
-            'image_url': '/static/img/blogs/blog2.jpg',  
-            'link': 'https://67814d7602356.site123.me/blog/openai-anuncia-deep-research-una-nueva-herramienta-de-investigaci%C3%93n-profunda-para-chatgpt',
-        },
-        {
-            'title': 'TECNOLOGÍA: Así puedes cambiar el color de las conversaciones de WhatsApp',
-            'image_url': '/static/img/blogs/blog4.jpg',  
-            'link': 'https://icasofti21.blogspot.com/2024/11/tecnologia-asi-puedes-cambiar-el-color.html',
-        },
-            {
-            'title': 'TECNOLOGÍA: WhatsApp Plus V12: DESCARGAR la última versión actualizada para Android en noviembre 2024',
-            'image_url': '/static/img/blogs/blog5.jpg',  
-            'link': 'https://icasofti21.blogspot.com/2024/11/tecnologia-whatsapp-plus-v12-descargar.html',
-        },
-        {
-            'title': 'TECNOLOGÍA: Así puedes cambiar el color de las conversaciones de WhatsApp',
-            'image_url': '/static/img/blogs/blog5.jpg',  
-            'link': 'https://icasofti21.blogspot.com/2024/11/tecnologia-asi-puedes-cambiar-el-color.html',
-        },
-            {
-            'title': 'TECNOLOGÍA: Así puedes cambiar el color de las conversaciones de WhatsApp',
-            'image_url': '/static/img/blogs/blog5.jpg',  
-            'link': 'https://icasofti21.blogspot.com/2024/11/tecnologia-asi-puedes-cambiar-el-color.html',
-        },
-         
-    ]
+    data_blog = Blog.objects.all()
+    blogs = []
+
+    for blog in data_blog:
+        imagen_nombre = os.path.basename(blog.imagen_url.name) if blog.imagen_url else ''
+
+        ruta_absoluta = os.path.join(
+            'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
+            imagen_nombre
+        )
+
+        if blog.imagen_url and os.path.exists(ruta_absoluta):
+            image_url = f'/blog-img/{imagen_nombre}'
+        else:
+            image_url = '/static/img/no-image.jpg'
+
+        blogs.append({
+            'title': blog.title,
+            'image_url': image_url,
+            'link': blog.blog_url,
+        })
+
+    data_proyecto = Proyecto.objects.filter(estado=True).prefetch_related('portafolio_set') #portafolio_set para acceder a los portafolios desde un proyecto
+    proyectos = []
+
+    for proyecto in data_proyecto:
+        imagenes = []
+
+        for portafolio in proyecto.portafolio_set.all():
+            imagen_nombre = os.path.basename(portafolio.imagen_url.name) if portafolio.imagen_url else ''
+            ruta_absoluta = os.path.join(
+                'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
+                imagen_nombre
+            )
+
+            if portafolio.imagen_url and os.path.exists(ruta_absoluta):
+                imagenes.append(f'/portafolio-img/{imagen_nombre}')
+
+        if not imagenes:
+            imagenes.append('/static/img/no-image.jpg')
+
+        proyectos.append({
+            'title': proyecto.title,
+            'descripcion': proyecto.descripcion,
+            'imagenes': imagenes,
+            'imagenes_json': json.dumps(imagenes),
+        })
 
     fotos = [
         {
@@ -103,9 +109,6 @@ def user_inicio(request):
             'title': 'Proximamente más cursos',
             'image_url': '/static/img/info-cursos/proximamente.jpg',
         },
-
-        
-       
     ]
 
     reviews = [
@@ -150,7 +153,6 @@ def user_inicio(request):
         },
     ]
 
-
     servicios = [
         {
             'nombre': 'Reparación de hardware',
@@ -193,8 +195,8 @@ def user_inicio(request):
             'descripcion': 'Ofrecemos servicios especializados en Redes de Computadora para optimizar la conectividad y el rendimiento de tu infraestructura tecnológica. Desde la instalación y configuración hasta el mantenimiento y monitoreo, aseguramos una red estable, segura y eficiente para ti o para tu empresa.'
         },
     ]
-    
-    return render(request, "appIcasoftWeb/inicio.html", {'blogs': blogs,'fotos': fotos,'cursos': cursos, 'reviews': reviews, 'productos':productos ,'servicios': servicios})
+
+    return render(request, "appIcasoftWeb/inicio.html", {'blogs': blogs,'proyectos': proyectos,'cursos': cursos, 'reviews': reviews, 'productos':productos ,'servicios': servicios})
 
 
 def user_curso(request, curso_nombre=None):
