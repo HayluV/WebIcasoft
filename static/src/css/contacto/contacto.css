@@ -1,0 +1,187 @@
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .formulario-contacto {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 35px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 15px;
+            box-shadow: 
+                8px 8px 15px rgba(0, 0, 0, 0.1),
+                -8px -8px 15px rgba(255, 255, 255, 0.8),
+                inset 3px 3px 5px rgba(0, 0, 0, 0.05),
+                inset -3px -3px 5px rgba(255, 255, 255, 0.8);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .formulario-contacto::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            background: linear-gradient(145deg, #e0e0e0, #ffffff) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .formulario-contacto h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .campo-formulario {
+            margin-bottom: 25px;
+        }
+        
+        .campo-formulario label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 15px;
+        }
+        
+        .campo-formulario input[type="text"],
+        .campo-formulario input[type="email"],
+        .campo-formulario input[type="tel"],
+        .campo-formulario select,
+        .campo-formulario textarea {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border: 1px solid #e0e3e6;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.05),
+                -3px -3px 6px rgba(255, 255, 255, 0.8);
+        }
+        
+        .campo-formulario input:focus,
+        .campo-formulario select:focus,
+        .campo-formulario textarea:focus {
+            background: #ffffff;
+            border-color: #3498db;
+            box-shadow: 
+                3px 3px 6px rgba(0, 0, 0, 0.1),
+                -3px -3px 6px rgba(255, 255, 255, 0.8),
+                inset 2px 2px 4px rgba(0, 0, 0, 0.05);
+            outline: none;
+        }
+        
+        .campo-formulario textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .boton-enviar {
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            box-shadow: 
+                4px 4px 8px rgba(0, 0, 0, 0.1),
+                -4px -4px 8px rgba(255, 255, 255, 0.5);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+        
+        .boton-enviar:hover {
+            background: linear-gradient(145deg, #2980b9, #3498db);
+            box-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.1),
+                -2px -2px 4px rgba(255, 255, 255, 0.5);
+        }
+        
+        .boton-enviar:active {
+            box-shadow: 
+                inset 3px 3px 5px rgba(0, 0, 0, 0.2),
+                inset -3px -3px 5px rgba(255, 255, 255, 0.5);
+        }
+        
+        .requerido::after {
+            content: " *";
+            color: #e74c3c;
+        }
+        
+        .campo-formulario input[type="checkbox"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(145deg, #f8f9fa, #ffffff);
+            border: 1px solid #e0e3e6;
+            border-radius: 4px;
+            box-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.05),
+                -2px -2px 4px rgba(255, 255, 255, 0.8);
+            position: relative;
+            vertical-align: middle;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .campo-formulario input[type="checkbox"]:checked {
+            background: #3498db;
+        }
+        
+        .campo-formulario input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Mensaje de éxito */
+        #mensaje-exito {
+            display: none;
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 35px;
+            background: linear-gradient(145deg, #d4edda, #c3e6cb);
+            border-radius: 15px;
+            box-shadow: 
+                8px 8px 15px rgba(0, 0, 0, 0.1),
+                -8px -8px 15px rgba(255, 255, 255, 0.8);
+            text-align: center;
+            color: #155724;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        /* Estilo para dispositivos móviles */
+        @media (max-width: 768px) {
+            .formulario-contacto, #mensaje-exito {
+                margin: 30px 15px;
+                padding: 25px;
+            }
+        }

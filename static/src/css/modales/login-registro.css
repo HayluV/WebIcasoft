@@ -61,9 +61,9 @@
 
   .close-login-modal, .close-register-modal {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 24px;
+    top: 0px;
+    right: 0px;
+    font-size: 62px;
     cursor: pointer;
     background: none;
     border: none;

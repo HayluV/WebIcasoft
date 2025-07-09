@@ -1,6 +1,6 @@
 /* Contenedor del slider */
 .slider-viewport {
-  width: calc(3 * 350px + 2 * 30px);
+  width: calc(3 * 380px + 2 * 30px);
 }
 
 .slider-container {
@@ -28,12 +28,11 @@
   justify-content: space-around;
 }
 
-/* Estilo para los productos */
 .producto-card {
   flex: 0 0 320px !important;
   margin: 0px 20px 0px 20px;
   box-sizing: border-box;
-  height: 400px;
+  height: 480px; 
   padding: 15px;
   background-color: #e0f2fe;
   border-radius: 30px;
@@ -46,25 +45,33 @@
 
 .producto-card img {
   width: 250px;
-  height: 210px;
+  height: 200px; /* Reduje un poco la altura de la imagen */
   object-fit: cover;
-  margin: 0 auto 35px;
+  margin: 0 auto 25px; /* Reduje el margen inferior */
   display: block;
   transition: transform 0.3s ease;
   border-radius: 30px;
 }
 
+.text-content {
+  width: 100%;
+  min-height: 80px; /* Altura mínima para el texto */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 .producto-title-clamp {
   font-size: clamp(12px, 1.8vw, 20px);
   line-height: 1.2;
   text-align: center;
-  display: inline-block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  word-break: break-word;
   max-width: 100%;
   transition: transform 0.3s ease-in-out, width 0.3s ease;
+  margin-bottom: 8px;
 }
 
 .producto-title-clamp:hover {
@@ -72,6 +79,52 @@
   text-overflow: unset;
   overflow: visible;
 }
+
+  /* Agrega esto a tu archivo productos-top.css */
+
+/* Estilo para la marca del producto */
+.producto-marca {
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    transform: rotate(-15deg);
+    transform-origin: left bottom;
+    font-size: 20px !important;
+    font-weight: 700;
+    color: #1e3a8a; /* Color azul oscuro */
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 2px 8px;
+    border-radius: 3px;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    /* Quitamos cualquier efecto de scrolling/text-shadow que tenía antes */
+    animation: none !important;
+    text-shadow: none !important;
+}
+/* Modificación para la tarjeta para acomodar la marca */
+.producto-card {
+    position: relative; /* Necesario para posicionamiento absoluto de la marca */
+    padding-left: 40px !important; /* Espacio para la marca */
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+    .producto-marca {
+        font-size: 0.7em !important;
+        left: 5px;
+        top: 15px;
+        padding: 1px 5px;
+    }
+    
+    .producto-card {
+        padding-left: 30px !important;
+    }
+}
+
+
 
 @keyframes scrolling-text {
   0% {
@@ -82,58 +135,29 @@
   }
 }
 
-/* Estilo para los botones de cantidad (en una sola fila) */
+.quantity-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 300px; /* Ajusta según necesidad */
+  margin: 0 auto;
+}
+
+/* Contenedor de cantidad */
 .quantity-container {
-  background-color: #0a115e; /* bg-icasoftBlue (reemplaza con el color adecuado si necesario) */
+  background-color: #0a115e;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 20px; /* Espaciado entre los botones */
-  border-radius: 30px; /* Aplica el border-radius aquí */
-  padding: 10px; /* Espaciado interno para que no se peguen los bordes */
+  justify-content: space-between;
+  border-radius: 30px;
+  padding: 10px 20px;
+  width: 100%;
 }
 
+/* Botones de cantidad */
 .quantity-btn {
-  width: 50px; /* Tamaño del botón */
-  height: 50px; /* Tamaño del botón */
-  border-radius: 50%;
-  background-color: #3944b3; /* Color de fondo */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centra el contenido horizontal y verticalmente */
-  cursor: pointer;
-  color: white;
-  padding: 10px; /* Espaciado dentro del botón */
-}
-
-.quantity-btn span {
-  font-size: 38px; /* Tamaño ajustable del texto */
-  font-weight: bold;
-  display: flex;
-  align-items: flex-end; /* Asegura que el texto esté centrado verticalmente */
-  justify-content: center; /* Asegura que el texto esté centrado horizontalmente */
-}
-
-.quantity-btn:hover {
-  background-color: #6cc1f5; /* Cambio de color al pasar el ratón */
-}
-
-.quantity-display {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffffff;
-}
-
-/* Estilo para el ícono del carrito */
-.cart-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.cart-btn {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #3944b3;
   display: flex;
@@ -141,12 +165,53 @@
   justify-content: center;
   cursor: pointer;
   color: white;
+  transition: all 0.3s ease;
+}
+
+.quantity-btn span {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 2px; /* Ajuste fino para centrado visual */
+}
+
+.quantity-btn:hover {
+  background-color: #6cc1f5;
+  transform: scale(1.05);
+}
+
+/* Display de cantidad */
+.quantity-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* Botón de agregar al carrito */
+.cart-btn {
+  background-color: #3944b3;
+  border-radius: 30px;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.cart-btn span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
 .cart-btn:hover {
   background-color: #6cc1f5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 /* Estilo para las flechas de navegación */
 .arrow-left,
 .arrow-right {
