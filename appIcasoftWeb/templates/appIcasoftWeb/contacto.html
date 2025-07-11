@@ -1,19 +1,120 @@
+  {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo-Icasoft/logoNaranja.png' %}">
+    <link rel="stylesheet" href="{% static 'src/css/contacto/contacto.css' %}" />
+    <title>Contacto - IcaSoft</title>
 </head>
+
 
 <body>
     <div>
         <header>
             {% include 'appIcasoftWeb/header/header.html' %}
         </header>
-
-
+    <main>
+           <form class="formulario-contacto" id="formulario-contacto">
+            <h2>Contáctenos</h2>
+            
+            <div class="campo-formulario">
+                <label for="tipo-solicitante" class="requerido">¿Es empresa o particular?</label>
+                <select id="tipo-solicitante" name="tipo-solicitante" required>
+                    <option value="">Seleccione una opción</option>
+                    <option value="empresa">Empresa</option>
+                    <option value="particular">Particular</option>
+                </select>
+            </div>
+            
+            <div class="campo-formulario">
+                <label for="nombre" class="requerido">Nombre completo / Razón social</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <div class="campo-formulario">
+                <label for="email" class="requerido">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="campo-formulario">
+                <label for="telefono" class="requerido">Teléfono de contacto</label>
+                <input type="tel" id="telefono" name="telefono" required>
+            </div>
+            
+            <div class="campo-formulario">
+                <label for="servicio">Tipo de servicio requerido</label>
+                <select id="servicio" name="servicio">
+                    <option value="">Seleccione un servicio</option>
+                    <option value="reparacion">Reparación de equipos</option>
+                    <option value="mantenimiento">Mantenimiento preventivo</option>
+                    <option value="desarrollo">Desarrollo de software</option>
+                    <option value="consultoria">Consultoría tecnológica</option>
+                    <option value="otro">Otro servicio</option>
+                </select>
+            </div>
+            
+            <div class="campo-formulario">
+                <label for="mensaje" class="requerido">Descripción de su consulta o problema</label>
+                <textarea id="mensaje" name="mensaje" required></textarea>
+            </div>
+            
+            <div class="campo-formulario">
+                <input type="checkbox" id="privacidad" name="privacidad" required>
+                <label for="privacidad">Acepto la política de privacidad</label>
+            </div>
+            
+            <button type="submit" class="boton-enviar">Enviar solicitud</button>
+        </form>
+        
+        <div id="mensaje-exito">
+            ¡Gracias por contactarnos!<br><br>
+            Hemos recibido tu solicitud correctamente.<br>
+            Nos pondremos en contacto contigo pronto.
+        </div>
+    </main>
+    
+    <!-- Aquí iría tu footer incluido -->
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const formulario = document.getElementById('formulario-contacto');
+            const mensajeExito = document.getElementById('mensaje-exito');
+            
+            formulario.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validar checkbox de privacidad
+                if (!document.getElementById('privacidad').checked) {
+                    alert('Debe aceptar la política de privacidad');
+                    return;
+                }
+                
+                // Simular envío (para prueba)
+                console.log('Datos del formulario (simulación):');
+                console.log({
+                    tipo: document.getElementById('tipo-solicitante').value,
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    telefono: document.getElementById('telefono').value,
+                    servicio: document.getElementById('servicio').value,
+                    mensaje: document.getElementById('mensaje').value
+                });
+                
+                // Mostrar mensaje de éxito
+                formulario.style.display = 'none';
+                mensajeExito.style.display = 'block';
+                
+                // Opcional: Resetear después de 5 segundos (para pruebas)
+                setTimeout(() => {
+                    formulario.reset();
+                    formulario.style.display = 'block';
+                    mensajeExito.style.display = 'none';
+                }, 5000);
+            });
+        });
+    </script>
           <footer>
         {% include 'appIcasoftWeb/footer/footer.html' %}
         {% include 'appIcasoftWeb/chatbot/chatbot.html' %}

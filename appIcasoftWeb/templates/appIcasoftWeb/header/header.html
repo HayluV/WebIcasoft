@@ -34,8 +34,7 @@
 
       <!-- Menú para desktop -->
       <nav class="hidden lg:flex space-x-8 items-center">
-        <input type="text" placeholder="Buscar..."
-          class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none" />
+        <input type="text" placeholder="Buscar..." class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none" />
         <a href="/" class="shopping-cart-container">
           <i class="icofont-shopping-cart" style="font-size: 40px;"></i>
           <span class="cart-number">0</span>
@@ -46,7 +45,7 @@
         <a href="/#cursos">CURSOS</a>
         <a href="/#blog">BLOG</a>
         <a href="/Contacto">CONTACTAR</a>
-
+        
         <!-- Ícono de usuario con menú desplegable -->
         <div class="user-menu-container relative">
           <!-- Ícono de usuario -->
@@ -54,13 +53,13 @@
             <i class="fa-solid fa-circle-user iconLogin"></i>
           </button>
 
-          <div id="user-menu">
-            <a href="/mi-cuenta">Mi Cuenta</a>
-            <a href="/mis-pedidos">Mis Pedidos</a>
-          </div>
+<div id="user-menu">
+  <a href="/mi-cuenta">Mi Cuenta</a>
+  <a href="/mis-pedidos">Mis Pedidos</a>
+</div>
         </div>
       </nav>
-      <!-- Botón menú hamburguesa para móvil/tablet -->
+  <!-- Botón menú hamburguesa para móvil/tablet -->
       <div id="mobile-menu-button" class="lg:hidden text-white cursor-pointer no-wrap-text flex items-center px-4">
         ☰ MENÚ
       </div>
@@ -128,8 +127,7 @@
   <!-- Modal de Login -->
   <div id="login-modal" class="fixed inset-0 z-50 hidden">
     <div class="login-modal-background absolute inset-0  opacity-90"></div>
-    <div class="login-container relative mx-auto my-16 max-w-md overflow-hidden"
-      style="background-image: url('{% static 'img/fondo-test-negro.jpeg' %}'); background-size: cover; background-position: center; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <div class="login-container relative mx-auto my-16 max-w-md overflow-hidden" style="background-image: url('{% static 'img/header/login-registro/fondo-loginRegistro.webp' %}'); background-size: cover; background-position: center; border-radius: 1.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
       <div class="absolute inset-0  bg-opacity-50"></div>
       <div class="relative z-10 p-8 text-white">
         <button class="close-login-modal absolute top-4 right-4 text-2xl font-bold hover:text-gray-300">×</button>
@@ -146,14 +144,12 @@
             <label for="password" class="block mb-2 font-medium font-lex">Contraseña:</label>
             <input type="password" id="password" required class="w-full px-4 py-2 rounded text-black">
           </div>
-          <button type="submit"
-            class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
+          <button type="submit" class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
             Ingresar
           </button>
         </form>
         <div class="login-footer mt-6 text-center">
-          <p class="text-blue-300 mb-2">¿No tienes cuenta? <a href="#" id="open-register-from-login"
-              class="text-white hover:underline">Regístrate</a></p>
+          <p class="text-blue-300 mb-2">¿No tienes cuenta? <a href="#" id="open-register-from-login" class="text-white hover:underline">Regístrate</a></p>
           <p><a href="/recuperar-contrasena" class="text-white hover:underline">¿Olvidaste tu contraseña?</a></p>
         </div>
       </div>
@@ -161,97 +157,89 @@
   </div>
 
 
-  <!-- Modal de Registro - Versión mejorada -->
-  <!-- Modal de Registro (versión final) -->
-  <div id="register-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
-    <div class="register-modal-background absolute inset-0 opacity-90"></div>
-    <div class="register-container relative max-w-md w-full mx-4"
-      style="background-image: url('{% static 'img/fondo-test-negro.jpeg' %}')">
-      <div class="absolute inset-0  rounded-lg"></div>
-      <div class="relative z-10 p-6">
-        <button class="close-register-modal absolute top-4 right-4 text-2xl text-white">×</button>
-
-        <!-- Parte superior fija (logo y título) -->
-        <div class="flex flex-col items-center mb-4">
-          <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-form mb-3">
-          <h3 class="text-2xl text-white font-Big-Shoulders text-center white-shadow">Crear Cuenta</h3>
-        </div>
-
-        <!-- Contenedor scrolleable para los campos del formulario -->
-        <div class="form-fields-container"
-          style="max-height: 50vh; overflow-y: auto; margin-bottom: 15px; padding-right: 8px;">
-          <form class="register-form space-y-4">
-            <div class="form-group">
-              <label for="reg-name" class="block mb-1 text-white font-medium white-shadow">Nombres:</label>
-              <input type="text" id="reg-name" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-lastname" class="block mb-1 text-white font-medium white-shadow">Apellidos:</label>
-              <input type="text" id="reg-lastname" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-email" class="block mb-1 text-white font-medium white-shadow">Correo Electrónico:</label>
-              <input type="email" id="reg-email" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-phone" class="block mb-1 text-white font-medium white-shadow">Teléfono/Celular:</label>
-              <input type="tel" id="reg-phone" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-doc-type" class="block mb-1 text-white font-medium white-shadow">Tipo de
-                Documento:</label>
-              <select id="reg-doc-type" required class="w-full p-2 rounded text-white">
-                <option value="">Seleccionar</option>
-                <option value="dni">DNI</option>
-                <option value="ruc">RUC</option>
-                <option value="ce">Carné de Extranjería</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="reg-doc-number" class="block mb-1 text-white font-medium white-shadow">Número de
-                Documento:</label>
-              <input type="text" id="reg-doc-number" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-password" class="block mb-1 text-white font-medium white-shadow">Contraseña:</label>
-              <input type="password" id="reg-password" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-confirm-password" class="block mb-1 text-white font-medium white-shadow">Confirmar
-                Contraseña:</label>
-              <input type="password" id="reg-confirm-password" required class="w-full p-2 rounded text-black">
-            </div>
-          </form>
-        </div>
-
-        <!-- Parte inferior fija (términos y botón) -->
-        <div class="terms-and-submit">
-          <div class="terms-checkbox flex items-center mb-4">
-            <input type="checkbox" id="reg-terms" required class="mr-2">
-            <label for="reg-terms" class="text-white text-sm">Acepto los <a href="/terminos"
-                class="text-blue-300 hover:underline">Términos y Condiciones</a></label>
+<!-- Modal de Registro - Versión mejorada -->
+<!-- Modal de Registro (versión final) -->
+<div id="register-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+  <div class="register-modal-background absolute inset-0 opacity-90"></div>
+  <div class="register-container relative max-w-md w-full mx-4" style="background-image:url('{% static 'img/header/login-registro/fondo-loginRegistro.webp' %}');border-radius: 1.5rem">
+    <div class="absolute inset-0  rounded-lg"></div>
+    <div class="relative z-10 p-6">
+      <button class="close-register-modal absolute top-4 right-4 text-2xl text-white">×</button>
+      
+      <!-- Parte superior fija (logo y título) -->
+      <div class="flex flex-col items-center mb-4">
+        <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-form mb-3">
+        <h3 class="text-2xl text-white font-Big-Shoulders text-center white-shadow">Crear Cuenta</h3>
+      </div>
+      
+      <!-- Contenedor scrolleable para los campos del formulario -->
+      <div class="form-fields-container" style="max-height: 50vh; overflow-y: auto; margin-bottom: 15px; padding-right: 8px;">
+        <form class="register-form space-y-4">
+          <div class="form-group">
+            <label for="reg-name" class="block mb-1 text-white font-medium white-shadow">Nombres:</label>
+            <input type="text" id="reg-name" required class="w-full p-2 rounded text-black">
           </div>
-
-          <button type="submit"
-            class="register-btn w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition duration-200">
-            Registrarse
-          </button>
-
-          <div class="register-footer mt-4 text-center">
-            <p class="text-blue-300">¿Ya tienes cuenta? <a href="#" id="open-login-from-register"
-                class="text-white hover:underline">Inicia Sesión</a></p>
+          
+          <div class="form-group">
+            <label for="reg-lastname" class="block mb-1 text-white font-medium white-shadow">Apellidos:</label>
+            <input type="text" id="reg-lastname" required class="w-full p-2 rounded text-black">
           </div>
+          
+          <div class="form-group">
+            <label for="reg-email" class="block mb-1 text-white font-medium white-shadow">Correo Electrónico:</label>
+            <input type="email" id="reg-email" required class="w-full p-2 rounded text-black">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-phone" class="block mb-1 text-white font-medium white-shadow">Teléfono/Celular:</label>
+            <input type="tel" id="reg-phone" required class="w-full p-2 rounded text-black">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-doc-type" class="block mb-1 text-white font-medium white-shadow">Tipo de Documento:</label>
+            <select id="reg-doc-type" required class="w-full p-2 rounded text-white">
+              <option value="">Seleccionar</option>
+              <option value="dni">DNI</option>
+              <option value="ruc">RUC</option>
+              <option value="ce">Carné de Extranjería</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-doc-number" class="block mb-1 text-white font-medium white-shadow">Número de Documento:</label>
+            <input type="text" id="reg-doc-number" required class="w-full p-2 rounded text-black">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-password" class="block mb-1 text-white font-medium white-shadow">Contraseña:</label>
+            <input type="password" id="reg-password" required class="w-full p-2 rounded text-black">
+          </div>
+          
+          <div class="form-group">
+            <label for="reg-confirm-password" class="block mb-1 text-white font-medium white-shadow">Confirmar Contraseña:</label>
+            <input type="password" id="reg-confirm-password" required class="w-full p-2 rounded text-black">
+          </div>
+        </form>
+      </div>
+      
+      <!-- Parte inferior fija (términos y botón) -->
+      <div class="terms-and-submit">
+        <div class="terms-checkbox flex items-center mb-4">
+          <input type="checkbox" id="reg-terms" required class="mr-2">
+          <label for="reg-terms" class="text-white text-sm">Acepto los <a href="/terminos" class="text-blue-300 hover:underline">Términos y Condiciones</a></label>
+        </div>
+        
+        <button type="submit" class="register-btn w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition duration-200">
+          Registrarse
+        </button>
+        
+        <div class="register-footer mt-4 text-center">
+          <p class="text-blue-300">¿Ya tienes cuenta? <a href="#" id="open-login-from-register" class="text-white hover:underline">Inicia Sesión</a></p>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <script src="{% static 'src/js/header.js' %}"></script>
   <script src="{% static 'src/js/modales/login-register.js' %}"></script>

@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Inicio - IcaSoft</title>
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}" />
-  <link rel="stylesheet" href="{% static 'src/css/inicio/servicios.css' %}"/>
+  <link rel="stylesheet" href="{% static 'src/css/inicio/servicios/servicios.css' %}"/>
+
   <style>
-    /* ESTILOS BASE DEL MODAL */
+
     .modal {
       display: none;
       position: fixed;
@@ -87,12 +88,12 @@
       text-align: center;
     }
     
-    .close-modal {
+    .close-modal-servicios {
       position: absolute;
-      top: 10px;
+      top: 0px;
       right: 15px;
-      color: rgb(51, 0, 255);
-      font-size: 50px;
+      color: rgb(255, 255, 255);
+      font-size: 70px;
       font-weight: bold;
       cursor: pointer;
       z-index: 3;
@@ -100,7 +101,7 @@
       text-shadow: 2px 2px 15px white;
     }
     
-    .close-modal:hover {
+    .close-modal-servicios:hover {
       transform: scale(1.1);
     }
     
@@ -193,7 +194,7 @@
         padding: 12px 20px;
       }
       
-      .close-modal {
+      .close-modal-servicios {
         font-size: 40px;
         right: 10px;
         top: 5px;
@@ -242,7 +243,7 @@
         padding: 12px 20px;
       }
       
-      .close-modal {
+      .close-modal-servicios {
         font-size: 40px;
         right: 10px;
         top: 5px;
@@ -286,7 +287,7 @@
       <div class="visor-slider">
         {% for servicio in servicios %}
           <div class="tarjeta-servicio" 
-               onclick="abrirModal(
+               onclick="abrirModalServicio(
                  '{{ servicio.nombre }}', 
                  '{{ servicio.descripcion }}', 
                  '{% static servicio.imagen %}'
@@ -308,7 +309,7 @@
     <!-- Modal de Servicios -->
     <div id="servicioModal" class="modal">
       <div class="modal-content">
-        <span class="close-modal" onclick="cerrarModal()">&times;</span>
+        <span class="close-modal-servicios" onclick="cerrarModalServicio()">&times;</span>
         <div class="modal-img-container">
           <img id="modalImagen" src="" alt="" class="img-servicio-modal">
           <div class="modal-img-overlay"></div>
@@ -322,7 +323,7 @@
 
     <script>
       // FUNCIONES DEL MODAL
-      function abrirModal(nombre, descripcion, imagenUrl) {
+      function abrirModalServicio(nombre, descripcion, imagenUrl) {
         const modal = document.getElementById('servicioModal');
         document.getElementById('modalTitulo').textContent = nombre;
         document.getElementById('modalDescripcion').textContent = descripcion;
@@ -344,7 +345,7 @@
         }, 10);
       }
       
-      function cerrarModal() {
+      function cerrarModalServicio() {
         const modal = document.getElementById('servicioModal');
         modal.classList.remove('show');
         document.body.style.touchAction = ''; // Restaura el touch
@@ -358,14 +359,14 @@
       window.onclick = function(event) {
         const modal = document.getElementById('servicioModal');
         if (event.target === modal) {
-          cerrarModal();
+          cerrarModalServicio();
         }
       };
       
       // Cerrar con tecla ESC
       document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && document.getElementById('servicioModal').style.display === 'flex') {
-          cerrarModal();
+          cerrarModalServicio();
         }
       });
 

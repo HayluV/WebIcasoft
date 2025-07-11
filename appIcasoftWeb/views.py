@@ -12,7 +12,7 @@ def user_inicio(request):
         imagen_nombre = os.path.basename(blog.imagen_url.name) if blog.imagen_url else ''
 
         ruta_absoluta = os.path.join(
-            'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
+            'C:/Users/angelina/Downloads/ProyectoIcasoftIA/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
             imagen_nombre
         )
 
@@ -37,7 +37,7 @@ def user_inicio(request):
         for portafolio in proyecto.portafolio_set.all():
             imagen_nombre = os.path.basename(portafolio.imagen_url.name) if portafolio.imagen_url else ''
             ruta_absoluta = os.path.join(
-                'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
+                'C:/Users/angelina/Downloads/ProyectoIcasoftIA/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
                 imagen_nombre
             )
 
@@ -120,20 +120,31 @@ def user_inicio(request):
 
     productos = [
         {
+            'marca': 'EPSON',
             'img': '/static/img/inicio/productosTop/producto1.jpg',
-            'text': 'Tinta EPSON original'
+            'text': 'Tinta EPSON amarrilla',
+            'precio': '35.00'
         },
         {
+            'marca': 'HP',
             'img': '/static/img/inicio/productosTop/producto2.jpg',
-            'text': 'Laptop HP 15 pulgadas'
+            'text': 'Laptop HP 15 pulgadas',
+            'precio': '1100.00'
+
         },
         {
+            'marca': 'LOGITECH',
             'img': '/static/img/inicio/productosTop/producto4.jpg',
-            'text': 'Mouse LOGITECH'
+            'text': 'Mouse LOGITECH',
+            'precio': '60.00'
+
+            
         },
          {
+            'marca': 'GENIUS',
             'img': '/static/img/productos/tecladoGenius.webp',
-            'text': 'Teclado GENIUS'
+            'text': 'Teclado GENIUS',
+            'precio': '45.00'
         },
     ]
 
@@ -186,16 +197,36 @@ def user_inicio(request):
 def user_curso(request, curso_nombre=None):
     cursos_info = {
         "SoporteTecnico": {
-            "titulo": "Curso de Soporte Técnico",
+            "titulo": "Curso de Soporte Técnico - Presencial - Ica",
             "descripcion": "Nuestro curso de soporte técnico y mantenimiento de computadoras están diseñados para equipar a los estudiantes con las habilidades necesarias para diagnosticar y solucionar problemas comunes en sistemas informáticos, así como para realizar mantenimiento preventivo y correctivo.",
             'image_url': '/static/img/soporte-técnico.jpg',
-            'info': "Módulos: 4<br>Horas: 100 horas<br>Incluye certificado",
-        },
-        "SoporteTecnicoPresencialIca": {
-            "titulo": "Curso de Soporte Técnico - Presencial - Ica",
-            "descripcion": "Nuestro curso de soporte técnico y mantenimiento de computadoras están diseñados para equipar a los estudiantes con las habilidades necesarias para diagnosticar y solucionar problemas comunes en sistemas informáticos, así como para realizar mantenimiento preventivo y correctivo en la ciudad de Ica.",
-            'image_url': '/static/img/soporte-técnico.jpg',
             'info': "Módulos: 4<br>Duración: 2 meses <br>Incluye certificado",
+            'precio': "250.00",
+            'presencial_info': {
+                'dirección' : "Av. Los Maestros",
+                'horarios' : "Lunes a Viernes de 6pm a 9pm",
+                'dias' : "Inicio 15 de cada mes",
+                'duración' : "33333"
+            },
+            'modulos': [
+                {
+                    'nombre': 'Diagnóstico',
+                    'clases': ['Aprende','realiza']
+                },
+                {
+                    'nombre': 'Mantenimiento',
+                    'clases': ['limpia','saca']
+                }
+            ]
+
+        },
+        "Ofimática": {
+            "titulo": "Curso de Ofimática - Virtual",
+            "descripcion": "Aprende a manejar las herramientas esenciales de Microsoft Office (Word, Excel, PowerPoint) y otras aplicaciones clave para mejorar tu productividad en tareas administrativas, crear documentos profesionales y gestionar datos eficientemente. Ideal para quienes inician en el mundo de la informática.",
+            'image_url': '/static/img/cursos/office.jpg',
+            'info': "Módulos: 4<br>Duración: 100 horas <br>Incluye certificado",
+            'precio': "250.00",
+
             
         },
     }
@@ -230,7 +261,7 @@ def user_producto(request):
     return render(request, 'appIcasoftWeb/productos/todos.html', {'categorias': categorias})
 
 def user_producto_categoria(request, categoria):
-    # Ejemplo con datos estáticos (reemplazar con query real)
+
     productos = [
         {'img': '/static/img/productos/laptop1.jpg', 'text': 'Laptop Gaming X1', 'precio': 1200},
         {'img': '/static/img/productos/laptop2.jpg', 'text': 'Laptop Empresarial E5', 'precio': 1500}

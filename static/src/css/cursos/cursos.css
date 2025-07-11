@@ -1,0 +1,71 @@
+ .titulo-curso {
+      font-family: "Big Shoulders", cursive;
+      font-weight: 700;
+      font-size: 3rem;
+      text-transform: uppercase;
+      background-color: var(--icasoftBlue);
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .descripcion-curso {
+      font-family: "Lexend Deca", sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      letter-spacing: 0.03em;
+      word-spacing: 0.15em;
+      text-align: justify;
+      color: var(--icasoftBlue);
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .fila-img-info {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+      justify-content: space-between; 
+    }
+
+    .curso-imagen {
+      flex: 0 0 40%;
+      max-width: 300px;
+    }
+
+    .curso-imagen img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+
+    .info-curso {
+      flex: 0 0 auto;
+      max-width: calc(100% - 320px);
+      min-width: auto;
+      width: auto;
+      background-color: #f0f4f8;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
+      font-family: "Lexend Deca", sans-serif;
+      font-size: 1rem;
+      color: var(--icasoftBlue);
+    }
+
+    @media (max-width: 768px) {
+      .fila-img-info {
+        flex-direction: column;
+      }
+
+      .curso-imagen,
+      .info-curso {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
