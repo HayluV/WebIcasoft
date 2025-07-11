@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from appIcasoftWeb.models import Categoria, Blog, Proyecto, Portafolio
+from appIcasoftWeb.models import Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio
 import os, json
 
 def user_inicio(request):
+    # Blogs
     data_blog = Blog.objects.all()
     blogs = []
 
@@ -26,6 +27,7 @@ def user_inicio(request):
             'link': blog.blog_url,
         })
 
+    # Portafolios
     data_proyecto = Proyecto.objects.filter(estado=True).prefetch_related('portafolio_set') #portafolio_set para acceder a los portafolios desde un proyecto
     proyectos = []
 
@@ -51,65 +53,47 @@ def user_inicio(request):
             'imagenes': imagenes,
             'imagenes_json': json.dumps(imagenes),
         })
+    
+    # Cursos
+    data_cursos = Curso.objects.all()
+    cursos = []
 
-    fotos = [
-        {
-        'title': 'Proyecto: IcaSoft IA',
-        'image_url': '/static/img/portafolio/icasoftia/icasoftia.webp',
-        'additional_images': '["/static/img/portafolio/icasoftia/icasoftia2.webp", "/static/img/portafolio/icasoftia/icasoftia3.webp", "/static/img/portafolio/icasoftia/icasoft5.jpeg"]'
-        },
-        {
-        'title': 'Proyecto: MetalMark',
-        'image_url': '/static/img/portafolio/metalmark/metalmark.webp',
-        'additional_images': '["/static/img/portafolio/metalmark/extra1.webp", "/static/img/portafolio/metalmark/extra2.webp"]'
-        },
-        {
-            'title': 'Proyecto: Shuman Peru',
-            'image_url': '/static/img/portafolio/shuman/shuman1.webp',  
-        'additional_images': '["/static/img/portafolio/shuman/shuman2.webp", "/static/img/portafolio/shuman/shuman3.webp"]'
-           
-        },
-        {
-            'title': 'Proyecto: Interbank',
-            'image_url': '/static/img/portafolio/interbank/interbank.png',  
-            'link': 'https://67814d7602356.site123.me/blog/openai-anuncia-deep-research-una-nueva-herramienta-de-investigaci%C3%93n-profunda-para-chatgpt',
-        },
-        {
-            'title': 'Proyecto: GILAT',
-            'image_url': '/static/img/portafolio/gilat/gilat.png',  
-            'link': 'https://icasofti21.blogspot.com/2024/11/tecnologia-asi-puedes-cambiar-el-color.html',
-        },
-            {
-            'title': 'Proyecto: Metalmark',
-            'image_url': '/static/img/portafolio/metalmark2/metalmark.png',  
-            'link': 'https://67814d7602356.site123.me/blog/openai-anuncia-deep-research-una-nueva-herramienta-de-investigaci%C3%93n-profunda-para-chatgpt',
-        },
-        {
-            'title': 'Proyecto Vanguard Perú',
-            'image_url': '/static/img/portafolio/vanguard/vanguard1.webp',  
-            'link': 'https://icasofti21.blogspot.com/2024/11/tecnologia-asi-puedes-cambiar-el-color.html',
-        },
+    for curso in data_cursos:
+        imagen_nombre = os.path.basename(curso.imagenCurso.name) if curso.imagenCurso else ''
 
-    ]
+        ruta_absoluta = os.path.join(
+            'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/curso',
+            imagen_nombre
+        )
 
-    cursos = [
-        {
-            'title': 'Curso de Soporte Técnico - Presencial - Ica',
-            'image_url': '/static/img/info-cursos/soporte.jpg',
-            'link': 'Curso/SoporteTecnico/',
-        },
+        if curso.imagenCurso and os.path.exists(ruta_absoluta):
+            image_url = f'/curso-img/{imagen_nombre}'
+        else:
+            image_url = '/static/img/no-image.jpg'
 
-        {
-            'title': 'Curso de Ofimatica - Virtual',
-            'image_url': '/static/img/info-cursos/ofimatica.jpg',
-            'link': 'Curso/SoporteTecnicoPresencialIca/',
-        },
+        cursos.append({
+            'title': curso.nombre,
+            'image_url': image_url,
+        })
 
-        {
-            'title': 'Proximamente más cursos',
-            'image_url': '/static/img/info-cursos/proximamente.jpg',
-        },
-    ]
+    # cursos = [
+    #     {
+    #         'title': 'Curso de Soporte Técnico - Presencial - Ica',
+    #         'image_url': '/static/img/info-cursos/soporte.jpg',
+    #         'link': 'Curso/SoporteTecnico/',
+    #     },
+
+    #     {
+    #         'title': 'Curso de Ofimatica - Virtual',
+    #         'image_url': '/static/img/info-cursos/ofimatica.jpg',
+    #         'link': 'Curso/SoporteTecnicoPresencialIca/',
+    #     },
+
+    #     {
+    #         'title': 'Proximamente más cursos',
+    #         'image_url': '/static/img/info-cursos/proximamente.jpg',
+    #     },
+    # ]
 
     reviews = [
         {

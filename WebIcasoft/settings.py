@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'appIcasoftWeb.context_processors.categorias_con_subcategorias', #para que categorias esté disponible en todas las plantillas, y se ejecute en cada render.
             ],
         },
     },

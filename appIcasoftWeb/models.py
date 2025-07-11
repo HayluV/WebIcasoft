@@ -75,18 +75,33 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nombreCategoria
+    
+class SubCategoria(models.Model):
+    idSub = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    estado = models.BooleanField(default=True)
+    fechaCreacion = models.DateTimeField(auto_now_add=True)
+    fechaModificacion = models.DateTimeField(auto_now=True)
+    idCategoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    class Meta:
+        managed = False
+        db_table = 'users_subcategoria'
 
+    def __str__(self):
+        return self.nombre
+    
 class Producto(models.Model):
     idProducto = models.AutoField(primary_key=True)
     nombreProducto = models.CharField(max_length=200)
     descripcionProducto = models.TextField()
+    idSubCategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE, null=True, blank=True)
     stock = models.IntegerField(default=0)
     precioVenta = models.DecimalField(max_digits=10, decimal_places=2)
     precioCompra = models.DecimalField(max_digits=10, decimal_places=2)
-    estadoProducto = models.BooleanField(default=True)
+    estado = models.BooleanField(default=True)
     fechaCaducidad = models.DateField(null=True, blank=True)
-    fechaCreacionProducto = models.DateTimeField(auto_now_add=True)
-    fechaModificacionProducto = models.DateTimeField(auto_now=True)
+    fechaCreacion = models.DateTimeField(auto_now_add=True)
+    fechaModificacion = models.DateTimeField(auto_now=True)
     idCategoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     imagenProducto = models.ImageField(upload_to='productos/', null=True, blank=True)
 

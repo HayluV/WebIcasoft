@@ -6,4 +6,4 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', include('appIcasoftWeb.urls')),
-] + static('/blog-img/', document_root='E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog/') + static('/portafolio-img/', document_root='E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio/')
+] + static('/blog-img/', document_root='E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog/') + static('/portafolio-img/', document_root='E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio/') + static('/curso-img/', document_root='E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/curso/')
