@@ -11,7 +11,7 @@ def user_inicio(request):
         imagen_nombre = os.path.basename(blog.imagen_url.name) if blog.imagen_url else ''
 
         ruta_absoluta = os.path.join(
-            'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
+            'C:/Users/angelina/Downloads/ProyectoIcasoftIA/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
             imagen_nombre
         )
 
@@ -35,7 +35,7 @@ def user_inicio(request):
         for portafolio in proyecto.portafolio_set.all():
             imagen_nombre = os.path.basename(portafolio.imagen_url.name) if portafolio.imagen_url else ''
             ruta_absoluta = os.path.join(
-                'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
+                'C:/Users/angelina/Downloads/ProyectoIcasoftIA/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
                 imagen_nombre
             )
 

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const slider = document.getElementById('blog-slider');
     const prevButton = document.querySelector('.arrow-left-blog');
     const nextButton = document.querySelector('.arrow-right-blog');
-    const cards = document.querySelectorAll('.portafolio-card');
+    const cards = document.querySelectorAll('.blog-card');
     let cardsPerPage;
     let currentIndex = 0;
 

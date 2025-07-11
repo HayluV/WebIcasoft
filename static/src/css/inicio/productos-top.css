@@ -245,7 +245,6 @@
   color: white;
 }
 
-/* Estilo para el botón de "Ver Producto" */
 button.btn {
   color: white;
   padding: 7px 60px;
@@ -261,6 +260,17 @@ button.btn:hover {
   transform: translateY(-5px);
   border-color: #3944b3;
 }
+
+@media (max-width: 1920px) and (min-width: 1366px) {
+     .producto-card {
+    flex: 0 0 340px !important;
+    margin: 0px 25px 0px 12px;
+    height: 400px;
+    padding: 15px;
+  }
+
+}
+
 
 @media (max-width: 1033px) {
    .producto-card {
