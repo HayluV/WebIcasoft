@@ -84,15 +84,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Close menus when clicking outside
   document.addEventListener('click', (event) => {
     // Products menu (desktop)
-    if (menuProductos && menuProductos.classList.contains('icasoft-menu-show') && 
-        !menuProductos.contains(event.target) && 
-        event.target !== menuProductosText) {
+    if (menuProductos && menuProductos.classList.contains('icasoft-menu-show') &&
+      !menuProductos.contains(event.target) &&
+      event.target !== menuProductosText) {
       toggleProductsMenu(false);
     }
-    
+
     // Mobile menu
-    if (mobileMenu && !mobileMenu.contains(event.target) && 
-        event.target !== mobileMenuButton) {
+    if (mobileMenu && !mobileMenu.contains(event.target) &&
+      event.target !== mobileMenuButton) {
       toggleMobileMenu(false);
     }
   });
@@ -135,37 +135,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const openModalBtns = document.querySelectorAll('#openModalBtnHeader, #openModalBtnMobile');
   const loginModal = document.getElementById('login-modal');
   const closeLoginModal = document.querySelector('.close-login-modal');
   const loginModalBackground = document.querySelector('.login-modal-background');
 
   openModalBtns.forEach(btn => {
-    btn.addEventListener('click', function(e) {
+    btn.addEventListener('click', function (e) {
       e.stopPropagation();
       // Cerrar otros menús si están abiertos
       document.getElementById('menu-productos').classList.remove('icasoft-menu-show');
       document.getElementById('mobile-menu').classList.add('hidden');
-      
+
       // Alternar el modal de login
       loginModal.classList.toggle('hidden');
       loginModal.classList.toggle('icasoft-login-show');
     });
   });
 
-  closeLoginModal.addEventListener('click', function() {
+  closeLoginModal.addEventListener('click', function () {
     loginModal.classList.add('hidden');
     loginModal.classList.remove('icasoft-login-show');
   });
 
-  loginModalBackground.addEventListener('click', function() {
+  loginModalBackground.addEventListener('click', function () {
     loginModal.classList.add('hidden');
     loginModal.classList.remove('icasoft-login-show');
   });
 
   // Cerrar modal al hacer clic fuera
-  document.addEventListener('click', function(e) {
+  document.addEventListener('click', function (e) {
     if (!loginModal.contains(e.target) && !Array.from(openModalBtns).includes(e.target)) {
       loginModal.classList.add('hidden');
       loginModal.classList.remove('icasoft-login-show');
