@@ -2,8 +2,8 @@
 {% load static %}
 
 {% block extra_head %}
-  <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
-  <link rel="stylesheet" href="{% static 'src/css/productos/todos.css' %}">
+<link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+<link rel="stylesheet" href="{% static 'src/css/productos/todos.css' %}">
 
 {% endblock %}
 
@@ -13,50 +13,58 @@
   <nav class="mb-6" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 font-medium">
       <li>
-        <a href="{% url 'user_producto' %}" class="text-blue-300 hover:text-primary transition font-Big-Shoulders uppercase">Productos</a>
+        <a href="{% url 'user_producto' %}"
+          class="text-blue-300 hover:text-primary transition font-Big-Shoulders uppercase">Productos</a>
       </li>
       <li class="text-gray-400">/</li>
-      <li class="text-gray-600">{{ categoria|title }}</li>
+      <li class="text-gray-600 hover:text-primary transition" style="text-transform: uppercase;">{{ categoria.nombre }}</li>
     </ol>
   </nav>
 
- <div class="mb-8 flex flex-col items-center">
-  <!-- Título centrado -->
-  <div class="text-center w-full">
-    <h2 class="titulo-principal-productos fondo-animated-text">
-      {{ categoria|title }} disponibles
-    </h2>
+  <div class="mb-8 flex flex-col items-center">
+    <!-- Título centrado -->
+    <div class="text-center w-full">
+      <h2 class="titulo-principal-productos fondo-animated-text">
+        {{ categoria.nombre }} disponibles
+      </h2>
+    </div>
+
+    <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
+    <div class="self-start mt-4"> <!-- mt-4 añade margen superior -->
+      <a href="{% url 'user_producto' %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
+        ← Volver a Productos
+      </a>
+    </div>
   </div>
 
-  <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
-  <div class="self-start mt-4">  <!-- mt-4 añade margen superior -->
-    <a href="{% url 'user_producto' %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
-      ← Volver a Productos
-    </a>
-  </div>
-</div>
+  <div>
+    {% for sub in categoria.subcategorias %}
+    <h3 class="text-lg font-semibold mb-2">{{ sub.nombre }}</h3>
 
-  <!-- Grid de productos -->
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-    {% for producto in productos %}
-    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-      <!-- Imagen del producto -->
-      <div class="p-3 flex-grow flex items-center">
-        <img src="{{ producto.img }}" alt="{{ producto.text }}" class="w-full h-auto object-contain max-h-40 mx-auto">
-      </div>
-      
-      <!-- Detalles del producto -->
-      <div class="p-3 border-t border-gray-100">
-        <h3 class="text-sm font-medium text-gray-800 mb-2 line-clamp-2">{{ producto.text }}</h3>
-        <div class="flex items-center justify-between">
-          <span class="text-green-600 font-bold">S/ {{ producto.precio|default:"499" }}</span>
-          <button class="text-primary hover:text-primary-dark text-sm font-medium py-1 px-2 border border-primary rounded hover:bg-primary hover:text-white transition">
-            + Carrito
-          </button>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
+      {% for producto in sub.productos %}
+      <div
+        class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
+        <div class="p-3 flex-grow flex items-center">
+          <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
+            class="w-full h-auto object-contain max-h-40 mx-auto">
+        </div>
+
+        <div class="p-3 border-t border-gray-100">
+          <h3 class="text-sm font-medium text-gray-800 mb-2 line-clamp-2">{{ producto.nombre }}</h3>
+          <div class="flex items-center justify-between">
+            <span class="text-green-600 font-bold">S/ {{ producto.precio }}</span>
+            <button
+              class="text-primary hover:text-primary-dark text-sm font-medium py-1 px-2 border border-primary rounded hover:bg-primary hover:text-white transition">
+              + Carrito
+            </button>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
     {% endfor %}
   </div>
+</div>
 </div>
 {% endblock %}

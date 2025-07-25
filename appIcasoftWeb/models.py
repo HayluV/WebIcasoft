@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.utils.text import slugify
 
 # Custom User Manager
 class CustomUserManager(BaseUserManager):
@@ -66,26 +67,41 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Categoria(models.Model):
     idCategoria = models.AutoField(primary_key=True)
     nombreCategoria = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True, blank=True, null=True)
     estadoCategoria = models.BooleanField(default=True)
     fechaCreacionCategoria = models.DateTimeField(auto_now_add=True)
     fechaModificacionCategoria = models.DateTimeField(auto_now=True)
+
     class Meta:
         managed = False
         db_table = 'users_categoria'
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombreCategoria)
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.nombreCategoria
-    
+
+
 class SubCategoria(models.Model):
     idSub = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True, blank=True, null=True)
     estado = models.BooleanField(default=True)
     fechaCreacion = models.DateTimeField(auto_now_add=True)
     fechaModificacion = models.DateTimeField(auto_now=True)
     idCategoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+
     class Meta:
         managed = False
         db_table = 'users_subcategoria'
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.nombre
@@ -93,6 +109,7 @@ class SubCategoria(models.Model):
 class Producto(models.Model):
     idProducto = models.AutoField(primary_key=True)
     nombreProducto = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=100, unique=True, blank=True, null=True)
     descripcionProducto = models.TextField()
     idSubCategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE, null=True, blank=True)
     stock = models.IntegerField(default=0)
@@ -102,13 +119,16 @@ class Producto(models.Model):
     fechaCaducidad = models.DateField(null=True, blank=True)
     fechaCreacion = models.DateTimeField(auto_now_add=True)
     fechaModificacion = models.DateTimeField(auto_now=True)
-    idCategoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     imagenProducto = models.ImageField(upload_to='productos/', null=True, blank=True)
 
     class Meta:
         managed = False
         db_table = 'users_producto'
-    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombreProducto)
+        super().save(*args, **kwargs) 
+
     def __str__(self):
         return self.title
    

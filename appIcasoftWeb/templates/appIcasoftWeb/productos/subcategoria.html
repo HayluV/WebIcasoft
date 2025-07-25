@@ -12,14 +12,14 @@
   <nav class="mb-6" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2 font-medium uppercase">
       <li>
-        <a href="{% url 'user_producto' %}" class="text-gray-600 hover:text-primary transition">Productos</a>
+        <a href="#" class="text-gray-600 hover:text-primary transition">Productos</a>
       </li>
       <li class="text-gray-400">/</li>
       <li>
-        <a href="{% url 'user_producto_categoria' categoria %}" class="text-gray-600 hover:text-primary transition">{{ categoria|title }}</a>
+        <a href="{% url 'user_producto_categoria' categoria.slugcat %}" class="text-gray-600 hover:text-primary transition">{{ categoria.nombre }}</a>
       </li>
       <li class="text-gray-400">/</li>
-      <li class="text-primary">{{ subcategoria|title }}</li>
+      <li class="text-primary">{{ subcategoria.nombre }}</li>
     </ol>
   </nav>
 
@@ -28,21 +28,21 @@
   <!-- Título centrado -->
   <div class="text-center w-full">
     <h2 class="titulo-principal-productos fondo-animated-text">
-      {{ categoria|title }} <span>{{ subcategoria|title }}</span>
+      {{ subcategoria.nombre }}</span>
     </h2>
   </div>
 
   <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
   <div class="self-start mt-4">  <!-- mt-4 añade margen superior -->
-    <a href="{% url 'user_producto_categoria' categoria %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
-      ← Volver a {{ categoria|title }}
+    <a href="{% url 'user_producto_categoria' categoria.slugcat %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
+      ← Volver a {{ categoria.nombre }}
     </a>
   </div>
 </div>
 
   <!-- Grid de productos -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {% for producto in productos %}
+    {% for producto in subcategoria.productos %}
     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <!-- Badge nuevo -->
       <div class="absolute top-2 right-2">
@@ -51,12 +51,12 @@
       
       <!-- Imagen del producto -->
       <div class="p-4 flex justify-center">
-        <img src="{{ producto.img }}" alt="{{ producto.text }}" class="h-48 object-contain">
+        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="h-48 object-contain">
       </div>
       
       <!-- Detalles del producto -->
       <div class="p-4 border-t border-gray-100">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ producto.text }}</h3>
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ producto.nombre }}</h3>
         <p class="text-green-600 font-bold text-xl mb-4">S/ {{ producto.precio|default:"699" }}</p>
         <button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition">
           Añadir al carrito

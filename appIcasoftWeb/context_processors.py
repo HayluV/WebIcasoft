@@ -10,13 +10,14 @@ def categorias_con_subcategorias(request):
         for subcategoria in data_subcategoria:
             subcategorias.append({
                 'nombre': subcategoria.nombre,
+                'slugSub': subcategoria.slug,
             })     
         categoria_data = {
             'id': categoria.idCategoria,
             'nombre': categoria.nombreCategoria,
-            'subcategorias': subcategorias,
+            'slugcat': categoria.slug,
+            'subcategorias': subcategorias
         }
-        print("Categoría agregada:", categoria_data) 
         categorias.append(categoria_data)
 
     return {'categorias': categorias}

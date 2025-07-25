@@ -1,7 +1,28 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from appIcasoftWeb.models import Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 import os, json
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('email') 
+        password = request.POST.get('password')
+        print(f"[DEBUG] Datos recibidos: username={username}, password={password}")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            if user.role == 'client':
+                return redirect('user_inicio')
+        else:
+            messages.error(request, "Usuario o contraseña incorrectos.")
+    return render(request, 'appIcasoftWeb/inicio.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('user_inicio')
 
 def user_inicio(request):
     # Blogs
@@ -12,7 +33,7 @@ def user_inicio(request):
         imagen_nombre = os.path.basename(blog.imagen_url.name) if blog.imagen_url else ''
 
         ruta_absoluta = os.path.join(
-            'C:/Users/angelina/Downloads/ProyectoIcasoftIA/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
+            'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/blog',
             imagen_nombre
         )
 
@@ -37,7 +58,7 @@ def user_inicio(request):
         for portafolio in proyecto.portafolio_set.all():
             imagen_nombre = os.path.basename(portafolio.imagen_url.name) if portafolio.imagen_url else ''
             ruta_absoluta = os.path.join(
-                'C:/Users/angelina/Downloads/ProyectoIcasoftIA/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
+                'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/portafolio',
                 imagen_nombre
             )
 
@@ -260,26 +281,96 @@ def user_producto(request):
     }
     return render(request, 'appIcasoftWeb/productos/todos.html', {'categorias': categorias})
 
-def user_producto_categoria(request, categoria):
 
-    productos = [
-        {'img': '/static/img/productos/laptop1.jpg', 'text': 'Laptop Gaming X1', 'precio': 1200},
-        {'img': '/static/img/productos/laptop2.jpg', 'text': 'Laptop Empresarial E5', 'precio': 1500}
-    ]
+RUTA_MEDIA_PRODUCTOS = 'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/productos'
+IMAGEN_POR_DEFECTO = '/static/img/no-image.jpg'
+
+def obtener_url_imagen(producto):
+
+    if not producto.imagenProducto:
+        return IMAGEN_POR_DEFECTO
+
+    nombre_imagen = os.path.basename(producto.imagenProducto.name)
+    ruta_imagen = os.path.join(RUTA_MEDIA_PRODUCTOS, nombre_imagen)
+
+    if os.path.exists(ruta_imagen):
+        return f'/producto-img/{nombre_imagen}'
+    return IMAGEN_POR_DEFECTO
+
+def construir_datos_producto(producto):
+    return {
+        'id': producto.idProducto,
+        'nombre': producto.nombreProducto,
+        'descripcion': producto.descripcionProducto,
+        'precio': producto.precioVenta,
+        'stock': producto.stock,
+        'imagen_url': obtener_url_imagen(producto),
+        'slug': producto.slug
+    }
+
+def construir_datos_subcategoria(subcategoria):
+    productos = Producto.objects.filter(
+        estado=True,
+        idSubCategoria=subcategoria.idSub
+    ).select_related('idSubCategoria') #realiza una sola consulta SQL con JOIN para traer no solo los productos, sino también la subcategoría asociada (idSubCategoria) en una sola consulta a la base de datos. Para evitar el: for producto in productos:
+
+    productos_data = [construir_datos_producto(prod) for prod in productos]
+
+    return {
+        'id': subcategoria.idSub,
+        'nombre': subcategoria.nombre,
+        'slugSub': subcategoria.slug,
+        'productos': productos_data
+    }
+
+def construir_datos_categoria(categoria_obj):
+    subcategorias = SubCategoria.objects.filter(
+        estado=True,
+        idCategoria=categoria_obj.idCategoria
+    )
+
+    subcategorias_data = [construir_datos_subcategoria(sub) for sub in subcategorias]
+
+    return {
+        'id': categoria_obj.idCategoria,
+        'nombre': categoria_obj.nombreCategoria,
+        'slugcat': categoria_obj.slug,
+        'subcategorias': subcategorias_data
+    }
+
+def user_producto_categoria(request, categoria):
+    """
+    Vista que muestra los productos por categoría y subcategoría.
+    """
+    categorias_activas = Categoria.objects.filter(
+        estadoCategoria=True,
+        slug=categoria
+    ).first() 
+
+    categorias_data = construir_datos_categoria(categorias_activas)
+
     return render(request, 'appIcasoftWeb/productos/categoria.html', {
-        'productos': productos,
-        'categoria': categoria
+        'categoria': categorias_data
     })
 
 def user_producto_subcategoria(request, categoria, subcategoria):
-    # Ejemplo con datos estáticos
-    productos = [
-        {'img': '/static/img/productos/laptop-gaming.jpg', 'text': 'Laptop Gaming Pro', 'precio': 2000}
-    ]
+    categorias_activas = Categoria.objects.filter(
+        estadoCategoria=True,
+        slug=categoria
+    ).first() 
+
+    subcategorias_activas = SubCategoria.objects.filter(
+        estado=True,
+        slug=subcategoria,
+        idCategoria=categorias_activas.idCategoria
+    ).first()
+
+    categorias_data = construir_datos_categoria(categorias_activas)
+    subcategoria_data = construir_datos_subcategoria(subcategorias_activas)
+
     return render(request, 'appIcasoftWeb/productos/subcategoria.html', {
-        'productos': productos,
-        'categoria': categoria,
-        'subcategoria': subcategoria
+        'categoria': categorias_data,
+        'subcategoria': subcategoria_data
     })
 
 
