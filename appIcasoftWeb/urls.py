@@ -11,7 +11,7 @@ from .views import (
     user_contacto,
     user_carrito,
     user_entrega,
-    user_configuration,
+    user_micuenta,
     user_pedido,
 )
 
@@ -27,6 +27,6 @@ urlpatterns = [
     path("Contacto", user_contacto, name="user_contacto"),
     path("Carrito", user_carrito, name="user_carrito"),
     path("Entrega", user_entrega, name="user_entrega"),
-    path("Configuracion", user_configuration, name="user_configuration"),
+    path("MiCuenta", user_micuenta, name="user_micuenta"),
     path("MisPedidos", user_pedido, name="user_pedido"),
 ]

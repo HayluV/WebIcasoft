@@ -172,42 +172,36 @@ def user_inicio(request):
     servicios = [
         {
             'nombre': 'Reparación de hardware',
-            'imagen': 'img/servicios/servicio2.jpg',
+            'imagen': 'img/inicio/servicios/soporte.webp',
             'descripcion': 'Ofrecemos servicios expertos de Reparación de Hardware para garantizar el funcionamiento adecuado de tus equipos. Desde la reparación de componentes internos hasta el reemplazo de piezas dañadas, trabajamos para devolverle a tu tecnología su máximo rendimiento con soluciones rápidas y eficaces.'
         },
         {
             'nombre': 'Actualización de software',
-            'imagen': 'img/servicios/servicio1.jpg',
+            'imagen': 'img/inicio/servicios/actualización.webp',
             'descripcion': 'Brindamos servicios de Actualización de Software para mantener tus sistemas y aplicaciones al día con las últimas mejoras y correcciones de seguridad. Aseguramos un rendimiento óptimo y protegemos tu infraestructura tecnológica contra vulnerabilidades, garantizando que siempre estés un paso adelante.'
 
         },
         {
             'nombre': 'Eliminación de virus y malware',
-            'imagen': 'img/servicios/virus.jpg',
-            'enlace': 'https://ejemplo.com/servicio3',
+            'imagen': 'img/inicio/servicios/virus.webp',
             'descripcion': 'Ofrecemos servicios profesionales de Eliminación de Virus y Malware para proteger tus dispositivos y datos. Detectamos, eliminamos y prevenimos amenazas cibernéticas, garantizando la seguridad de tus sistemas y evitando pérdidas de información o daños a tu infraestructura tecnológica.'
 
         },
         {
             'nombre': 'Marketing digital con IA',
-            'imagen': 'img/servicios/diseñoWeb.jpg',
-            'enlace': 'https://ejemplo.com/servicio3',
+            'imagen': 'img/inicio/servicios/MarketingDigital.webp',
             'descripcion': 'Transforma tu negocio con soluciones de marketing digital impulsadas por IA: optimiza estrategias, personaliza experiencias y maximiza resultados con análisis avanzados y automatización inteligente.'
-
-
         },
 
         {
             'nombre': 'Desarrollo de Software y aplicaciones',
-            'imagen': 'img/servicios/desarrollo.jpg',
-            'enlace': 'https://ejemplo.com/servicio3',
+            'imagen': 'img/inicio/servicios/desarrolloWeb.webp',
             'descripcion': 'Brindamos soluciones a medida en Desarrollo de Software y Aplicaciones para impulsar la productividad de tu empresa. Diseñamos y desarrollamos plataformas personalizadas adaptados a tus necesidades específicas, asegurando eficiencia y escalabilidad.'
-
         },
 
          {
             'nombre': 'Redes de computadoras',
-            'imagen': 'img/servicios/redes.jpg',
+            'imagen': 'img/inicio/servicios/redes.webp',
             'descripcion': 'Ofrecemos servicios especializados en Redes de Computadora para optimizar la conectividad y el rendimiento de tu infraestructura tecnológica. Desde la instalación y configuración hasta el mantenimiento y monitoreo, aseguramos una red estable, segura y eficiente para ti o para tu empresa.'
         },
     ]
@@ -381,11 +375,22 @@ def user_contacto(request):
 def user_carrito(request):
     return render(request, "appIcasoftWeb/carrito.html")
 
+from django.shortcuts import render
+from django.shortcuts import render
+import json
+
 def user_entrega(request):
+
+
     return render(request, "appIcasoftWeb/entrega.html")
 
-def user_configuration(request):
-    return render(request, "appIcasoftWeb/configuration.html")
+
+
 
 def user_pedido(request):
     return render(request, "appIcasoftWeb/pedido.html")
+
+def user_micuenta(request):
+    return render(request, "appIcasoftWeb/micuenta.html")
+
+

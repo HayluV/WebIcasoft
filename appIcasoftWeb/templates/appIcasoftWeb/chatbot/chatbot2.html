@@ -1,0 +1,323 @@
+<!-- appIcasoftWeb/chatbot/chatbot.html -->
+<div class="chatbot-container">
+  <!-- Botón flotante del chatbot -->
+  <div class="chatbot-button">
+    <i class="fas fa-comment-dots"></i>
+    <span class="chatbot-tooltip">¿Necesitas ayuda?</span>
+  </div>
+
+  <!-- Ventana del chatbot -->
+  <div class="chatbot-window">
+    <div class="chatbot-header">
+      <h3>Asistente IcaSoft</h3>
+      <div class="chatbot-close">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    
+    <div class="chatbot-messages">
+      <div class="chatbot-message chatbot-received">
+        <p>¡Hola! Soy el asistente virtual de IcaSoft. ¿En qué puedo ayudarte hoy?</p>
+        <span class="chatbot-time"></span>
+      </div>
+    </div>
+    
+    <div class="chatbot-input">
+      <input type="text" placeholder="Escribe tu mensaje..." id="chatbot-input-field" />
+      <button class="chatbot-send" id="chatbot-send-btn">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Estilos del chatbot - No bloqueantes */
+  .chatbot-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000; /* Alto pero no máximo */
+  }
+
+  .chatbot-button {
+    width: 60px;
+    height: 60px;
+    background-color: #2C50EF;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(44, 80, 239, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .chatbot-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(44, 80, 239, 0.4);
+  }
+
+  .chatbot-button i {
+    color: white;
+    font-size: 24px;
+  }
+
+  .chatbot-tooltip {
+    position: absolute;
+    right: 70px;
+    white-space: nowrap;
+    background: #2C50EF;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+  }
+
+  .chatbot-button:hover .chatbot-tooltip {
+    opacity: 1;
+  }
+
+  .chatbot-window {
+    width: 350px;
+    max-height: 70vh;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    overflow: hidden;
+  }
+
+  .chatbot-header {
+    background-color: #2C50EF;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chatbot-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .chatbot-close {
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+
+  .chatbot-close:hover {
+    transform: rotate(90deg);
+  }
+
+  .chatbot-messages {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    max-height: calc(70vh - 120px);
+  }
+
+  .chatbot-message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    position: relative;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chatbot-received {
+    background-color: white;
+    color: #333;
+    border-top-left-radius: 5px;
+    align-self: flex-start;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .chatbot-sent {
+    background-color: #2C50EF;
+    color: white;
+    border-top-right-radius: 5px;
+    align-self: flex-end;
+  }
+
+  .chatbot-time {
+    display: block;
+    font-size: 10px;
+    color: #777;
+    text-align: right;
+    margin-top: 5px;
+  }
+
+  .chatbot-input {
+    display: flex;
+    padding: 15px;
+    background-color: white;
+    border-top: 1px solid #eee;
+  }
+
+  .chatbot-input input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    outline: none;
+    font-size: 14px;
+  }
+
+  .chatbot-input input:focus {
+    border-color: #2C50EF;
+  }
+
+  .chatbot-send {
+    background-color: #2C50EF;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .chatbot-send:hover {
+    background-color: #1a3bb7;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .chatbot-container {
+      bottom: 15px;
+      right: 15px;
+    }
+    
+    .chatbot-window {
+      width: 90vw;
+      right: 5vw;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Inicialización cuando el DOM está listo
+  document.addEventListener('DOMContentLoaded', function() {
+    // Configurar hora actual
+    const now = new Date();
+    document.querySelector('.chatbot-time').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Elementos del DOM
+    const chatbotButton = document.querySelector('.chatbot-button');
+    const chatbotWindow = document.querySelector('.chatbot-window');
+    const chatbotClose = document.querySelector('.chatbot-close');
+    const chatbotMessages = document.querySelector('.chatbot-messages');
+    const chatbotInput = document.getElementById('chatbot-input-field');
+    const chatbotSendBtn = document.getElementById('chatbot-send-btn');
+    
+    // Estado del chatbot
+    let isChatOpen = false;
+
+    // Alternar visibilidad del chatbot
+    function toggleChat() {
+      isChatOpen = !isChatOpen;
+      chatbotWindow.style.display = isChatOpen ? 'flex' : 'none';
+      
+      // Enfocar el input cuando se abre
+      if (isChatOpen) {
+        setTimeout(() => {
+          chatbotInput.focus();
+        }, 300);
+      }
+    }
+
+    // Manejar clicks
+    chatbotButton.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleChat();
+    });
+    
+    chatbotClose.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleChat();
+    });
+
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', function(e) {
+      if (isChatOpen && !chatbotWindow.contains(e.target) {
+        toggleChat();
+      }
+    });
+
+    // Prevenir que clicks dentro del chat se propaguen
+    chatbotWindow.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+
+    // Enviar mensaje
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (message) {
+        addMessage(message, 'sent');
+        chatbotInput.value = '';
+        
+        // Respuesta automática
+        setTimeout(() => {
+          const responses = [
+            "Entendido, ¿hay algo más en lo que pueda ayudarte?",
+            "Gracias por tu mensaje. Un agente te responderá pronto.",
+            "¿Necesitas información sobre algún servicio en particular?",
+            "Puedo ayudarte con información sobre nuestros productos y servicios."
+          ];
+          const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+          addMessage(randomResponse, 'received');
+        }, 800);
+      }
+    }
+    
+    // Manejar envío de mensajes
+    chatbotSendBtn.addEventListener('click', sendMessage);
+    chatbotInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // Añadir mensaje al chat
+    function addMessage(text, type) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chatbot-message chatbot-${type}`;
+      
+      const messageText = document.createElement('p');
+      messageText.textContent = text;
+      
+      const messageTime = document.createElement('span');
+      messageTime.className = 'chatbot-time';
+      messageTime.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      
+      messageDiv.appendChild(messageText);
+      messageDiv.appendChild(messageTime);
+      chatbotMessages.appendChild(messageDiv);
+      
+      // Auto-scroll
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+  });
+})();
+</script>

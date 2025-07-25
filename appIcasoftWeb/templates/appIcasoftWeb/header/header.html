@@ -34,11 +34,10 @@
 
       <!-- Menú para desktop -->
       <nav class="hidden lg:flex space-x-8 items-center">
-        <input type="text" placeholder="Buscar..."
-          class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none" />
+        <input type="text" placeholder="Buscar..." class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none" />
         <a href="/" class="shopping-cart-container">
           <i class="icofont-shopping-cart" style="font-size: 40px;"></i>
-          <span class="cart-number">0</span>
+          <span class="cart-number">0</span> <!-- Esta clase es importante -->
         </a>
         <div id="menu-productos-text" class="text-white cursor-pointer no-wrap-text">
           ☰ PRODUCTOS
@@ -58,16 +57,13 @@
           </button>
           {% endif %}
 
-          {% if user.is_authenticated %}
-          <div id="user-menu">
-              <a href="/mi-cuenta">Mi Cuenta</a>
-              <a href="/mis-pedidos">Mis Pedidos</a>
-              <a href="{% url 'user_logout' %}">Cerrar Sesión</a>
-          </div>
-          {% endif %}
+<div id="user-menu">
+  <a href="/mi-cuenta">Mi Cuenta</a>
+  <a href="/mis-pedidos">Mis Pedidos</a>
+</div>
         </div>
       </nav>
-      <!-- Botón menú hamburguesa para móvil/tablet -->
+  <!-- Botón menú hamburguesa para móvil/tablet -->
       <div id="mobile-menu-button" class="lg:hidden text-white cursor-pointer no-wrap-text flex items-center px-4">
         ☰ MENÚ
       </div>
@@ -81,12 +77,6 @@
 
       <input type="text" placeholder="Buscar..."
         class="search-input p-2 rounded-lg border-2 border-gray-300 focus:outline-none w-full" />
-
-      <a href="#" id="openModalBtnMobile"
-        class="block p-2 text-black hover:bg-gray-100 rounded text-center flex items-center justify-center gap-2">
-        <i class="icofont-login" style="font-size: 1.2rem;"></i>
-        <span>INICIAR SESIÓN</span>
-      </a>
       <div class="productos-menu text-center">
         <div class="relative p-2 text-black cursor-pointer hover:bg-gray-100 rounded" id="mobile-productos-btn">
           <span>☰ PRODUCTOS</span>
@@ -104,10 +94,7 @@
       <a href="/#blog" class="block p-2 text-black hover:bg-gray-100 rounded text-center">BLOG</a>
       <a href="/Contacto" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CONTACTAR</a>
 
-      <div class="shopping-cart-container p-2 hover:bg-gray-100 rounded text-center">
-        <i class="icofont-shopping-cart" style="font-size: 30px;"></i>
-        <span class="cart-number">0</span>
-      </div>
+
     </div>
   </div>
 
@@ -155,15 +142,7 @@
             <label for="password" class="block mb-2 font-medium font-lex">Contraseña:</label>
             <input type="password" id="password" name="password" required class="w-full px-4 py-2 rounded text-black">
           </div>
-          {% if messages %}
-          <ul class="messages mb-4">
-            {% for message in messages %}
-            <li class="text-red-500">{{ message }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          <button type="submit"
-            class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
+          <button type="submit" class="login-btn w-full bg-blue-600 hover:bg-sky-300 text-white font-bold py-2 px-4 rounded transition duration-200">
             Ingresar
           </button>
         </form>
@@ -271,6 +250,7 @@
 
   <script src="{% static 'src/js/header.js' %}"></script>
   <script src="{% static 'src/js/modales/login-register.js' %}"></script>
+  <script src="{% static 'src/js/cart.js' %}"></script>
 </body>
 
 </html>

@@ -1,0 +1,114 @@
+<!-- appIcasoftWeb/modal-login.html -->
+<div id="loginModal" class="modal-login hidden fixed inset-0 z-50 overflow-y-auto">
+  <div class="modal-overlay absolute inset-0 bg-black bg-opacity-70"></div>
+  
+  <div class="modal-container relative w-full max-w-md mx-auto my-8 px-4">
+    <div class="modal-content bg-white rounded-lg shadow-xl overflow-hidden">
+      <!-- Header del modal -->
+      <div class="modal-header bg-icasoftBlue text-white p-6 relative">
+        <h3 class="text-2xl font-bold uppercase font-Big-Shoulders">INICIAR SESIÓN</h3>
+        <button class="modal-close absolute top-4 right-4 text-2xl text-white hover:text-gray-200">
+          &times;
+        </button>
+      </div>
+      
+      <!-- Cuerpo del modal -->
+      <div class="modal-body p-6">
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label for="login-email" class="block text-gray-700 font-Lexend-Deca mb-1">Correo electrónico</label>
+            <input type="email" id="login-email" required
+                   class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-icasoftBlue">
+          </div>
+          
+          <div>
+            <label for="login-password" class="block text-gray-700 font-Lexend-Deca mb-1">Contraseña</label>
+            <input type="password" id="login-password" required
+                   class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-icasoftBlue">
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <input type="checkbox" class="form-checkbox text-icasoftBlue">
+              <span class="ml-2 text-gray-700 font-Lexend-Deca">Recordarme</span>
+            </label>
+            <a href="#" class="text-icasoftBlue hover:underline font-Lexend-Deca">¿Olvidaste tu contraseña?</a>
+          </div>
+          
+          <button type="submit" 
+                  class="w-full bg-icasoftBlue text-white py-3 px-4 rounded-lg hover:bg-blue-600 transition duration-200 font-Lexend-Deca uppercase font-bold">
+            INGRESAR
+          </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+          <p class="text-gray-600 font-Lexend-Deca">¿No tienes una cuenta? 
+            <a href="#" id="showRegisterModal" class="text-icasoftBlue hover:underline font-bold">Regístrate aquí</a>
+          </p>
+        </div>
+        
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <p class="text-center text-gray-600 font-Lexend-Deca mb-3">O inicia sesión con</p>
+          <div class="flex justify-center space-x-4">
+            <button class="social-login-btn bg-blue-600 text-white">
+              <i class="icofont-facebook"></i>
+            </button>
+            <button class="social-login-btn bg-red-600 text-white">
+              <i class="icofont-google-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Estilos para el modal de login */
+  .modal-login {
+    transition: opacity 0.3s ease;
+  }
+  
+  .modal-login.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .modal-login:not(.hidden) {
+    opacity: 1;
+  }
+  
+  .modal-container {
+    transition: transform 0.3s ease;
+  }
+  
+  .modal-login.hidden .modal-container {
+    transform: translateY(-20px);
+  }
+  
+  .modal-login:not(.hidden) .modal-container {
+    transform: translateY(0);
+  }
+  
+  .social-login-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: transform 0.2s;
+  }
+  
+  .social-login-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 640px) {
+    .modal-container {
+      width: 95%;
+      margin: 10px auto;
+    }
+  }
+</style>

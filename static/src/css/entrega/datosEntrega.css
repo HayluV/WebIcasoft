@@ -1,0 +1,338 @@
+/* Estilos base */
+body {
+
+}
+
+/* Contenedor principal */
+.checkout-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+/* Sección izquierda (formulario y resumen) */
+.left-section {
+    flex: 1;
+    padding: 30px;
+    min-width: 300px;
+}
+
+/* Sección derecha (pago) */
+.right-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    min-width: 300px;
+}
+
+.right-section img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Bloques de contenido */
+.delivery-block,
+.summary-block {
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+/* Encabezados de bloques */
+.block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.block-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Botones */
+.edit-btn {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #555;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Información de entrega */
+.delivery-info p {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Resumen de compra */
+.summary-details {
+    margin-top: 15px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em;
+}
+
+/* Botón de pago */
+.pay-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.pay-btn:hover {
+    background-color: #45a049;
+}
+
+/* Estilos del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 25px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: modalopen 0.4s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes modalopen {
+    from {
+        opacity: 0;
+        top: 45%;
+    }
+    to {
+        opacity: 1;
+        top: 50%;
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Formulario */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.required-field::after {
+    content: " *";
+    color: red;
+}
+
+/* Botón guardar */
+.save-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #45a049;
+}
+
+/* Campos dependientes del tipo de envío */
+.shipping-dependent-field {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border-left: 3px solid #4CAF50;
+}
+
+.shipping-dependent-field.visible {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .checkout-container {
+        margin: 10px;
+    }
+    
+    .left-section,
+    .right-section {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
+        flex-direction: column;
+    }
+    
+    .right-section {
+        order: -1;
+        padding: 30px 20px;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .left-section {
+        padding: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        top: 20px;
+        transform: none;
+        margin: 20px auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .block-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .block-title {
+        margin-bottom: 10px;
+    }
+    
+    .delivery-block,
+    .summary-block {
+        padding: 15px;
+    }
+    
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        padding: 8px;
+    }
+    
+    .pay-btn,
+    .save-btn {
+        padding: 12px;
+    }
+}
+
+/* Animaciones adicionales */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delivery-block,
+.summary-block {
+    animation: fadeInUp 0.5s ease-out;
+}

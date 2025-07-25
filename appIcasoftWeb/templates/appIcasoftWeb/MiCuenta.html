@@ -1,0 +1,278 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo-Icasoft/logoNaranja.png' %}">
+    <title>Mi Cuenta - IcaSoft</title>
+    <link rel="stylesheet" href="{% static 'src/css/cuenta/micuenta.css' %}" />
+</head>
+<body>
+    <div>
+        <header>
+            {% include 'appIcasoftWeb/header/header.html' %}
+        </header>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-title active font-Big-Shoulders">MI CUENTA</div>
+            </div>
+
+            <div class="profile-section">
+                <div class="profile-row">
+                    <div class="profile-field">
+                        <div class="profile-label">Nombres:</div>
+                        <div class="profile-value" id="display-firstname">Cargando...</div>
+                    </div>
+                    <div class="profile-field">
+                        <div class="profile-label">Apellidos:</div>
+                        <div class="profile-value" id="display-lastname">Cargando...</div>
+                    </div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="profile-field">
+                        <div class="profile-label">Tipo De Documento:</div>
+                        <div class="profile-value" id="display-doctype">Cargando...</div>
+                    </div>
+                    <div class="profile-field">
+                        <div class="profile-label">Número de documento:</div>
+                        <div class="profile-value" id="display-docnumber">Cargando...</div>
+                    </div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="profile-field">
+                        <div class="profile-label">Correo:</div>
+                        <div class="profile-value" id="display-correo">Cargando...</div>
+                    </div>
+                    <div class="profile-field">
+                        <div class="profile-label">Número de celular:</div>
+                        <div class="profile-value" id="display-phone">Cargando...</div>
+                    </div>
+                </div>
+
+                <div class="profile-row">
+                    <div class="profile-field">
+                        <div class="profile-label">Contraseña:</div>
+                        <div class="profile-value">**************</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="edit-button  font-Lexend-Deca" id="profile-open-modal">EDITAR PERFIL</button>
+        </div>
+
+        <div id="profile-edit-modal" class="profile-modal">
+            <div class="profile-modal-content">
+                <div class="profile-modal-header">
+                    <span class="profile-modal-title">Editar Perfil</span>
+                    <span class="profile-close-modal">&times;</span>
+                </div>
+
+                <form id="profileForm">
+                    <div class="profile-row">
+                        <div class="profile-field">
+                            <div class="profile-form-group">
+                                <label for="firstname">Nombres:</label>
+                                <input type="text" id="firstname" required>
+                            </div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="profile-form-group">
+                                <label for="lastname">Apellidos:</label>
+                                <input type="text" id="lastname" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-row">
+                        <div class="profile-field">
+                            <div class="profile-form-group">
+                                <label for="doctype">Tipo de Documento:</label>
+                                <select id="doctype" required>
+                                    <option value="Documento Nacional de Identidad">Documento Nacional de Identidad</option>
+                                    <option value="Carnet de Extranjería">Carnet de Extranjería</option>
+                                    <option value="Pasaporte">Pasaporte</option>
+                                    <option value="Otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="profile-form-group">
+                                <label for="docnumber">Número de documento:</label>
+                                <input type="text" id="docnumber" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-row">
+                        <div class="profile-field">
+                            <div class="profile-form-group">
+                                <label for="correo">Correo:</label>
+                                <input type="email" id="correo" required>
+                            </div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="profile-form-group">
+                                <label for="phone">Número de celular:</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-form-group password-container">
+                        <label for="nuevacontraseña1">Nueva Contraseña:</label>
+                        <input type="password" id="nuevacontraseña1" placeholder="Dejar en blanco si desea mantener la contraseña actual">
+                        <span class="toggle-password" id="togglePassword">Mostrar</span>
+                        <div class="error-message" id="password-error">La contraseña debe tener al menos 6 caracteres</div>
+                    </div>
+
+                    <div class="profile-form-group password-container">
+                        <label for="nuevacontraseña2">Confirmar Nueva Contraseña:</label>
+                        <input type="password" id="nuevacontraseña2" placeholder="Repite la nueva contraseña">
+                        <span class="toggle-password" id="toggleConfirmPassword">Mostrar</span>
+                        <div class="error-message" id="confirm-error">Las contraseñas no coinciden</div>
+                    </div>
+
+                    <div class="profile-modal-footer">
+                        <button type="button" class="profile-cancel" id="profile-cancel-edit">Cancelar</button>
+                        <button type="button" class="profile-save-changes" id="profile-save-changes">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer>
+            {% include 'appIcasoftWeb/footer/footer.html' %}
+            {% include 'appIcasoftWeb/chatbot/chatbot.html' %}
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileData = JSON.parse(localStorage.getItem('profileData')) || {
+                firstName: 'Juan',
+                lastName: 'Pérez',
+                docType: 'Documento Nacional de Identidad',
+                docNumber: '12345678',
+                correo: 'juan.perez@example.com',
+                phone: '987654321',
+                password: 'micontraseña123' 
+            };
+
+            renderProfileInfo(profileData);
+
+            const modal = document.getElementById('profile-edit-modal');
+            const openBtn = document.getElementById('profile-open-modal');
+            const closeBtn = document.querySelector('.profile-close-modal');
+            const cancelBtn = document.getElementById('profile-cancel-edit');
+            const saveBtn = document.getElementById('profile-save-changes');
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const passwordInput = document.getElementById('nuevacontraseña1');
+            const confirmPasswordInput = document.getElementById('nuevacontraseña2');
+
+            togglePassword.addEventListener('click', function () {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
+            });
+
+            toggleConfirmPassword.addEventListener('click', function () {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? 'Mostrar' : 'Ocultar';
+            });
+
+            openBtn.addEventListener('click', function () {
+                document.getElementById('firstname').value = profileData.firstName;
+                document.getElementById('lastname').value = profileData.lastName;
+                document.getElementById('doctype').value = profileData.docType;
+                document.getElementById('docnumber').value = profileData.docNumber;
+                document.getElementById('correo').value = profileData.correo;
+                document.getElementById('phone').value = profileData.phone;
+                document.getElementById('nuevacontraseña1').value = '';
+                document.getElementById('nuevacontraseña2').value = '';
+                document.getElementById('password-error').style.display = 'none';
+                document.getElementById('confirm-error').style.display = 'none';
+                modal.style.display = 'block';
+            });
+
+            function closeModal() {
+                modal.style.display = 'none';
+            }
+
+            closeBtn.addEventListener('click', closeModal);
+            cancelBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', function (event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+            function validatePasswords() {
+                const newPassword1 = passwordInput.value;
+                const newPassword2 = confirmPasswordInput.value;
+                let isValid = true;
+
+                if (newPassword1 || newPassword2) {
+                    if (newPassword1.length < 6 && newPassword1.length > 0) {
+                        document.getElementById('password-error').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('password-error').style.display = 'none';
+                    }
+
+                    if (newPassword1 !== newPassword2) {
+                        document.getElementById('confirm-error').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('confirm-error').style.display = 'none';
+                    }
+                }
+
+                return isValid;
+            }
+
+            saveBtn.addEventListener('click', function () {
+                if (!validatePasswords()) return;
+
+                const firstName = document.getElementById('firstname').value.trim();
+                const lastName = document.getElementById('lastname').value.trim();
+                const docType = document.getElementById('doctype').value;
+                const docNumber = document.getElementById('docnumber').value.trim();
+                const correo = document.getElementById('correo').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+                const newPassword1 = document.getElementById('nuevacontraseña1').value.trim();
+                const newPassword2 = document.getElementById('nuevacontraseña2').value.trim();
+
+                const newProfileData = {
+                    firstName,
+                    lastName,
+                    docType,
+                    docNumber,
+                    correo,
+                    phone,
+                    password: newPassword1 ? newPassword1 : profileData.password
+                };
+
+                localStorage.setItem('profileData', JSON.stringify(newProfileData));
+                renderProfileInfo(newProfileData);
+                Object.assign(profileData, newProfileData);
+                closeModal();
+                alert('Los cambios se han guardado correctamente');
+            });
+
+            function renderProfileInfo(data) {
+                document.getElementById('display-firstname').textContent = data.firstName;
+                document.getElementById('display-lastname').textContent = data.lastName;
+                document.getElementById('display-doctype').textContent = data.docType;
+                document.getElementById('display-docnumber').textContent = data.docNumber;
+                document.getElementById('display-correo').textContent = data.correo;
+                document.getElementById('display-phone').textContent = data.phone;
+            }
+        });
+    </script>
+</body>
+</html>
