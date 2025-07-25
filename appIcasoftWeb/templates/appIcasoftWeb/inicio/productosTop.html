@@ -15,26 +15,23 @@
     <section class="w-full mt-0 overflow-hidden relative">
       <div class="bg-sky-300 p-[10px] w-full">
         <h2 class="titulo-principal-cursos fondo-animated-text uppercase">Productos top</h2>
-
       </div>
 
-      <div
-        class="productos-top-flex productos-top-flex-col lg:productos-top-flex-row w-full mt-3 mb-6 justify-center gap-6">
+      <div class="productos-top-flex productos-top-flex-col lg:productos-top-flex-row w-full mt-3 mb-6 justify-center gap-6">
         <div class="productos-top-flex justify-between items-center w-full">
-          <div
-            class="arrow-left cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] productos-top-flex items-center justify-center ml-[20px]">
-            &#10094;</div>
+          <div class="arrow-left cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] productos-top-flex items-center justify-center ml-[20px]">
+            &#10094;
+          </div>
           <div class="slider-viewport overflow-hidden mx-auto">
-            <div id="productos-top-slider"
-              class="slider-container productos-top-flex transition-transform duration-300">
+            <div id="productos-top-slider" class="slider-container productos-top-flex transition-transform duration-300">
               {% for producto in productos %}
-              <div class="producto-card bg-sky-100 p-6 lg:p-[48px] bg-opacity-90 mb-6 lg:mb-0">
+             <div class="producto-card bg-sky-100 p-6 lg:p-[48px] bg-opacity-90 mb-6 lg:mb-0" style="height: 520px;">
                 <picture>
                   <img src="{{ producto.img }}" alt="{{ producto.name }}"
                     class="mb-[25px] rounded-lg mx-auto block transition-transform duration-300 transform hover:scale-105 object-cover max-w-full" />
                 </picture>
                 <div class="text-content w-full mb-4 space-y-2">
-                  <div class="producto-marca text-blue-950 font-Big-Shoulders font-bold ">
+                  <div class="producto-marca text-blue-950 font-Big-Shoulders font-bold">
                     {{producto.marca }}
                   </div>
                   <h2 class="producto-title-clamp font-Big-Shoulders uppercase text-blue-950" style="font-size: 20px;">
@@ -65,9 +62,9 @@
               {% endfor %}
             </div>
           </div>
-          <div
-            class="arrow-right cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] productos-top-flex items-center justify-center mr-[20px]">
-            &#10095;</div>
+          <div class="arrow-right cursor-pointer text-2xl bg-icasoftBlue text-white p-5 rounded-full w-[50px] h-[50px] productos-top-flex items-center justify-center mr-[20px]">
+            &#10095;
+          </div>
         </div>
       </div>
     </section>
@@ -75,5 +72,4 @@
 
   <script src="{% static 'src/js/productosTopSlider.js' %}"></script>
 </body>
-
 </html>

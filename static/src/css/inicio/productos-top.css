@@ -32,7 +32,7 @@
   flex: 0 0 320px !important;
   margin: 0px 20px 0px 20px;
   box-sizing: border-box;
-  height: 480px; 
+  height: 520px; /* Aumentado de 480px a 520px */
   padding: 15px;
   background-color: #e0f2fe;
   border-radius: 30px;
@@ -41,26 +41,28 @@
   justify-content: space-between;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
 .producto-card img {
   width: 250px;
-  height: 200px; /* Reduje un poco la altura de la imagen */
+  height: 180px; /* Reducido de 200px a 180px */
   object-fit: cover;
-  margin: 0 auto 25px; /* Reduje el margen inferior */
+  margin: 0 auto 15px; /* Reducido de 25px a 15px */
   display: block;
   transition: transform 0.3s ease;
   border-radius: 30px;
 }
 
+/* Ajustar el contenedor del texto */
 .text-content {
   width: 100%;
-  min-height: 80px; /* Altura mínima para el texto */
+  min-height: 70px; /* Reducido de 80px a 70px */
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 10px; /* Añadido para separación */
 }
-
 
 .producto-title-clamp {
   font-size: clamp(12px, 1.8vw, 20px);
@@ -80,51 +82,27 @@
   overflow: visible;
 }
 
-  /* Agrega esto a tu archivo productos-top.css */
-
 /* Estilo para la marca del producto */
 .producto-marca {
-    position: absolute;
-    left: 10px;
-    top: 20px;
-    transform: rotate(-15deg);
-    transform-origin: left bottom;
-    font-size: 20px !important;
-    font-weight: 700;
-    color: #1e3a8a; /* Color azul oscuro */
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 2px 8px;
-    border-radius: 3px;
-    z-index: 1;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-    white-space: nowrap;
-    /* Quitamos cualquier efecto de scrolling/text-shadow que tenía antes */
-    animation: none !important;
-    text-shadow: none !important;
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  transform: rotate(-15deg);
+  transform-origin: left bottom;
+  font-size: 20px !important;
+  font-weight: 700;
+  color: #1e3a8a;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 2px 8px;
+  border-radius: 3px;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  white-space: nowrap;
+  animation: none !important;
+  text-shadow: none !important;
 }
-/* Modificación para la tarjeta para acomodar la marca */
-.producto-card {
-    position: relative; /* Necesario para posicionamiento absoluto de la marca */
-    padding-left: 40px !important; /* Espacio para la marca */
-}
-
-/* Ajuste para pantallas pequeñas */
-@media (max-width: 768px) {
-    .producto-marca {
-        font-size: 0.7em !important;
-        left: 5px;
-        top: 15px;
-        padding: 1px 5px;
-    }
-    
-    .producto-card {
-        padding-left: 30px !important;
-    }
-}
-
-
 
 @keyframes scrolling-text {
   0% {
@@ -139,8 +117,10 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 300px; /* Ajusta según necesidad */
-  margin: 0 auto;
+  width: 100%;
+  max-width: 300px;
+  margin: 10px auto 0; /* Añadido margen superior */
+  padding-top: 10px; /* Añadido padding */
 }
 
 /* Contenedor de cantidad */
@@ -172,7 +152,7 @@
   font-size: 24px;
   font-weight: bold;
   line-height: 1;
-  margin-bottom: 2px; /* Ajuste fino para centrado visual */
+  margin-bottom: 2px;
 }
 
 .quantity-btn:hover {
@@ -193,18 +173,24 @@
 .cart-btn {
   background-color: #3944b3;
   border-radius: 30px;
-  padding: 12px 20px;
+  padding: 12px;
   cursor: pointer;
   color: white;
   text-align: center;
   transition: all 0.3s ease;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .cart-btn span {
   font-size: 1.1rem;
   font-weight: 500;
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cart-btn:hover {
@@ -212,6 +198,7 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 /* Estilo para las flechas de navegación */
 .arrow-left,
 .arrow-right {
@@ -261,55 +248,94 @@ button.btn:hover {
   border-color: #3944b3;
 }
 
+/* ------------------------- MEDIA QUERIES ------------------------- */
+
 @media (max-width: 1920px) and (min-width: 1366px) {
-     .producto-card {
+  .producto-card {
     flex: 0 0 340px !important;
     margin: 0px 25px 0px 12px;
     height: 400px;
     padding: 15px;
   }
-
+  
+  .quantity-wrapper {
+    max-width: 280px;
+  }
 }
 
+@media (max-width: 1280px) {
+  .producto-card {
+    flex: 0 0 300px !important;
+    height: 420px;
+  }
+  
+  .cart-btn span {
+    font-size: 1rem;
+  }
+}
 
 @media (max-width: 1033px) {
-   .producto-card {
+  .producto-card {
     flex: 0 0 240px !important;
-    margin: 0px 20px 0px 20px;
-    height: 400px;
-    padding: 15px;
+    height: 420px;
+  }
+  
+  .quantity-container {
+    padding: 8px 15px;
+  }
+  
+  .cart-btn span {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 1023px) {
-   .producto-card {
+  .producto-card {
     flex: 0 0 270px !important;
-    margin: 0px 20px 0px 20px;
-    height: 400px;
-    padding: 15px;
+    height: 420px;
   }
 }
 
 @media (max-width: 1000px) {
-   .producto-card {
+  .producto-card {
     flex: 0 0 240px !important;
     margin: 0px 30px 0px 30px !important;
-    height: 400px;
-    padding: 15px;
+    height: 420px;
+  }
+  
+  .quantity-wrapper {
+    gap: 10px;
+  }
+  
+  .cart-btn {
+    padding: 10px;
   }
 }
 
-
-/* Diseño para pantallas pequeñas */
+/* Tablet */
 @media (max-width: 768px) {
   .slider-viewport {
     width: 100%;
   }
 
   .producto-card {
-    margin: 0px 4px 0px 0px !important;
-    height: 400px !important;
-    max-width: 50%;
+    flex: 0 0 45% !important;
+    margin: 0px 10px !important;
+    height: 420px !important;
+    padding: 15px;
+  }
+  
+  .producto-card img {
+    width: 90%;
+    height: 180px;
+  }
+  
+  .quantity-wrapper {
+    max-width: 100%;
+  }
+  
+  .cart-btn span {
+    font-size: 0.8rem;
   }
 
   .arrow-left,
@@ -317,24 +343,61 @@ button.btn:hover {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
+    padding: 1.5rem;
+  }
+  
+  .producto-marca {
+    font-size: 16px !important;
+    left: 8px;
+    top: 15px;
   }
 }
 
-/* Diseño para pantallas más pequeñas */
+/* Mobile */
 @media (max-width: 480px) {
   .slider-viewport {
     width: 100%;
   }
 
   .producto-card {
-    flex: 0 0 100% !important;
-    margin: 0px 1px 0px 0px !important;
+    flex: 0 0 90% !important;
+    margin: 0px 5px !important;
     height: 400px;
-    max-width: 100%;
+    padding: 15px;
   }
-
+  
   .producto-card img {
-    width: 80%;
+    width: 85%;
+    height: 160px;
+  }
+  
+  .quantity-wrapper {
+    gap: 8px;
+  }
+  
+  .quantity-container {
+    padding: 6px 12px;
+  }
+  
+  .quantity-btn {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .quantity-btn span {
+    font-size: 20px;
+  }
+  
+  .quantity-display {
+    font-size: 1.2rem;
+  }
+  
+  .cart-btn {
+    padding: 8px;
+  }
+  
+  .cart-btn span {
+    font-size: 0.8rem;
   }
 
   .arrow-left,
@@ -342,32 +405,15 @@ button.btn:hover {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
+    padding: 1rem;
     transform: translateY(0);
   }
-
-  .arrow-left {
-    left: 10px;
-  }
-
-  .arrow-right {
-    right: 10px;
-  }
-
-  /* Estilo para la cantidad en pantallas pequeñas */
-  .quantity-container {
-    padding: 8px; /* Ajusta el padding para que no se vea demasiado grande */
-    gap: 10px; /* Espaciado entre los botones */
-    border-radius: 25px; /* Ajusta el border-radius */
-  }
-
-  .quantity-btn {
-    width: 40px; /* Botones más pequeños */
-    height: 40px; /* Botones más pequeños */
-    font-size: 28px; /* Reduce el tamaño del texto */
-  }
-
-  .quantity-display {
-    font-size: 1rem; /* Ajusta el tamaño del texto */
+  
+  .producto-marca {
+    font-size: 14px !important;
+    left: 5px;
+    top: 10px;
+    padding: 1px 5px;
   }
 }
 
@@ -377,14 +423,4 @@ button.btn:hover {
 
 .producto-card img:hover {
   transform: scale(1.05);
-}
-
-button.btn {
-  color: white;
-  padding: 7px 30px;
-  border-radius: 30px;
-  font-size: larger;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  border: 2px solid transparent;
 }

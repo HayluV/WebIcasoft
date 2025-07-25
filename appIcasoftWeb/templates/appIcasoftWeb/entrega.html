@@ -1,11 +1,225 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Carrito de compras de IcaSoft">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'src/header.css' %}" />
+    <link rel="stylesheet" href="{% static 'src/css/entrega/datosEntrega.css' %}" />
+    <title>Entrega - IcaSoft</title>
+    <script src="https://js.culqi.com/checkout-js"></script>
 </head>
+
 <body>
-    
+    <header>
+        {% include 'appIcasoftWeb/header/header.html' %}
+    </header>
+
+    <div class="checkout-container">
+        <div class="left-section">
+            <div class="delivery-block">
+                <div class="block-header">
+                    <div class="block-title">Datos de entrega</div>
+                    <button class="edit-btn" id="edit-delivery-btn">Editar</button>
+                </div>
+                <div class="delivery-info" id="delivery-info">
+                </div>
+            </div>
+
+            <div class="summary-block">
+                <div class="block-header">
+                    <div class="block-title">Resumen</div>
+                </div>
+                <div class="summary-details">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span id="subtotal">S/ 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Gasto de envío</span>
+                        <span id="shipping">S/ 0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Total</span>
+                        <span id="total">S/ 0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="culqi-container"></div>
+    </div>
+
+    <div id="delivery-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar datos de entrega</h2>
+            <form id="delivery-form">
+                <div class="form-group">
+                    <label for="first-name" class="required-field">Nombre</label>
+                    <input type="text" id="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name" class="required-field">Apellido Paterno</label>
+                    <input type="text" id="last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="mother-last-name" class="required-field">Apellido Materno</label>
+                    <input type="text" id="mother-last-name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="dni" class="required-field">DNI</label>
+                    <input type="text" id="dni" required maxlength="8">
+                </div>
+                <div class="form-group">
+                    <label for="shipping-type">Tipo de envío</label>
+                    <select id="shipping-type">
+                        <option value="">Seleccione una opción</option>
+                        <option value="pickup">Recojo en el local</option>
+                        <option value="delivery">Delivery (solo válido en Ica)</option>
+                        <option value="shalom">Envío por Shalom</option>
+                        <option value="olva">Envío por Olva Courier</option>
+                    </select>
+                </div>
+
+                <!-- Campos para recoger en local -->
+                <div id="pickup-fields" class="shipping-dependent-field">
+                    <input type="hidden" id="pickup-departamento" value="Ica">
+                    <input type="hidden" id="pickup-provincia" value="Ica">
+                    <input type="hidden" id="pickup-distrito" value="Ica">
+                </div>
+
+                <!-- Campos para delivery (solo Ica) -->
+                <div id="delivery-fields" class="shipping-dependent-field">
+                    <div class="form-group">
+                        <label for="address">Dirección de entrega</label>
+                        <textarea id="address" rows="3"></textarea>
+                    </div>
+                    <input type="hidden" id="delivery-departamento" value="Ica">
+                    <input type="hidden" id="delivery-provincia" value="Ica">
+                    <input type="hidden" id="delivery-distrito" value="Ica">
+                </div>
+
+                <!-- Campos para envío por Shalom -->
+                <div id="shalom-fields" class="shipping-dependent-field">
+                    <div class="form-group">
+                        <label for="shalom-address">Nombre de la agencia a entregar</label>
+                        <textarea id="shalom-address" rows="3" placeholder="Ingrese dirección completa"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="shalom-departamento">Departamento</label>
+                        <select id="shalom-departamento">
+                            <option value="">Seleccione un departamento</option>
+                            <option value="Lima">Lima</option>
+                            <option value="Arequipa">Arequipa</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Piura">Piura</option>
+                            <option value="La Libertad">La Libertad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="shalom-provincia">Provincia</label>
+                        <select id="shalom-provincia">
+                            <option value="">Seleccione una provincia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="shalom-distrito">Distrito</label>
+                        <select id="shalom-distrito">
+                            <option value="">Seleccione un distrito</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Campos para envío por Olva -->
+                <div id="olva-fields" class="shipping-dependent-field">
+                    <div class="form-group">
+                        <label for="olva-address">Dirección de entrega</label>
+                        <textarea id="olva-address" rows="3" placeholder="Ingrese dirección completa"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="olva-departamento">Departamento</label>
+                        <select id="olva-departamento">
+                            <option value="">Seleccione un departamento</option>
+                            <option value="Lima">Lima</option>
+                            <option value="Arequipa">Arequipa</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Piura">Piura</option>
+                            <option value="La Libertad">La Libertad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="olva-provincia">Provincia</label>
+                        <select id="olva-provincia">
+                            <option value="">Seleccione una provincia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="olva-distrito">Distrito</label>
+                        <select id="olva-distrito">
+                            <option value="">Seleccione un distrito</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="required-field">Teléfono</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <button type="submit" class="save-btn">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <footer>
+        {% include 'appIcasoftWeb/footer/footer.html' %}
+    </footer>
+
+    {% include 'appIcasoftWeb/chatbot/chatbot.html' %}
+    <script src="{% static 'src/js/entrega/entrega.js' %}"></script>
+
+    <script>
+        let culqiCheckoutInstance = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCulqi();
+        });
+
+        function initializeCulqi() {
+            const totalElement = document.getElementById('total');
+            let totalAmount = parseFloat(totalElement.textContent.replace('S/ ', '')) * 100;
+            
+            if (isNaN(totalAmount) || totalAmount === 0) {
+                totalAmount = 100; 
+            }
+
+            const publicKey = 'pk_test_e94078b9b248675b'; 
+
+            culqiCheckoutInstance = new CulqiCheckout(publicKey, {
+                settings: {
+                    title: "IcaSoft",
+                    currency: "PEN",
+                    amount: totalAmount,
+                },
+                options: {
+                    container: "#culqi-container",
+                    modal: false,
+                }
+            });
+
+            culqiCheckoutInstance.open();
+
+            culqiCheckoutInstance.culqi = function() {
+                if (culqiCheckoutInstance.token) {
+                    alert("¡Pago exitoso! Token: " + culqiCheckoutInstance.token.id);
+                }
+            };
+        }
+    </script>
 </body>
 </html>
