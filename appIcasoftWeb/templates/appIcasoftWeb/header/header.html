@@ -52,7 +52,7 @@
           {% if user.is_authenticated %}
           <p style="cursor: pointer; font-size: larger;">¡Hola, {{ user.username }}!</p>
           <div id="user-menu">
-            <a href="/mi-cuenta">Mi Cuenta</a>
+            <a href="/MiCuenta">Mi Cuenta</a>
             <a href="/mis-pedidos">Mis Pedidos</a>
             <a href="{% url 'user_logout' %}">Cerrar Sesión</a>
           </div>
@@ -149,17 +149,18 @@
           </button>
         </form>
         <div class="login-footer mt-6 text-center">
-          <p class="text-blue-300 mb-2">¿No tienes cuenta? <a href="#" id="open-register-from-login"
-              class="text-white hover:underline">Regístrate</a></p>
-          <p><a href="/recuperar-contrasena" class="text-white hover:underline">¿Olvidaste tu contraseña?</a></p>
+          <p class="text-blue-300 mb-2">¿No tienes cuenta?
+            <a href="{% url 'user_register' %}" class="text-white hover:underline">Registrarse</a>
+          </p>
+          <p>
+            <a href="" class="text-white hover:underline">¿Olvidaste tu contraseña?</a>
+          </p>
         </div>
       </div>
     </div>
   </div>
 
 
-  <!-- Modal de Registro - Versión mejorada -->
-  <!-- Modal de Registro (versión final) -->
   <div id="register-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
     <div class="register-modal-background absolute inset-0 opacity-90"></div>
     <div class="register-container relative max-w-md w-full mx-4"

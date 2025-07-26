@@ -10,15 +10,17 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('email') 
         password = request.POST.get('password')
-        print(f"[DEBUG] Datos recibidos: username={username}, password={password}")
+    
         user = authenticate(request, username=username, password=password)
-        if user is not None:
+        if user is not None and user.role == 'client':
             login(request, user)
-            if user.role == 'client':
-                return redirect('user_inicio')
+            return redirect('user_inicio')
         else:
-            messages.error(request, "Usuario o contraseña incorrectos.")
+            return redirect('user_inicio')
     return render(request, 'appIcasoftWeb/inicio.html')
+
+def user_register(request):
+    return render(request, "appIcasoftWeb/registrarse.html")
 
 def user_logout(request):
     logout(request)

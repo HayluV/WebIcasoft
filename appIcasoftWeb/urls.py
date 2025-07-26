@@ -3,6 +3,7 @@ from .views import user_inicio
 from .views import (
     user_inicio,
     user_login,
+    user_register,
     user_logout,
     user_curso,
     user_producto,
@@ -18,6 +19,7 @@ from .views import (
 urlpatterns = [
     path("", user_inicio, name="user_inicio"),
     path("Login/", user_login, name="user_login"),
+    path("Regitrarse/", user_register, name="user_register"),
     path("Logout/", user_logout, name="user_logout"),
     path("Curso/", user_curso, name="user_curso"),  
     path("Curso/<str:curso_nombre>/", user_curso, name="user_curso_detalle"),  

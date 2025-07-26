@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo-Icasoft/logoNaranja.png' %}">
+    <title>Registrarse - IcaSoft</title>
+    <link rel="stylesheet" href="{% static 'src/css/registrarse.css' %}" />
+</head>
+
+<body class="main-container">
+    <div class="content-wrapper">
+        <header>
+            {% include 'appIcasoftWeb/header/header.html' %}
+        </header>
+
+        <main>
+            <div class="dos-columnas">
+                <div class="image-column">
+                    <img src="{% static 'img/logo-Icasoft/logoNaranja.webp' %}" alt="IcaSoft logo">
+                </div>
+
+                <div class="form-column">
+                    <div class="form-container">
+                        <h1 class="form-title font-Big-Shoulders uppercase">REGISTRARSE</h1>
+
+                        <form id="registroForm" novalidate>
+                            <div class="form-group">
+                                <label for="documento" class="form-label">Número de documento (DNI)</label>
+                                <div class="dni-group">
+                                    <input type="text" id="documento" class="form-input dni-input"
+                                        placeholder="Ingrese su número" required pattern="[0-9]{8,12}" maxlength="12">
+                                    <button type="button" class="search-btn" id="buscarBtn">Buscar</button>
+                                </div>
+                                <div id="documento-error" class="error-message">
+                                    Por favor ingrese un número de documento válido (8-12 dígitos)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" id="nombre" class="form-input" placeholder="Ingrese su nombre"
+                                    required pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]{2,50}">
+                                <div id="nombre-error" class="error-message">
+                                    Por favor ingrese un nombre válido (solo letras, 2-50 caracteres)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="apellidos" class="form-label">Apellidos</label>
+                                <input type="text" id="apellidos" class="form-input" placeholder="Ingrese sus apellidos"
+                                    required pattern="[A-Za-záéíóúñÁÉÍÓÚÑ\s]{2,50}">
+                                <div id="apellidos-error" class="error-message">
+                                    Por favor ingrese apellidos válidos (solo letras, 2-50 caracteres)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" id="correo" class="form-input"
+                                    placeholder="Ingrese su correo electrónico" required>
+                                <div id="correo-error" class="error-message">
+                                    Por favor ingrese un correo electrónico válido
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="celular" class="form-label">N° de celular</label>
+                                <input type="tel" id="celular" class="form-input"
+                                    placeholder="Ingrese su número de celular" required pattern="[0-9]{9}"
+                                    maxlength="9">
+                                <div id="celular-error" class="error-message">
+                                    Por favor ingrese un número de celular válido (9 dígitos)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contrasena" class="form-label">Contraseña</label>
+                                <input type="password" id="contrasena" class="form-input"
+                                    placeholder="Cree una contraseña" required minlength="8" maxlength="20">
+                                <div class="password-strength">
+                                    <div class="password-strength-bar" id="password-strength-bar"></div>
+                                </div>
+                                <div class="password-hint">
+                                    La contraseña debe tener al menos 6 caracteres, incluir mayúsculas, minúsculas,
+                                    números y caracteres especiales.
+                                </div>
+                                <div id="contrasena-error" class="error-message">
+                                    Por favor ingrese una contraseña válida
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirmar-contrasena" class="form-label">Confirmar Contraseña</label>
+                                <input type="password" id="confirmar-contrasena" class="form-input"
+                                    placeholder="Confirme su contraseña" required>
+                                <div id="confirmar-contrasena-error" class="error-message">
+                                    Las contraseñas no coinciden
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn">REGISTRARSE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        {% include 'appIcasoftWeb/footer/footer.html' %}
+        {% include 'appIcasoftWeb/chatbot/chatbot.html' %}
+    </footer>
+
+    <script src="{% static 'src/js/registrarse.js' %}"></script>
+</body>
+</html>
