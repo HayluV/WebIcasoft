@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     const modalLoginBtn = document.getElementById('modalLogin');
-    // Si existe el modalLoginBtn, agregar el evento click
+    // Si existe el modalLoginBtn, agregar el evento click -- aquí que abra el modal de login ELIANA
     if (modalLoginBtn) {
         modalLoginBtn.addEventListener('click', function () {
             alert('Por favor, inicia sesión para continuar con la compra.');
