@@ -17,8 +17,10 @@ def user_login(request):
             return redirect('user_inicio')
         else:
             return redirect('user_inicio')
-            messages.error(request, "Usuario o contraseña incorrectos o no autorizado.")
     return render(request, 'appIcasoftWeb/inicio.html')
+
+def user_register(request):
+    return render(request, "appIcasoftWeb/registrarse.html")
 
 def user_logout(request):
     logout(request)
