@@ -45,15 +45,15 @@
         </div>
         <a href="/#cursos">CURSOS</a>
         <a href="/#blog">BLOG</a>
-        <a href="/Contacto">CONTACTAR</a>
+        <a href="{% url 'user_contacto' %}">CONTACTAR</a>
 
         <!-- Ícono de usuario con menú desplegable -->
         <div class="user-menu-container relative">
           {% if user.is_authenticated %}
           <p style="cursor: pointer; font-size: larger;">¡Hola, {{ user.username }}!</p>
           <div id="user-menu">
-            <a href="/MiCuenta">Mi Cuenta</a>
-            <a href="/mis-pedidos">Mis Pedidos</a>
+            <a href="{% url 'user_micuenta' %}">Mi Cuenta</a>
+            <a href="{% url 'user_pedido' %}">Mis Pedidos</a>
             <a href="{% url 'user_logout' %}">Cerrar Sesión</a>
           </div>
           {% else %}
@@ -93,7 +93,7 @@
       <a href="/#nosotros" class="block p-2 text-black hover:bg-gray-100 rounded text-center">NOSOTROS</a>
       <a href="/#cursos" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CURSOS</a>
       <a href="/#blog" class="block p-2 text-black hover:bg-gray-100 rounded text-center">BLOG</a>
-      <a href="/Contacto" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CONTACTAR</a>
+      <a href="{% url 'user_contacto' %}" class="block p-2 text-black hover:bg-gray-100 rounded text-center">CONTACTAR</a>
 
 
     </div>
@@ -109,12 +109,11 @@
           <h3 class="categoria-titulo">{{ categoria.nombre }}</h3>
           {% for sub in categoria.subcategorias %}
           <div class="producto-item">
-            <a href="/Productos/{{categoria.slugcat}}/{{sub.slugSub}}" class="producto-link">{{ sub.nombre }}</a>
-            <!--href="/Productos/laptops/gaming/"-->
+            <a href="{% url 'user_producto_subcategoria' categoria.slugcat sub.slugSub %}" class="producto-link">{{ sub.nombre }}</a>
           </div>
           {% endfor %}
           <div class="producto-item">
-            <a href="/Productos/{{categoria.slugcat}}/" class="producto-link">Ver todas</a>
+            <a href="{% url 'user_producto_categoria' categoria.slugcat %}" class="producto-link">Ver todas</a>
           </div>
         </div>
         {% endfor %}
@@ -160,99 +159,8 @@
     </div>
   </div>
 
-
-  <div id="register-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
-    <div class="register-modal-background absolute inset-0 opacity-90"></div>
-    <div class="register-container relative max-w-md w-full mx-4"
-      style="background-image:url('{% static 'img/header/login-registro/fondo-loginRegistro.webp' %}');border-radius: 1.5rem">
-      <div class="absolute inset-0  rounded-lg"></div>
-      <div class="relative z-10 p-6">
-        <button class="close-register-modal absolute top-4 right-4 text-2xl text-white">×</button>
-
-        <!-- Parte superior fija (logo y título) -->
-        <div class="flex flex-col items-center mb-4">
-          <img src="{% static 'img/logo.png' %}" alt="Logo" class="img-form mb-3">
-          <h3 class="text-2xl text-white font-Big-Shoulders text-center white-shadow">Crear Cuenta</h3>
-        </div>
-
-        <!-- Contenedor scrolleable para los campos del formulario -->
-        <div class="form-fields-container"
-          style="max-height: 50vh; overflow-y: auto; margin-bottom: 15px; padding-right: 8px;">
-          <form class="register-form space-y-4">
-            <div class="form-group">
-              <label for="reg-name" class="block mb-1 text-white font-medium white-shadow">Nombres:</label>
-              <input type="text" id="reg-name" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-lastname" class="block mb-1 text-white font-medium white-shadow">Apellidos:</label>
-              <input type="text" id="reg-lastname" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-email" class="block mb-1 text-white font-medium white-shadow">Correo Electrónico:</label>
-              <input type="email" id="reg-email" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-phone" class="block mb-1 text-white font-medium white-shadow">Teléfono/Celular:</label>
-              <input type="tel" id="reg-phone" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-doc-type" class="block mb-1 text-white font-medium white-shadow">Tipo de
-                Documento:</label>
-              <select id="reg-doc-type" required class="w-full p-2 rounded text-white">
-                <option value="">Seleccionar</option>
-                <option value="dni">DNI</option>
-                <option value="ruc">RUC</option>
-                <option value="ce">Carné de Extranjería</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="reg-doc-number" class="block mb-1 text-white font-medium white-shadow">Número de
-                Documento:</label>
-              <input type="text" id="reg-doc-number" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-password" class="block mb-1 text-white font-medium white-shadow">Contraseña:</label>
-              <input type="password" id="reg-password" required class="w-full p-2 rounded text-black">
-            </div>
-
-            <div class="form-group">
-              <label for="reg-confirm-password" class="block mb-1 text-white font-medium white-shadow">Confirmar
-                Contraseña:</label>
-              <input type="password" id="reg-confirm-password" required class="w-full p-2 rounded text-black">
-            </div>
-          </form>
-        </div>
-
-        <!-- Parte inferior fija (términos y botón) -->
-        <div class="terms-and-submit">
-          <div class="terms-checkbox flex items-center mb-4">
-            <input type="checkbox" id="reg-terms" required class="mr-2">
-            <label for="reg-terms" class="text-white text-sm">Acepto los <a href="/terminos"
-                class="text-blue-300 hover:underline">Términos y Condiciones</a></label>
-          </div>
-
-          <button type="submit"
-            class="register-btn w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition duration-200">
-            Registrarse
-          </button>
-
-          <div class="register-footer mt-4 text-center">
-            <p class="text-blue-300">¿Ya tienes cuenta? <a href="#" id="open-login-from-register"
-                class="text-white hover:underline">Inicia Sesión</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script src="{% static 'src/js/header.js' %}"></script>
-  <script src="{% static 'src/js/modales/login-register.js' %}"></script>
+  <script src="{% static 'src/js/modal-login.js' %}"></script>
   <script src="{% static 'src/js/cart.js' %}"></script>
 </body>
 

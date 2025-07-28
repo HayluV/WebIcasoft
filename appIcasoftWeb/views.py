@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from appIcasoftWeb.models import Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio
+from django.http import HttpResponse, JsonResponse
+from appIcasoftWeb.models import User, Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from appIcasoftWeb.forms import UserForm
 import os, json
+import requests
 
 
 def user_login(request):
@@ -20,7 +22,54 @@ def user_login(request):
     return render(request, 'appIcasoftWeb/inicio.html')
 
 def user_register(request):
+    if request.method == 'GET':
+        form = UserForm()
+        return render(request, "appIcasoftWeb/registrarse.html", {'form': form})
+
+    elif request.method == 'POST':
+        form = UserForm(request.POST)
+        print('FORMULARIO REGISTRO', form)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.role = 'client' 
+            user.username = request.POST.get('first_name') #es el name del form 
+            user.set_password(request.POST.get('password'))  
+            user.save()
+
+            login(request, user) 
+
+            return JsonResponse({'success': 'Usuario creado'}, status=200)
+        else:
+            return JsonResponse({'error': 'Verifique los campos'}, status=400)
+
+def user_dni(request):
+    if request.method == 'POST':
+        dni = request.POST.get('dni')
+        users_dni = User.objects.all().filter(dni=dni,is_active=True).count()
+
+        if users_dni == 0 and len(dni) == 8:
+            url = f"https://api.apis.net.pe/v1/dni?numero={dni}"
+            dni_api_key = os.environ.get('API_DNI_TOKEN') 
+
+            headers = {
+                "Authorization": f"Bearer {dni_api_key}"
+            }
+
+            try:
+                response = requests.get(url, headers=headers)
+                response.raise_for_status()
+                data = response.json()
+                return JsonResponse(data)
+            except requests.RequestException as e:
+                return JsonResponse({'error': 'Error al consultar el DNI.'}, status=500)
+
+        elif users_dni > 0:
+            return JsonResponse({'error': 'Ya existe un usuario registrado con el DNI'}, status=400)
+        else:
+            return JsonResponse({'error': 'DNI inválido'}, status=400)
+
     return render(request, "appIcasoftWeb/registrarse.html")
+    
 
 def user_logout(request):
     logout(request)
@@ -255,6 +304,15 @@ def user_curso(request, curso_nombre=None):
         return render(request, "appIcasoftWeb/curso_no_encontrado.html", {"curso_nombre": curso_nombre})
 
     return render(request, "appIcasoftWeb/cursos.html", {"curso": curso, "curso_nombre": curso_nombre})
+
+def user_contacto(request):
+    return render(request, "appIcasoftWeb/contacto.html")
+
+def user_micuenta(request):
+    return render(request, "appIcasoftWeb/MiCuenta.html")
+
+def user_pedido(request):
+    return render(request, "appIcasoftWeb/pedido.html")
 
 def user_producto(request):
     categorias = {
