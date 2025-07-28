@@ -148,25 +148,6 @@ def user_inicio(request):
             'image_url': image_url,
         })
 
-    # cursos = [
-    #     {
-    #         'title': 'Curso de Soporte Técnico - Presencial - Ica',
-    #         'image_url': '/static/img/info-cursos/soporte.jpg',
-    #         'link': 'Curso/SoporteTecnico/',
-    #     },
-
-    #     {
-    #         'title': 'Curso de Ofimatica - Virtual',
-    #         'image_url': '/static/img/info-cursos/ofimatica.jpg',
-    #         'link': 'Curso/SoporteTecnicoPresencialIca/',
-    #     },
-
-    #     {
-    #         'title': 'Proximamente más cursos',
-    #         'image_url': '/static/img/info-cursos/proximamente.jpg',
-    #     },
-    # ]
-
     reviews = [
         {
             'name': 'Angelina Aramayo',
@@ -452,5 +433,7 @@ def user_pedido(request):
 
 def user_micuenta(request):
     return render(request, "appIcasoftWeb/micuenta.html")
+
+
 
 

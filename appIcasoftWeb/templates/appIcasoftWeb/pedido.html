@@ -1,11 +1,217 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo-Icasoft/logoNaranja.webp' %}">
+    <title>Mis Pedidos - IcaSoft</title>
+    <link rel="stylesheet" href="{% static 'src/css/pedido.css' %}" />
+    <style>
+        .estado-pedido {
+            max-width: 600px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            padding: 20px;
+        }
+        
+        .estado-pedido h2 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .estado-pedido h3 {
+            font-size: 1.1rem;
+            margin: 20px 0 10px;
+            color: #555;
+        }
+        
+        .estado-item {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+            border-left: 2px solid #ddd;
+        }
+        
+        .estado-item:last-child {
+            border-left: 2px solid transparent;
+        }
+        
+        .estado-item::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff7b00;
+        }
+        
+        .estado-item.activo::before {
+            background: #4CAF50;
+        }
+        
+        .estado-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .estado-item .fecha {
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .estado-horizontal {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 30px 0 10px 0;
+            position: relative;
+            padding: 0 10px;
+        }
+        .estado-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+            position: relative;
+            z-index: 1;
+        }
+        .estado-step .estado-icono {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #f3f3ff;
+            border: 3px solid #2114a8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+        .estado-step.activo .estado-icono {
+            background: #e6f7ea;
+            border-color: #4CAF50;
+        }
+        .estado-label {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: #2114a8;
+        }
+        .estado-fecha {
+            font-size: 0.95rem;
+            color: #333;
+            text-align: center;
+        }
+        .estado-linea {
+            flex: 1;
+            height: 4px;
+            background: #2114a8;
+            margin: 26px 0 0 0;
+            z-index: 0;
+            border-radius: 2px;
+            min-width: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    
+    <div>
+        <header>
+            {% include 'appIcasoftWeb/header/header.html' %}
+        </header>
+
+        <h1 class="titulo-curso text-2xl fondo-animated-text font-Big-Shoulders">
+            Mis Pedidos
+        </h1>
+
+        <div class="tabla-pedidos-container" style="max-width:900px;margin:30px auto;">
+            <table class="tabla-pedidos"
+                style="width:100%;border-collapse:collapse;background:white;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,0.07);overflow:hidden;">
+                <thead style="background:#f5f5f5;">
+                    <tr>
+                        <th style="padding:12px 8px;text-align:left;">Producto</th>
+                        <th style="padding:12px 8px;text-align:left;">Precio</th>
+                        <th style="padding:12px 8px;text-align:left;">N° de Pedido</th>
+                        <th style="padding:12px 8px;text-align:left;">Fecha de Pedido</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 8px;">Licencia Windows 10 Pro</td>
+                        <td style="padding:10px 8px;">S/ 120.00</td>
+                        <td style="padding:10px 8px;">1001</td>
+                        <td style="padding:10px 8px;">15/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 8px;">Microsoft Office 365</td>
+                        <td style="padding:10px 8px;">S/ 80.00</td>
+                        <td style="padding:10px 8px;">1002</td>
+                        <td style="padding:10px 8px;">20/07/2025</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 8px;">Antivirus Kaspersky</td>
+                        <td style="padding:10px 8px;">S/ 60.00</td>
+                        <td style="padding:10px 8px;">1003</td>
+                        <td style="padding:10px 8px;">25/07/2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h1 class="titulo-curso text-2xl fondo-animated-text font-Big-Shoulders">
+            Estado del pedido
+        </h1>
+
+        <div class="estado-pedido">
+            <h2>N° de pedido: 123453</h2>
+            <div class="estado-horizontal">
+                <div class="estado-step activo">
+                    <div class="estado-icono">
+                        <!-- Puedes poner aquí un ícono SVG si lo deseas -->
+                        <span style="font-size:2rem;">📝</span>
+                    </div>
+                    <div class="estado-label">Recibimos tu pedido</div>
+                    <div class="estado-fecha">24/04</div>
+                </div>
+                <div class="estado-linea"></div>
+                <div class="estado-step activo">
+                    <div class="estado-icono">
+                        <span style="font-size:2rem;">✅</span>
+                    </div>
+                    <div class="estado-label">Pedido confirmado</div>
+                    <div class="estado-fecha">24/04</div>
+                </div>
+                <div class="estado-linea"></div>
+                <div class="estado-step activo">
+                    <div class="estado-icono">
+                        <span style="font-size:2rem;">🛍️</span>
+                    </div>
+                    <div class="estado-label">¡Tu pedido está listo!</div>
+                    <div class="estado-fecha">24/05</div>
+                </div>
+                <div class="estado-linea"></div>
+                <div class="estado-step">
+                    <div class="estado-icono">
+                        <span style="font-size:2rem;">✔️</span>
+                    </div>
+                    <div class="estado-label">Pedido entregado</div>
+                    <div class="estado-fecha">25/05</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            {% include 'appIcasoftWeb/footer/footer.html' %}
+            {% include 'appIcasoftWeb/chatbot/chatbot.html' %}
+        </footer>
+    </div>
 </body>
 </html>
