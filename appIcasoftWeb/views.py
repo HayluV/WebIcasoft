@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from appIcasoftWeb.models import User, Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio
 from django.contrib.auth import authenticate, login, logout
@@ -28,7 +28,7 @@ def user_register(request):
 
     elif request.method == 'POST':
         form = UserForm(request.POST)
-        print('FORMULARIO REGISTRO', form)
+       
         if form.is_valid():
             user = form.save(commit=False)
             user.role = 'client' 
@@ -290,7 +290,24 @@ def user_contacto(request):
     return render(request, "appIcasoftWeb/contacto.html")
 
 def user_micuenta(request):
-    return render(request, "appIcasoftWeb/MiCuenta.html")
+    if request.method == 'GET':
+        return render(request, "appIcasoftWeb/MiCuenta.html")
+
+    elif request.method == 'POST':
+        idUser = request.POST.get('id')
+        id = get_object_or_404(User, pk=idUser)
+        form = UserForm(request.POST, instance=id)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(request.POST.get('password'))  
+            user.save()
+            login(request, user) 
+            return JsonResponse({'success': 'Usuario actualizado'}, status=200)
+        else:
+            return JsonResponse({
+                'error': 'Verifique los campos',
+                'form_errors': form.errors
+            }, status=400)
 
 def user_pedido(request):
     return render(request, "appIcasoftWeb/pedido.html")
@@ -408,31 +425,13 @@ def user_producto_subcategoria(request, categoria, subcategoria):
         'subcategoria': subcategoria_data
     })
 
-
-
-def user_contacto(request):
-    return render(request, "appIcasoftWeb/contacto.html")
-
 def user_carrito(request):
     return render(request, "appIcasoftWeb/carrito.html")
 
-from django.shortcuts import render
-from django.shortcuts import render
-import json
-
 def user_entrega(request):
-
-
     return render(request, "appIcasoftWeb/entrega.html")
 
 
-
-
-def user_pedido(request):
-    return render(request, "appIcasoftWeb/pedido.html")
-
-def user_micuenta(request):
-    return render(request, "appIcasoftWeb/micuenta.html")
 
 
 

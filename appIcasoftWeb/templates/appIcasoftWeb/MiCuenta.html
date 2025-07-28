@@ -21,42 +21,45 @@
             <div class="profile-header">
                 <div class="profile-title">MI CUENTA</div>
             </div>
-            <form id="profile-form">
+            <form id="profile-form" method="POST">
                 <div class="profile-section">
                     <div class="profile-row">
+                        <div style="display: none;">
+                            <input type="text" name="id" value="{{user.id}}">
+                        </div>
                         <div class="profile-field">
                             <div class="profile-label">Nombres:</div>
-                            <input type="text" id="firstname" value="{{ user.first_name }}">
+                            <input type="text" id="firstname" name="first_name" value="{{ user.first_name }}">
                         </div>
                         <div class="profile-field">
                             <div class="profile-label">Apellidos:</div>
-                            <input type="text" id="lastname" value="{{ user.last_name }}">
+                            <input type="text" id="lastname" name="last_name" value="{{ user.last_name }}">
                         </div>
                     </div>
                     <div class="profile-row">
                         <div class="profile-field">
                             <div class="profile-label">Nombre de usuario:</div>
-                            <input type="text" id="username" value="{{ user.username }}" disabled>
+                            <input type="text" id="username" name="username" value="{{ user.username }}">
                         </div>
                         <div class="profile-field">
                             <div class="profile-label">DNI:</div>
-                            <input type="text" id="dni" value="{{ user.dni }}">
+                            <input type="text" id="dni" name="dni" value="{{ user.dni }}">
                         </div>
                     </div>
                     <div class="profile-row">
                         <div class="profile-field">
                             <div class="profile-label">Correo:</div>
-                            <input type="email" id="email" value="{{ user.email }}">
+                            <input type="email" id="email" name="email" value="{{ user.email }}">
                         </div>
                         <div class="profile-field">
                             <div class="profile-label">Teléfono:</div>
-                            <input type="tel" id="phone" value="{{ user.telefono }}">
+                            <input type="tel" id="phone" name="telefono" value="{{ user.telefono }}">
                         </div>
                     </div>
                     <div class="profile-row">
                         <div class="profile-field">
                             <div class="profile-label">Contraseña:</div>
-                            <input type="password" id="password" value="********" autocomplete="new-password">
+                            <input type="password" id="password" name="password" value="{{user.password}}" autocomplete="new-password">
                             <span class="toggle-password" id="togglePassword">Mostrar</span>
                             <div class="error-message" id="password-error">La contraseña debe tener al menos 6 caracteres</div>
                         </div>

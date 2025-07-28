@@ -3,7 +3,7 @@ from django import forms
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['dni', 'first_name','last_name', 'email', 'telefono', 'password']
+        fields = ['dni','username', 'first_name','last_name', 'email', 'telefono', 'password']
         widgets = {
             'dni': forms.TextInput(attrs={
                 'id': 'documento',
@@ -12,6 +12,12 @@ class UserForm(forms.ModelForm):
                 'required': True,
                 'pattern': '[0-8]{8}',
                 'maxlength': '8'
+            }),
+            'username': forms.TextInput(attrs={
+                'id': 'username',
+                'class': 'form-input',
+                'placeholder': 'Ingrese su nombre de usuario',
+                'pattern': '[A-Za-záéíóúñÁÉÍÓÚÑ\\s]{2,50}'
             }),
             'first_name': forms.TextInput(attrs={
                 'id': 'nombre',
