@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from appIcasoftWeb.models import User, Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio
+from appIcasoftWeb.models import User, Categoria, SubCategoria, Producto, Blog, Curso ,Proyecto, Portafolio, ModuloCurso, Horario
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from appIcasoftWeb.forms import UserForm
@@ -77,7 +77,7 @@ def user_logout(request):
 
 def user_inicio(request):
     # Blogs
-    data_blog = Blog.objects.all()
+    data_blog = Blog.objects.all().order_by('-fechaModificacion')
     blogs = []
 
     for blog in data_blog:
@@ -100,7 +100,7 @@ def user_inicio(request):
         })
 
     # Portafolios
-    data_proyecto = Proyecto.objects.filter(estado=True).prefetch_related('portafolio_set') #portafolio_set para acceder a los portafolios desde un proyecto
+    data_proyecto = Proyecto.objects.filter(estado=True).order_by('-fechaModificacion').prefetch_related('portafolio_set') #portafolio_set para acceder a los portafolios desde un proyecto
     proyectos = []
 
     for proyecto in data_proyecto:
@@ -127,7 +127,7 @@ def user_inicio(request):
         })
     
     # Cursos
-    data_cursos = Curso.objects.all()
+    data_cursos = Curso.objects.all().filter(estado=True).order_by('-fechaModificacion')
     cursos = []
 
     for curso in data_cursos:
@@ -240,51 +240,62 @@ def user_inicio(request):
 
     return render(request, "appIcasoftWeb/inicio.html", {'blogs': blogs,'proyectos': proyectos,'cursos': cursos, 'reviews': reviews, 'productos':productos ,'servicios': servicios})
 
-
+#Es el parámetro que le pasaré para que todas las demmás views funcionen
 def user_curso(request, curso_nombre=None):
-    cursos_info = {
-        "SoporteTecnico": {
-            "titulo": "Curso de Soporte Técnico - Presencial - Ica",
-            "descripcion": "Nuestro curso de soporte técnico y mantenimiento de computadoras están diseñados para equipar a los estudiantes con las habilidades necesarias para diagnosticar y solucionar problemas comunes en sistemas informáticos, así como para realizar mantenimiento preventivo y correctivo.",
-            'image_url': '/static/img/soporte-técnico.jpg',
-            'info': "Módulos: 4<br>Duración: 2 meses <br>Incluye certificado",
-            'precio': "250.00",
-            'presencial_info': {
-                'dirección' : "Av. Los Maestros",
-                'horarios' : "Lunes a Viernes de 6pm a 9pm",
-                'dias' : "Inicio 15 de cada mes",
-                'duración' : "33333"
-            },
-            'modulos': [
-                {
-                    'nombre': 'Diagnóstico',
-                    'clases': ['Aprende','realiza']
-                },
-                {
-                    'nombre': 'Mantenimiento',
-                    'clases': ['limpia','saca']
-                }
-            ]
+    cursos_activos = Curso.objects.filter(
+        estado=True,
+        nombre=curso_nombre
+    ).first() 
 
-        },
-        "Ofimática": {
-            "titulo": "Curso de Ofimática - Virtual",
-            "descripcion": "Aprende a manejar las herramientas esenciales de Microsoft Office (Word, Excel, PowerPoint) y otras aplicaciones clave para mejorar tu productividad en tareas administrativas, crear documentos profesionales y gestionar datos eficientemente. Ideal para quienes inician en el mundo de la informática.",
-            'image_url': '/static/img/cursos/office.jpg',
-            'info': "Módulos: 4<br>Duración: 100 horas <br>Incluye certificado",
-            'precio': "250.00",
+    cursos_data = construir_datos_cursos(cursos_activos)
 
-            
-        },
+    return render(request, 'appIcasoftWeb/cursos.html', {
+        'curso': cursos_data
+    })
+
+#Traer data de los módulos y horarios del curso:
+def construir_datos_cursos(curso):
+    modulo = ModuloCurso.objects.filter(idCurso = curso).select_related('idCurso')
+    horario = Horario.objects.filter(codigoCurso = curso).select_related('codigoCurso')
+    curso_data_modulo = [construir_datos_modulos(cur) for cur in modulo]
+    curso_data_horario = [construir_datos_horarios(hor) for hor in horario]
+
+    imagen_nombre = os.path.basename(curso.imagenCurso.name) if curso.imagenCurso else ''
+    ruta_absoluta = os.path.join(
+        'E:/icasoft/ProyectoIcasoftIA/Icasoft/SIGTR/media/curso',imagen_nombre
+    )
+
+    if curso.imagenCurso and os.path.exists(ruta_absoluta):
+        image_url = f'/curso-img/{imagen_nombre}'
+    else:
+        image_url = '/static/img/no-image.jpg'
+
+    return {
+        'idCurso': curso.codigo,
+        'nombreC': curso.nombre,
+        'descrC': curso.descripcion,
+        'precio': curso.precio,
+        'fechaModificacion': curso.fechaModificacion,
+        'imagen':image_url,
+        'modulos': curso_data_modulo,
+        'horarios':curso_data_horario,
     }
-
-    curso = cursos_info.get(curso_nombre, None)
-
-    if curso is None and curso_nombre is not None:
-        # Aquí podrías mostrar una página 404 o un mensaje
-        return render(request, "appIcasoftWeb/curso_no_encontrado.html", {"curso_nombre": curso_nombre})
-
-    return render(request, "appIcasoftWeb/cursos.html", {"curso": curso, "curso_nombre": curso_nombre})
+#Traer data del módulo que va a estar asociado al curso seleccionado
+def construir_datos_modulos(modulo):
+    return {
+        'id': modulo.idModulo,
+        'title': modulo.title,
+        'descripcion': modulo.descripcion,
+        'idCurso': modulo.idCurso,
+    }
+# Traer data del horrario que va a estar asociado al curso seleccionado
+def construir_datos_horarios(horario):
+    return {
+        'id': horario.id,
+        'day_start': horario.day_start,
+        'day_end': horario.day_end,
+        'dias':horario.dias
+    }
 
 def user_contacto(request):
     return render(request, "appIcasoftWeb/contacto.html")
@@ -349,6 +360,7 @@ def obtener_url_imagen(producto):
         return f'/producto-img/{nombre_imagen}'
     return IMAGEN_POR_DEFECTO
 
+#Información de todos los productos:
 def construir_datos_producto(producto):
     return {
         'id': producto.idProducto,
@@ -360,6 +372,7 @@ def construir_datos_producto(producto):
         'slug': producto.slug
     }
 
+#Información de todos los productos por la subcategoría seleccionada.
 def construir_datos_subcategoria(subcategoria):
     productos = Producto.objects.filter(
         estado=True,
@@ -375,6 +388,7 @@ def construir_datos_subcategoria(subcategoria):
         'productos': productos_data
     }
 
+# Información de todos los productos y subcategorías por selección de categoría. 
 def construir_datos_categoria(categoria_obj):
     subcategorias = SubCategoria.objects.filter(
         estado=True,
@@ -392,7 +406,7 @@ def construir_datos_categoria(categoria_obj):
 
 def user_producto_categoria(request, categoria):
     """
-    Vista que muestra los productos por categoría y subcategoría.
+    Vista que muestra los productos por categoría. url: dashboard/categoria
     """
     categorias_activas = Categoria.objects.filter(
         estadoCategoria=True,
@@ -406,6 +420,9 @@ def user_producto_categoria(request, categoria):
     })
 
 def user_producto_subcategoria(request, categoria, subcategoria):
+    """
+    Vista que muestra los productos por subcategoría. url: dashboard/categoria/subcategoria
+    """
     categorias_activas = Categoria.objects.filter(
         estadoCategoria=True,
         slug=categoria
