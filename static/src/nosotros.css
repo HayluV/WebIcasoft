@@ -1,0 +1,86 @@
+/* Sección "Sobre Nosotros" */
+.titulo-principal-servicios {
+  font-size: 2.5rem;
+  text-align: center;
+  color: white;
+  padding: 1rem 0;
+  font-weight: bold;
+}
+
+/* Layout responsivo */
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row;
+  }
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+}
+
+/* Estilos para la imagen */
+.img-nosotros {
+  max-width: 70%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el texto */
+.sobre-nosotros-text {
+  font-family: "Lexend Deca", sans-serif;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  word-spacing: 0.15em;
+  text-align: justify;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.footer-h2 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+/* Efecto hover para la imagen */
+.transition-transform {
+  transition: transform 0.3s ease;
+}
+.transform:hover\:scale-105:hover {
+  transform: scale(1.05);
+}
+
+/* Fondo animado para el título */
+.fondo-animated-text {
+  background: linear-gradient(90deg, #3182ce, #63b3ed, #3182ce);
+  background-size: 200% auto;
+  animation: gradient 3s linear infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Ajustes específicos para móviles */
+@media (max-width: 767px) {
+  .titulo-principal-servicios {
+    font-size: 2rem;
+  }
+  
+  .sobre-nosotros-text {
+    font-size: 0.9rem;
+    padding: 0 1rem;
+  }
+  
+  .footer-h2 {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  
+  .img-responsive-nosotros {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+}

@@ -4,7 +4,6 @@
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
 <link rel="stylesheet" href="{% static 'src/css/productos/todos.css' %}">
-
 {% endblock %}
 
 {% block content %}
@@ -22,15 +21,12 @@
   </nav>
 
   <div class="mb-8 flex flex-col items-center">
-    <!-- Título centrado -->
     <div class="text-center w-full">
       <h2 class="titulo-principal-productos fondo-animated-text">
         {{ categoria.nombre }} disponibles
       </h2>
     </div>
-
-    <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
-    <div class="self-start mt-4"> <!-- mt-4 añade margen superior -->
+    <div class="self-start mt-4">
       <a href="{% url 'user_producto' %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
         ← Volver a Productos
       </a>
@@ -40,24 +36,81 @@
   <div>
     {% for sub in categoria.subcategorias %}
     <h3 class="text-lg font-semibold mb-2">{{ sub.nombre }}</h3>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 mb-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
       {% for producto in sub.productos %}
-      <div
-        class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300 h-full flex flex-col">
-        <div class="p-3 flex-grow flex items-center">
-          <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
-            class="w-full h-auto object-contain max-h-40 mx-auto">
+      <div class="relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group border border-gray-100 producto-card-cat" data-product-id="{{ producto.id }}">
+        <!-- Badge nuevo -->
+        <div class="absolute top-3 right-3 z-3">
+          <span class="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">NUEVO</span>
         </div>
-
-        <div class="p-3 border-t border-gray-100">
-          <h3 class="text-sm font-medium text-gray-800 mb-2 line-clamp-2">{{ producto.nombre }}</h3>
-          <div class="flex items-center justify-between">
-            <span class="text-green-600 font-bold">S/ {{ producto.precio }}</span>
-            <button
-              class="text-primary hover:text-primary-dark text-sm font-medium py-1 px-2 border border-primary rounded hover:bg-primary hover:text-white transition">
-              + Carrito
+        <!-- Imagen del producto -->
+        <div class="p-6 flex justify-center bg-gray-50 group-hover:bg-white transition">
+          <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}"
+            class="h-44 object-contain transform group-hover:scale-105 transition duration-300 drop-shadow-lg cursor-pointer abrir-modal-producto"
+            data-modal-id="modal-{{ producto.id }}">
+        </div>
+        <!-- Detalles del producto -->
+        <div class="p-5 border-t border-gray-100">
+          <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-primary transition producto-nombre">{{ producto.nombre }}</h3>
+          <p class="text-green-600 font-bold text-xl mb-4 producto-precio">S/ {{ producto.precio|default:"699" }}</p>
+          <button class="add-to-cart-cat w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007.6 17h10.8a1 1 0 00.95-.68L21 13M7 13V6h13"></path>
+            </svg>
+            Añadir al carrito
+          </button>
+        </div>
+        <!-- Modal para el producto -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 modal-producto hidden" id="modal-{{ producto.id }}">
+          <div class="bg-white rounded-xl p-8 max-w-md w-full relative">
+            <button class="absolute top-2 right-2 text-gray-500 hover:text-red-500 close-modal">&times;</button>
+            <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="h-40 mx-auto mb-4 object-contain">
+            <h3 class="text-xl font-bold mb-2 producto-nombre">{{ producto.nombre }}</h3>
+            <p class="text-green-600 font-bold text-lg mb-2 producto-precio">S/ {{ producto.precio|default:"699" }}</p>
+            <p class="mb-4">{{ producto.descripcion }}</p>
+            {% if producto.caracteristicas %}
+              <div class="mb-4">
+                <h4 class="font-semibold mb-2">Características:</h4>
+                <ul class="list-disc list-inside text-gray-700 text-sm">
+                  {% for c in producto.caracteristicas %}
+                    <li>{{ c }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+            <button class="add-to-cart-cat w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold py-2 px-4 rounded-lg shadow flex items-center justify-center gap-2 mt-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007.6 17h10.8a1 1 0 00.95-.68L21 13M7 13V6h13"></path>
+              </svg>
+              Añadir al carrito
             </button>
+            <!-- Productos relacionados -->
+            <div class="mt-8">
+              <h4 class="font-semibold mb-3 text-blue-700">Productos relacionados</h4>
+              <div class="grid grid-cols-1 gap-4">
+                <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3 shadow">
+                  <img src="https://via.placeholder.com/48x48?text=Prod1" alt="Producto 1" class="h-12 w-12 object-contain rounded">
+                  <div>
+                    <div class="font-bold text-gray-800">Producto de prueba 1</div>
+                    <div class="text-green-600 font-semibold text-sm">S/ 199</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3 shadow">
+                  <img src="https://via.placeholder.com/48x48?text=Prod2" alt="Producto 2" class="h-12 w-12 object-contain rounded">
+                  <div>
+                    <div class="font-bold text-gray-800">Producto de prueba 2</div>
+                    <div class="text-green-600 font-semibold text-sm">S/ 249</div>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 bg-gray-50 rounded-lg p-3 shadow">
+                  <img src="https://via.placeholder.com/48x48?text=Prod3" alt="Producto 3" class="h-12 w-12 object-contain rounded">
+                  <div>
+                    <div class="font-bold text-gray-800">Producto de prueba 3</div>
+                    <div class="text-green-600 font-semibold text-sm">S/ 299</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -66,5 +119,79 @@
     {% endfor %}
   </div>
 </div>
-</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Abrir modal al hacer click en la imagen
+  document.querySelectorAll('.abrir-modal-producto').forEach(img => {
+    img.addEventListener('click', function() {
+      const modalId = img.getAttribute('data-modal-id');
+      document.getElementById(modalId).classList.remove('hidden');
+    });
+  });
+
+  // Cerrar modal al hacer click en la X o fuera del modal
+  document.querySelectorAll('.modal-producto').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target.classList.contains('modal-producto') || e.target.classList.contains('close-modal')) {
+        modal.classList.add('hidden');
+      }
+    });
+  });
+
+  // Función para añadir al carrito y actualizar el contador
+  function addToCart(button) {
+    // Busca el card o modal más cercano
+    let card = button.closest('.producto-card-cat');
+    if (!card) {
+      // Si está en el modal, busca el id y el card original
+      const modal = button.closest('.modal-producto');
+      const modalId = modal.id;
+      card = document.querySelector(`[data-modal-id="${modalId}"]`).closest('.producto-card-cat');
+    }
+    const productId = card.getAttribute('data-product-id');
+    const productName = card.querySelector('.producto-nombre').textContent.trim();
+    const productPrice = parseFloat(card.querySelector('.producto-precio').textContent.replace('S/ ', ''));
+    const productImage = card.querySelector('img').src;
+
+    const product = {
+      id: productId,
+      name: productName,
+      price: productPrice,
+      image: productImage,
+      quantity: 1
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const existingProduct = cart.find(p => p.id == product.id);
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      cart.push(product);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartInHeader();
+
+    alert(`${product.name} agregado al carrito`);
+  }
+
+  // Añadir al carrito desde tarjeta y modal
+  document.querySelectorAll('.add-to-cart-cat').forEach(button => {
+    button.addEventListener('click', function(e) {
+      addToCart(button);
+    });
+  });
+
+  function updateCartInHeader() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, product) => total + product.quantity, 0);
+    const cartNumberElement = document.querySelector('.cart-number');
+    if (cartNumberElement) {
+      cartNumberElement.textContent = cartCount;
+    }
+  }
+
+  updateCartInHeader();
+});
+</script>
 {% endblock %}
