@@ -187,7 +187,6 @@ function respuestaDNI() {
                 return data;
             })
             .then(data => {
-                console.log("DNI encontrado:", data);
                 const nombre = document.querySelector('.nombreDNI');
                 const apellido = document.querySelector('.apellidoDNI');
                 nombre.value = data.nombres;

@@ -16,8 +16,11 @@ def user_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None and user.role == 'client':
             login(request, user)
+            
             return redirect('user_inicio')
         else:
+            print("Error de autenticación: usuario no encontrado o rol incorrecto")
+            messages.error(request, 'Usuario o contraseña incorrectos')
             return redirect('user_inicio')
     return render(request, 'appIcasoftWeb/inicio.html')
 
@@ -28,19 +31,29 @@ def user_register(request):
 
     elif request.method == 'POST':
         form = UserForm(request.POST)
-       
+
+        # ✅ Imprime todos los datos recibidos en el POST
+        print("Datos del formulario recibidos:")
+        for key, value in request.POST.items():
+            print(f"{key}: {value}")
+
         if form.is_valid():
             user = form.save(commit=False)
-            user.role = 'client' 
-            user.username = request.POST.get('first_name') #es el name del form 
-            user.set_password(request.POST.get('password'))  
+            user.role = 'client'
+            user.username = request.POST.get('first_name')  # Asegúrate que 'first_name' esté en tu formulario
+            user.set_password(request.POST.get('password'))
             user.save()
 
-            login(request, user) 
+            login(request, user)
+            print("Usuario registrado y logueado:", user.username)
 
             return JsonResponse({'success': 'Usuario creado'}, status=200)
         else:
-            return JsonResponse({'error': 'Verifique los campos'}, status=400)
+            # ✅ Imprime los errores del formulario
+            print("Errores del formulario:")
+            print(form.errors.as_json())  # Puedes usar as_data() si prefieres estructura de Python
+
+            return JsonResponse({'error': 'Verifique los campos', 'detalles': form.errors}, status=400)
 
 def user_dni(request):
     if request.method == 'POST':

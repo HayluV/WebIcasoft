@@ -7,7 +7,7 @@ class UserForm(forms.ModelForm):
         widgets = {
             'dni': forms.TextInput(attrs={
                 'id': 'documento',
-                'class': 'form-input dni-input',
+                'class': 'form-input',
                 'placeholder': 'Ingrese su número de identidad',
                 'maxlength': '8'
 
@@ -16,21 +16,17 @@ class UserForm(forms.ModelForm):
                 'id': 'username',
                 'class': 'form-input',
                 'placeholder': 'Ingrese su nombre de usuario',
-                'pattern': '[A-Za-záéíóúñÁÉÍÓÚÑ\\s]{2,50}'
             }),
             'first_name': forms.TextInput(attrs={
                 'id': 'nombre',
                 'class': 'nombreDNI form-input',
                 'placeholder': 'Ingrese su nombre',
                 'required': True,
-                'pattern': '[A-Za-záéíóúñÁÉÍÓÚÑ\\s]{2,50}'
             }),
             'last_name': forms.TextInput(attrs={
                 'id': 'apellidos',
                 'class': 'apellidoDNI form-input',
                 'placeholder': 'Ingrese sus apellidos',
-                'required': True,
-                'pattern': '[A-Za-záéíóúñÁÉÍÓÚÑ\\s]{2,50}'
             }),
             'email': forms.EmailInput(attrs={
                 'id': 'correo',
@@ -44,6 +40,8 @@ class UserForm(forms.ModelForm):
                 'class': 'form-input',
                 'placeholder': 'Ingrese su número de celular',
                 'required': True,
+                'pattern': '[0-9]{9}',
+                'maxlength': '9',
                 'autocomplete': 'off'
             }),
             'password': forms.PasswordInput(attrs={

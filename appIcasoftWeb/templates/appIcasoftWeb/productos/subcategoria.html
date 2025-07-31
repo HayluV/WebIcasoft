@@ -23,42 +23,44 @@
     </ol>
   </nav>
 
+  <div class="mb-8 flex flex-col items-center">
+    <!-- Título centrado -->
+    <div class="text-center w-full">
+      <h2 class="titulo-principal-productos fondo-animated-text">
+        {{ subcategoria.nombre }}</span>
+      </h2>
+    </div>
 
-<div class="mb-8 flex flex-col items-center">
-  <!-- Título centrado -->
-  <div class="text-center w-full">
-    <h2 class="titulo-principal-productos fondo-animated-text">
-      {{ subcategoria.nombre }}</span>
-    </h2>
+    <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
+    <div class="self-start mt-4">
+      <a href="{% url 'user_producto_categoria' categoria.slugcat %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
+        ← Volver a {{ categoria.nombre }}
+      </a>
+    </div>
   </div>
-
-  <!-- Enlace "Volver" alineado a la izquierda pero dentro del flujo normal -->
-  <div class="self-start mt-4">  <!-- mt-4 añade margen superior -->
-    <a href="{% url 'user_producto_categoria' categoria.slugcat %}" class="inline-flex items-center text-gray-600 hover:text-primary transition">
-      ← Volver a {{ categoria.nombre }}
-    </a>
-  </div>
-</div>
 
   <!-- Grid de productos -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for producto in subcategoria.productos %}
-    <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div class="relative bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 group border border-gray-100 producto-card-sub" data-product-id="{{ producto.id }}">
       <!-- Badge nuevo -->
-      <div class="absolute top-2 right-2">
-        <span class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">NUEVO</span>
+      <div class="absolute top-3 right-3 z-10">
+        <span class="bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">NUEVO</span>
       </div>
       
       <!-- Imagen del producto -->
-      <div class="p-4 flex justify-center">
-        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="h-48 object-contain">
+      <div class="p-6 flex justify-center bg-gray-50 group-hover:bg-white transition">
+        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="h-44 object-contain transform group-hover:scale-105 transition duration-300 drop-shadow-lg">
       </div>
       
       <!-- Detalles del producto -->
-      <div class="p-4 border-t border-gray-100">
-        <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ producto.nombre }}</h3>
-        <p class="text-green-600 font-bold text-xl mb-4">S/ {{ producto.precio|default:"699" }}</p>
-        <button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2 px-4 rounded transition">
+      <div class="p-5 border-t border-gray-100">
+        <h3 class="text-lg font-bold text-gray-800 mb-2 group-hover:text-primary transition producto-nombre">{{ producto.nombre }}</h3>
+        <p class="text-green-600 font-bold text-xl mb-4 producto-precio">S/ {{ producto.precio|default:"699" }}</p>
+        <button class="add-to-cart-sub w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-500 hover:to-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-200 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007.6 17h10.8a1 1 0 00.95-.68L21 13M7 13V6h13"></path>
+          </svg>
           Añadir al carrito
         </button>
       </div>
@@ -66,4 +68,50 @@
     {% endfor %}
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCartButtons = document.querySelectorAll('.add-to-cart-sub');
+  addToCartButtons.forEach((button) => {
+    button.addEventListener('click', function() {
+      const card = button.closest('.producto-card-sub');
+      const productId = card.getAttribute('data-product-id');
+      const productName = card.querySelector('.producto-nombre').textContent.trim();
+      const productPrice = parseFloat(card.querySelector('.producto-precio').textContent.replace('S/ ', ''));
+      const productImage = card.querySelector('img').src;
+
+      const product = {
+        id: productId,
+        name: productName,
+        price: productPrice,
+        image: productImage,
+        quantity: 1
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingProduct = cart.find(p => p.id == product.id);
+      if (existingProduct) {
+        existingProduct.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartInHeader();
+
+      alert(`${product.name} agregado al carrito`);
+    });
+  });
+
+  function updateCartInHeader() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartCount = cart.reduce((total, product) => total + product.quantity, 0);
+    const cartNumberElement = document.querySelector('.cart-number');
+    if (cartNumberElement) {
+      cartNumberElement.textContent = cartCount;
+    }
+  }
+
+  updateCartInHeader();
+});
+</script>
 {% endblock %}
