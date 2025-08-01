@@ -6,7 +6,8 @@ from django.contrib import messages
 from appIcasoftWeb.forms import UserForm
 import os, json
 import requests
-
+import pywhatkit as kit
+from datetime import datetime, timedelta
 
 def user_login(request):
     if request.method == 'POST':
@@ -32,15 +33,10 @@ def user_register(request):
     elif request.method == 'POST':
         form = UserForm(request.POST)
 
-        # ✅ Imprime todos los datos recibidos en el POST
-        print("Datos del formulario recibidos:")
-        for key, value in request.POST.items():
-            print(f"{key}: {value}")
-
         if form.is_valid():
             user = form.save(commit=False)
             user.role = 'client'
-            user.username = request.POST.get('first_name')  # Asegúrate que 'first_name' esté en tu formulario
+            user.username = request.POST.get('first_name')  
             user.set_password(request.POST.get('password'))
             user.save()
 
@@ -49,9 +45,9 @@ def user_register(request):
 
             return JsonResponse({'success': 'Usuario creado'}, status=200)
         else:
-            # ✅ Imprime los errores del formulario
+            
             print("Errores del formulario:")
-            print(form.errors.as_json())  # Puedes usar as_data() si prefieres estructura de Python
+            print(form.errors.as_json()) 
 
             return JsonResponse({'error': 'Verifique los campos', 'detalles': form.errors}, status=400)
 
@@ -312,6 +308,35 @@ def construir_datos_horarios(horario):
 
 def user_contacto(request):
     return render(request, "appIcasoftWeb/contacto.html")
+
+def user_message(numero: str, mensaje: str):
+    try:
+        ahora = datetime.now()
+        envio = ahora + timedelta(minutes=2)
+
+        hora = envio.hour
+        minuto = envio.minute
+
+        print(f"[INFO] Intentando enviar mensaje a las {hora}:{minuto:01d} (hora Perú)...")
+
+        kit.sendwhatmsg(
+            numero,
+            mensaje,
+            hora,
+            minuto,
+            wait_time=20
+        )
+
+        print("[✅ ÉXITO] Mensaje programado correctamente.")
+
+    except Exception as e:
+        print("[❌ ERROR] No se pudo enviar el mensaje.")
+        print(f"Detalles: {e}")
+
+if __name__ == "__main__":
+    numero = '+51904687071'  
+    mensaje = 'Hola, esto es una prueba automatizada.'
+    user_message(numero, mensaje)
 
 def user_micuenta(request):
     if request.method == 'GET':

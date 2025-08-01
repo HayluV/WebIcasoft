@@ -16,7 +16,7 @@
             {% include 'appIcasoftWeb/header/header.html' %}
         </header>
         <main>
-            <form class="formulario-contacto" id="formulario-contacto">
+            <form class="formulario-contacto" id="formulario-contacto" method="post" action="{% url 'user_message' %}">
                 <h2 class="font-Big-Shoulders ">Contáctenos</h2>
 
                 <div class="campo-formulario">

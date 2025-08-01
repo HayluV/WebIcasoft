@@ -40,8 +40,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=150, unique=True) # va a jalar de la bd esto, obtener los valores de la bd
     dni = models.CharField(max_length=8, unique=True, blank=True, null=True)
-    first_name = models.CharField(max_length=30, blank=True, null=True)
-    last_name = models.CharField(max_length=30, blank=True, null=True)
+    first_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100, blank=True, null=True)
     telefono = models.CharField(
         max_length=20,
         null=True,
