@@ -35,12 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function validateForm() {
         let isValid = true;
         // Validar número de documento
-        if (!documento.value || !documento.checkValidity()) {
-            showError(documento, 'documento-error');
-            isValid = false;
-        } else {
-            hideError(documento, 'documento-error');
-        }
 
         // Validar nombre
         const nombre = document.getElementById('nombre');

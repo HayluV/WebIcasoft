@@ -10,6 +10,7 @@ class UserForm(forms.ModelForm):
                 'class': 'form-input',
                 'placeholder': 'Ingrese su número de identidad',
                 'maxlength': '8'
+
             }),
             'username': forms.TextInput(attrs={
                 'id': 'username',
@@ -38,6 +39,9 @@ class UserForm(forms.ModelForm):
                 'id': 'celular',
                 'class': 'form-input',
                 'placeholder': 'Ingrese su número de celular',
+                'required': True,
+                'pattern': '[0-9]{9}',
+                'maxlength': '9',
                 'autocomplete': 'off'
             }),
             'password': forms.PasswordInput(attrs={

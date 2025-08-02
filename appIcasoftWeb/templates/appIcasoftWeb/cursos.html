@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{% if curso %}{{ curso.titulo }}{% else %}Inicio - IcaSoft{% endif %}</title>
+  <title>{% if curso %}{{ curso.nombre }}{% else %}Inicio - IcaSoft{% endif %}</title>
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/logo.png' %}">
   <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
   <link rel="stylesheet" href="{% static 'src/inicio.css' %}">
@@ -304,15 +304,15 @@
     </header>
 
     <main class="pt-10 lg-pt">
-      {% if curso %}
+    {% if curso %}
       <div class="main-container">
         <div class="left-column">
           <h1 class="titulo-curso fondo-animated-text">
-            {{ curso.titulo }}
+            {{ curso.nombreC }}
           </h1>
           
           <p class="descripcion-curso">
-            {{ curso.descripcion }}
+            {{ curso.descrC }}
           </p>
           
           <div class="rating">
@@ -327,9 +327,8 @@
           </div>
           
           <div class="meta-info">
-            <span>Creado por {{ curso.instructor|default:"Educatic Centro de Formación" }}</span>
-            <span><i class="far fa-calendar-alt"></i> Última actualización: 10/2024</span>
-            <span><i class="fas fa-language"></i> Español</span>
+            <span>Creado por Icasoft</span>
+            <span><i class="far fa-calendar-alt"></i> Última actualización: {{curso.fechaModificacion}}</span>
           </div>
           
           <div class="what-you-learn">
@@ -351,23 +350,11 @@
               {% for modulo in curso.modulos %}
               <div class="modulo">
                 <div class="modulo-header">
-                  <h4><span class="modulo-number">Módulo {{ forloop.counter }}:</span> {{ modulo.nombre }}</h4>
+                  <h4><span class="modulo-number">Módulo {{ forloop.counter }}:</span> {{ modulo.title }}</h4>
                   <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="modulo-content">
-                  {% if modulo.clases %}
-                  <ul class="clases-list">
-                    {% for clase in modulo.clases %}
-                      <li class="clase-item">
-                        <i class="fas fa-tasks"></i>
-                        <span class="clase-number">Clase {{ forloop.counter }}: </span>
-                        <span class="text-blue-300">{{ clase }}</span>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                  {% else %}
-                  <p class="no-clases">Este módulo no contiene clases aún</p>
-                  {% endif %}
+                  <p class="no-clases">{{modulo.descripcion}}</p>
                 </div>
               </div>
               {% endfor %}
@@ -379,9 +366,9 @@
         
         <div class="right-column">
           <div class="curso-card">
-            <img src="{{ curso.image_url }}" alt="{{ curso.titulo }}" class="curso-imagen" />
+            <img src="{{ curso.imagen }}" alt="{{ curso.nombreC }}" class="curso-imagen" />
             
-            <div class="precio">S/ 117.90</div>
+            <div class="precio">s/. {{curso.precio}}</div>
             
             <div class="btn-container">
               <button class="btn-carrito">
@@ -413,52 +400,9 @@
               <button class="btn-share">
                 <i class="fas fa-share-alt"></i> Compartir
               </button>
-              <button class="btn-gift">
-                <i class="fas fa-gift"></i> Regalar este curso
-              </button>
             </div>
           </div>
-          
-          {% if curso.presencial_info %}
-          <div class="info-presencial curso-card">
-            <h3 class="font-Big-Shoulders">Información Presencial</h3>
-            <div class="info-presencial-grid">
-              <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div>
-                  <h4>Dirección</h4>
-                  <p>{{ curso.presencial_info.direccion }}</p>
-                </div>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-clock"></i>
-                <div>
-                  <h4>Horarios</h4>
-                  <p>{{ curso.presencial_info.horarios }}</p>
-                </div>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-calendar-alt"></i>
-                <div>
-                  <h4>Días</h4>
-                  <p>{{ curso.presencial_info.dias }}</p>
-                </div>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-hourglass-half"></i>
-                <div>
-                  <h4>Duración</h4>
-                  <p>{{ curso.presencial_info.duracion }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-      {% else %}
-      <p class="sobre-nosotros-text">No se encontró información del curso solicitado.</p>
-      {% endif %}
+    {% endif %}     
     </main>
 
     <footer>
